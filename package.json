@@ -1,0 +1,17 @@
+{
+  "name": "nhl95-build",
+  "version": "1.0.0",
+  "description": "Build scripts for NHL 95 Genesis",
+  "scripts": {
+    "extractassets": "node extractAssets95.js lst/nhl95.bin",
+    "asm": "build95.bat",
+    "fixopcodes": "node fixopcodes.js \"output\\\\nhl95 .lst\" output\\\\nhl95.bin",
+    "build:retail": "set rev=0&& set checksum=1&& npm run asm && npm run fixopcodes",
+    "build:seg": "buildseg.bat main95",
+    "verify:seg": "node verifySegment.js main95 0x0 lst/nhl95.bin"
+  },
+  "devDependencies": {
+    "crc-32": "^1.2.2"
+  },
+  "license": "ISC"
+}
