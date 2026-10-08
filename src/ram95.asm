@@ -1,4 +1,4 @@
-;	NHL 95 placeholder. Not matched.
-;	Adapted from ram94.asm: equates only.
-;	Org is not confirmed. The 94 file is https://github.com/abdulahmad/NHL94Genesis src/ram94.asm.
-;	Transcribe lst/nhl95.bin.lst into this file. Do not copy 94 bytes.
+;	NHL 95 RAM map. Equates only, no ROM bytes.
+;	This file will be written during the final RAM consolidation pass, after ROM segments are complete.
+;	For now, add each new RAM name to stubinc/ram_addrs.inc as you transcribe code segments.
+;	Do not transcribe this file as a segment pass.
