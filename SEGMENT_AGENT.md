@@ -4,7 +4,9 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 ## Current segment
 
-None. The first pass is RAM, then `main95`. Confirm every org against `lst/nhl95.bin` before the first verify. The 94 addresses are not 95 addresses.
+`main95`. Start label `Trap3` (the vector table at `$000000`). The confirmed org is `$0`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
+
+RAM (`ram95`) is skipped by the segment queue. The queue processes ROM segments only. RAM names come from the code segments as they are transcribed, not as a separate first pass. After ROM segments are matched, RAM will be organized as a final consolidation pass.
 
 The files in `src/nhl95.asm` are a starting map, not a confirmed split. Use https://github.com/abdulahmad/NHL94Genesis to decide where a segment starts and ends. Find the 94 routine that matches the 95 listing, then take the 95 range from the 95 listing, not from the 94 org. Split a placeholder when the 94 files are separate ranges here. Add a file when 95 has a system 94 does not have. Drop a placeholder when 95 has no matching code, and remove its include. Keep the includes in ROM order.
 
@@ -47,6 +49,7 @@ After every matched segment, delete `output/nhl95.bin` and `output/modified_nhl9
 - Data goes in the segment of the code that owns it. Sound data follows the sound driver. Graphics are incbins from `extractAssets95.js`, named for the asset, never for an IDA address. A map reference is `Label+8`. Team palettes are `.pal` incbins.
 - A new ROM map row gets its include in `src/nhl95.asm` in ROM order in the same session.
 - Do not copy a 94 name onto a 95 address because the low 16 bits match. Do not copy a 94 org.
+- RAM names go in `stubinc/ram_addrs.inc` as you transcribe code segments. Add each new RAM name to that file when you first encounter it. Do not wait for a RAM consolidation pass.
 
 ## Naming
 
@@ -57,18 +60,17 @@ Name it in the session that transcribes it. Do not leave a cleanup pass.
 - A structure field is an expression (`SortCords+OldXpos`), not a new global.
 - Do not leave `loc_`, `sub_`, `unk_`, `word_`, `byte_`, or `dword_` in code or in `ram_addrs.inc`.
 - Bring over the 94 comment when the routine matches. If there is no comment, add one that says what it does.
-- RAM is the first pass. Write `src/ram95.asm` in address order, one line per variable, with 94 names only where the address and the using routine match.
 
 ## ROM map
 
-No row is matched. The order is the 94 file order. Orgs are blank until the listing confirms them.
+The first unmatched ROM segment is the current segment. The order is the 94 file order. Orgs are blank until the listing confirms them.
 
 | File | Status | Org | Note |
 |---|---|---|---|
-| main95 | not matched | org not confirmed | Adapted from main94.asm: header, startup, vectors |
+| main95 | not matched | $0 | Adapted from main94.asm: header, startup, vectors. Start label `Trap3` |
 | teamdata95 | not matched | org not confirmed | Adapted from teamdata94.asm: teams, palettes, credits text |
 | frames95 | not matched | org not confirmed | Adapted from frames94.asm: sprite animation tables |
-| ram95 | not matched | org not confirmed | Adapted from ram94.asm: equates only |
+| ram95 | skipped | no org (equates only) | Adapted from ram94.asm: equates only, no ROM bytes. Skipped by the segment queue. RAM names come from code segments as transcribed, added to `stubinc/ram_addrs.inc`. A final consolidation pass may organize `src/ram95.asm` after ROM segments are complete |
 | hockey95 | not matched | org not confirmed | Adapted from hockey94.asm: game loop, pause |
 | menu95 | not matched | org not confirmed | Adapted from menu94.asm: menu core |
 | stats95 | not matched | org not confirmed | Adapted from stats94.asm: scores, line editor, roster, scoring and penalty summaries, player stats, crowd meter, goalie select |
