@@ -6,7 +6,8 @@
     "extractassets": "node extractAssets95.js lst/nhl95.bin",
     "asm": "build95.bat",
     "fixopcodes": "node fixopcodes.js \"output\\\\nhl95 .lst\" output\\\\nhl95.bin",
-    "build:retail": "set rev=0&& set checksum=1&& npm run asm && npm run fixopcodes",
+    "build:retail": "set rev=0&& set checksum=1&& npm run asm && npm run fixopcodes && node verifyRom.js output/modified_nhl95.bin lst/nhl95.bin",
+    "build:dev": "set rev=0&& set checksum=0&& npm run asm && npm run fixopcodes",
     "build:seg": "buildseg.bat main95",
     "verify:seg": "node verifySegment.js main95 0x0 lst/nhl95.bin"
   },
