@@ -15,6 +15,8 @@ Do not disassemble lst/nhl95.bin. Do not write a disassembler. Do not edit nhl95
 
 Follow the rules already in SEGMENT_AGENT.md. The reference ROM is lst/nhl95.bin. Style source is the matching file in https://github.com/abdulahmad/NHL94Genesis. Use https://github.com/abdulahmad/NHLPA93Genesis only when 94 does not have the routine.
 
+The placeholder files are not a confirmed split. Before writing asm, open the matching 94 file and find the routine this 95 range corresponds to. The 95 start and end come from lst/nhl95.bin.lst, not from the 94 org. If this placeholder covers more than one 94 file, split it and add the new include to nhl95.asm in ROM order. If 95 has a system 94 does not have, add a file and an include. If 95 has no matching code, drop the placeholder and its include. Do not leave an empty file in the include list.
+
 1. If this is the RAM pass, write src/ram95.asm in address order and include it from the stub. It has no ROM bytes, so do not run a byte verify.
 2. Otherwise write or reuse src/<file>_stub.asm at the confirmed org. Include src/stubinc/ports.inc, equals.inc, ram_addrs.inc, and src/<file>.asm. Do not put an org in the file nhl95.asm includes.
 3. Point package.json build:seg and verify:seg at that file and org. Add seg:<file>: buildseg.bat, then fixopcodes.js on "output\<file> .lst" and output\<file>.bin, then verifySegment.js <file> <org> lst/nhl95.bin. The assembler listing name has a space before .lst.

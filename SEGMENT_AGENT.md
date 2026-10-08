@@ -6,6 +6,8 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 None. The first pass is RAM, then `main95`. Confirm every org against `lst/nhl95.bin` before the first verify. The 94 addresses are not 95 addresses.
 
+The files in `src/nhl95.asm` are a starting map, not a confirmed split. Use https://github.com/abdulahmad/NHL94Genesis to decide where a segment starts and ends. Find the 94 routine that matches the 95 listing, then take the 95 range from the 95 listing, not from the 94 org. Split a placeholder when the 94 files are separate ranges here. Add a file when 95 has a system 94 does not have. Drop a placeholder when 95 has no matching code, and remove its include. Keep the includes in ROM order.
+
 ## Sources
 
 - Listing: `lst/nhl95.bin.lst`. Open it. Do not disassemble `lst/nhl95.bin`. Do not write a disassembler.
