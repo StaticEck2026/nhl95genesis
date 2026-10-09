@@ -169,7 +169,9 @@ def main():
             ("%.0f%%" % s["matched_pct"]) if ref else "-", s["confidence"], note_for(s).replace("|", "/")))
         if s["name"].startswith("frames"):
             rows.append("| ram%s | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. "
-                        "Skipped by the segment queue. RAM names go in `stubinc/ram_addrs.inc` as code is transcribed |" % suffix)
+                        "`skipped` only means this is not a queue segment: there is nothing to byte-verify, so the queue "
+                        "moves past it. RAM names still go in `stubinc/ram_addrs.inc` as code is transcribed, and "
+                        "`src/ram%s.asm` may be added to |" % (suffix, suffix))
     pad = [s for s in m["segments"] if s.get("kind") == "pad"]
     intro = ("The first row that is not matched is the current segment. The rows are in 95 ROM order and tile "
              "$000000-$1FFFFF with the `$FF` fill")
