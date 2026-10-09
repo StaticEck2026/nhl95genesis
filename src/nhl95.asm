@@ -19,7 +19,8 @@
 	include	display95_01.asm		; $00A204  Adapted from display94.asm: vblank, clock, crowd, rink scroll
 	include	replay95_01.asm		; $00A536  Adapted from replay94.asm: replay
 	include	setup95_01.asm		; $00A656  Adapted from setup94.asm: ice setup, intermission, playoff screen
-	include	sound95_01.asm		; $00AF44  Adapted from sound94.asm: sound driver, then the sound data
+	include	sounddrv95.asm		; $00AF44  New in 95: sound driver, Z80 program, sound bank
+	include	sound95_01.asm		; $0676D8  Adapted from sound94.asm: sound calls, the 94 driver remnant, then the 94 samples and patches
 	include	video95_01.asm		; $079902  Adapted from video94.asm: display helpers
 	include	display95_02.asm		; $079D80  Adapted from display94.asm: vblank, clock, crowd, rink scroll
 	include	video95_02.asm		; $07A02A  Adapted from video94.asm: display helpers

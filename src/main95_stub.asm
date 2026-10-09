@@ -29,8 +29,8 @@ ReadLineData = $87B30		;IDA: sub_87B30. jsr (x).l at $746 (data95_01)
 DefaultMenus = $866DE		;IDA: sub_866DE. jsr (x).l at $74C (data95_01)
 orjoy = $7A448			;IDA: sub_7A448. jsr (x).l at $766 (video95_02)
 Opening = $9AC8			;IDA: loc_9AC8. jmp (x).l at $76C (hockey95)
-Z80Program = $BD86		;movea.l #x at $6EC. The 95 Z80 sound program (sound95_01)
-SoundBanks = $D8EC		;movea.l #x at $708. The sound data after the Z80 program (sound95_01)
+Z80Program = $BD86		;movea.l #x at $6EC. The 95 Z80 sound program (sounddrv95)
+SoundBanks = $D8EC		;movea.l #x at $708. The sound data after the Z80 program (sounddrv95)
 
 ; Main segment code
 	include	main95.asm

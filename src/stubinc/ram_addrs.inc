@@ -10,7 +10,7 @@ TmpOptLine2 equ $FFFFCC76	;94 $FFFFD072
 TempOptPlayMode equ $FFFFCC78	;94 $FFFFD074
 PlayingSong equ $FFFFCFD8	;95 only. Song the sound driver is playing ($32-$55), -1 = none
 PALflag equ $FFFFDBBC	;94 $FFFFDEF2. Bit 0 set on a PAL (50 Hz) machine
-Stack equ $FFFFFDFA	;94 $FFFFFFFE. Begin's stack pointer; the sound driver uses $FFFFFDFC-$FFFFFDFF above it
+Stack equ $FFFFFDFA	;94 $FFFFFFFE. Begin's stack pointer; the sound driver RAM (SndDrvRAM) is above it
 vbint equ $FFFFAC52	;94 $FFFFB03A. Vertical blank handler address (VBjsr jumps through it)
 vcount equ $FFFFAC56	;94 $FFFFB03E. Vertical blank counter
 GameFlags equ $FFFFBF08	;95 only. Flag byte: bit 7 holds MakeSRAMChecksum during a batch of save RAM writes; bits 0, 1 pick the second shot / pass tables
@@ -105,3 +105,37 @@ goaliemode2 equ $FFFFCC60	;94 $FFFFD05C
 BA_Sktr_SCnum equ $FFFFD00A	;94 $FFFFD406
 homehotcoldsave equ $FFFFD39C	;94 $FFFFD6D2. clearTeamStats keeps the first $1A0 bytes of the home hot / cold table (HmShots+$1A4) here
 awayhotcoldsave equ $FFFFD53C	;94 $FFFFD872. The same for AwShots+$1A4
+SndDrvRAM equ $FFFFFDFC	;95 only. Sound driver (sounddrv95) RAM base: word $1234 = driver ready, 0 = busy (SndUpdate does nothing)
+SndSeqPtr equ $FFFFFDFE	;95 only. 8 song slots: song data (-1 = free)
+SndSeqPos equ $FFFFFE1E	;95 only. 8 longs: offset of the next event in the song
+SndSeqId equ $FFFFFE3E	;95 only. 8 words: the id SndStartSeq gave the slot (SndStopSeq finds it)
+SndSeqWait equ $FFFFFE4E	;95 only. 8 words: ticks to the next event
+SndSeqTempo equ $FFFFFE5E	;95 only. 8 words: tempo
+SndSeqFrac equ $FFFFFE6E	;95 only. 8 words: tick fraction
+SndSeqState equ $FFFFFE7E	;95 only. 8 longs: tick carry (word), running status (byte 2)
+SndNotes equ $FFFFFE9E	;95 only. 32 note timers (long: count word, then the note), -1 = free
+SndNoteCount equ $FFFFFF1E	;95 only. Notes in SndNotes
+SndSeqIndex equ $FFFFFF20	;95 only. Slot SndUpdate is working on
+SndStreamBase equ $FFFFFF22	;95 only. Sample being streamed to the Z80 (SndStreamZ80)
+SndStreamPtr equ $FFFFFF26	;95 only. Next 256 bytes to stream, 0 = done
+SndStreamLoop equ $FFFFFF2A	;95 only. Loop offset of the sample, -1 = none
+SndStopSlot equ $FFFFFF2C	;95 only. Slot SndStopSeq frees
+SndSeqArg1 equ $FFFFFF2E	;95 only. SndStartSeq d1 (d2-d4 follow at SndDrvRAM+$134-$138)
+SndBanks equ $FFFFFF36	;95 only. 4 sound banks (SndSetBank), -1 = none
+asv equ $FFFFAC5C	;94 $FFFFB044. Crowd noise volume (updatesound)
+crowdlevel equ $FFFFB4B4	;94 $FFFFB89C
+MaxCwdExciteLvl equ $FFFFB4BC	;94 $FFFFB8A4
+NumCwdExciteLvl equ $FFFFB4BE	;94 $FFFFB8A6
+SumCwdExciteLvl equ $FFFFB4C0	;94 $FFFFB8A8
+ltack equ $FFFFBC1A	;94 $FFFFC014. Last tackle sound
+sflags8 equ $FFFFBF04	;94 $FFFFC2FE
+music_needs_z80_update equ $FFFFCD84	;94 $FFFFD180. The 94 sound driver RAM below (sound95_01), unused by 95
+Z80_command_buffer equ $FFFFCD86	;94 $FFFFD182
+per_channel_attenuation_table equ $FFFFCD8B	;94 $FFFFD187
+per_channel_frequency_table equ $FFFFCD92	;94 $FFFFD18E
+per_channel_patch_table equ $FFFFCDA0	;94 $FFFFD19C
+fm_voice_usage_table equ $FFFFCDA8	;94 $FFFFD1A4
+fm_channel_structs equ $FFFFCFA8	;94 $FFFFD3A4
+fm_channel_struct6 equ $FFFFCFD0	;94 $FFFFD3CC
+fm_track_slots equ $FFFFCFD8	;94 $FFFFD3D4. 95 uses the first word as PlayingSong
+periodendtime equ $FFFFAC60	;94 $FFFFB048. 3rd-period song trigger time (CheckPeriodEnd)
