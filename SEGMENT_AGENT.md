@@ -4,7 +4,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 ## Current segment
 
-`teamdata95`. No IDA label at `$000772` (94 `TeamList`; it follows `jmp (Opening).l` at the end of main95). The mapped org is `$772`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
+`frames95`. No IDA label at `$005A34` (94 `SPAlist`; it follows playoffseats at the end of teamdata95). The mapped org is `$5A34`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
 
 RAM (`ram95`) is not a queue segment. It has no ROM bytes, so there is nothing to byte-verify, and the queue moves past its row. That does not put RAM off limits. RAM names come from the code segments as they are transcribed, not from a separate first pass: add each one to `src/stubinc/ram_addrs.inc`, which the stubs include. `src/ram95.asm` is the RAM map those names are consolidated into, and you may add to it whenever it fits. When the stubs are removed, the RAM definitions end up in `src/ram95.asm`. The full build includes both files and a stub includes only `ram_addrs.inc`, so define each name in one file, and keep a name a stub uses in `ram_addrs.inc` until the stubs are removed.
 
@@ -68,7 +68,7 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 | File | Status | Org, start label | End | 94 file | Matched | Confidence | Note |
 |---|---|---|---|---|---|---|---|
 | main95 | matched, 1906 bytes $000000-$000771 | $0, Trap3 | $000771 | main94 | 50% | high | Vectors, header, SegaInit, then 95 code: region lock and its message (loc_2FA-$68F), jsr checksum, dc.l 0 ($69A, 94 kept it at the start of teamdata94), four rts exception stubs, and 94 Begin (hockey94) at loc_6A6 ending jmp $9AC8. TeamList is $772 |
-| teamdata95 | not matched | $772, no IDA label; 94 TeamList | $005A33 | teamdata94 | 0% | low | 94 TeamList |
+| teamdata95 | matched, 21186 bytes $000772-$005A33 | $772, no IDA label; 94 TeamList | $005A33 | teamdata94 | 0% | high | 94 TeamList, the 28 team blocks ($7E2-$5833), then playoffseats ($5834). Team palettes are the `*95.pal` slices in extractAssets95.js |
 | frames95 | not matched | $5A34, no IDA label; 94 SPAlist | $0093FF | frames94 | 0% | low | SPAlist ($5A34, from movea.l #SPAlist operands), the SPA tables (frame numbers changed, so no byte match), then revframetbl at $8596 (94 kept it at the end of graphics94; RestoreReplayFrame reads it). $8C76-$93FF is unmatched data; byte_8DD8 is read by season code (sub_8E26A) |
 | ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. `skipped` only means this is not a queue segment: there is nothing to byte-verify, so the queue moves past it. RAM names still go in `stubinc/ram_addrs.inc` as code is transcribed, and `src/ram95.asm` may be added to |
 | sram95 | not matched | $9400, no IDA label; 94 ScrollArrowTbl | $009AC7 | sram94 | 35% | medium | 94 ScrollArrowTbl ... ReadSRAM; moved in: stats94:ScrollArrowTbl |
