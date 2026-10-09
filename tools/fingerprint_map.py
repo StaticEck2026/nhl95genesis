@@ -864,12 +864,14 @@ def build_map(args, units, segs94, rom94, kind94, rom95, ida_lines, ida_labels, 
             "out_of_order": sum(1 for x, y in zip(seq, seq[1:]) if y < x),
             "moved_in": ["%s:%s" % (u.seg, u.name) for _, _, u in pl if ref and u.seg != ref],
             "note": r.get("note", ""),
+            "desc": r.get("desc", ""),
             "units": [[u.seg, u.name, "$%06X" % u.start, "$%06X" % a, "$%06X" % b, round(u.pick[0], 3),
                        u.pick[4] if len(u.pick) > 4 else ""] for a, b, u in pl],
         }
         m = row["matched_pct"]
-        row["confidence"] = ("high" if m >= 60 else "medium" if m >= 30 or row["located_pct"] >= 60 else "low") \
-            if row["ref"] and row["kind"] == "match" else "none"
+        row["confidence"] = r.get("confidence") or (
+            ("high" if m >= 60 else "medium" if m >= 30 or row["located_pct"] >= 60 else "low")
+            if row["ref"] and row["kind"] == "match" else "none")
         out_rows.append(row)
     if fill_start < size95:
         out_rows.append({"name": "fill", "start": fill_start, "end": size95, "ref": None, "kind": "pad",

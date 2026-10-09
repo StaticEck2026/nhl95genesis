@@ -45,9 +45,8 @@ def row_info(seg, descs):
     ref = seg.get("ref")
     new = seg.get("kind", "").startswith("new")
     if new or not ref or ref == "pad":
-        desc = first_sentence(seg.get("note") or "") or "new 95 code"
-        return None, desc
-    return ref, descs.get(ref, "")
+        return None, seg.get("desc") or first_sentence(seg.get("note") or "") or "new 95 code"
+    return ref, seg.get("desc") or descs.get(ref, "")
 
 
 def start_name(seg):
@@ -127,8 +126,7 @@ def main():
 
     top = os.path.join(src, args.game + ".asm")
     lines = open(top, encoding="latin-1").read().splitlines()
-    head = [ln for ln in lines if ln.startswith(";")]
-    stub = [ln for ln in lines if "stubinc" in ln]
+    stub = [ln for ln in lines if ln.strip().startswith("include") and "stubinc" in ln]
     tail = [ln for ln in lines if ln.strip().startswith("dcb")]
     head = [
         ";",
@@ -138,7 +136,7 @@ def main():
         ";\tThe org for a segment build goes in its _stub.asm. Do not put an org in a file this list includes.",
         ";\tram95.asm has no bytes. The ports, VDP status bits and RAM names are in stubinc.",
         ";",
-    ] if head else head
+    ]
     body = []
     for s in segs:
         ref, desc = row_info(s, descs)
@@ -183,7 +181,8 @@ def main():
               "until the row matches. Matched is the share of the row covered by 94 routines found at similarity "
               "0.5 or more. Confidence is how sure the row's range is, not a byte match." % suffix)
     new_rows = [s for s in segs if not row_info(s, descs)[0]]
-    new_text = "\n".join("- `%s` `$%06X-$%06X`: %s" % (s["name"], hexa(s["start"]), hexa(s["end"]) - 1, s.get("note", ""))
+    new_text = "\n".join("- `%s` `$%06X-$%06X`: %s" % (s["name"], hexa(s["start"]), hexa(s["end"]) - 1,
+                                                      re.sub(r"^New in 95:\s*", "", s.get("note", "")))
                          for s in new_rows)
     text = re.sub(r"(## ROM map\n\n).*?(\n## New in 95\n)",
                   lambda mm: mm.group(1) + intro + "\n\n" + "\n".join(rows) + "\n" + mm.group(2),
