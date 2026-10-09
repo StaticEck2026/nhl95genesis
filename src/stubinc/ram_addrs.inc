@@ -90,3 +90,18 @@ Sattsize equ $FFFFBEEE	;94 $FFFFC2E8
 BA_PS_flags equ $FFFFBEF8	;94 $FFFFC2F2
 cont3team equ $FFFFBF50	;94 $FFFFC32C
 cont4team equ $FFFFBF52	;94 $FFFFC32E
+puckvx equ $FFFFB38A	;94 $FFFFB772
+puckvy equ $FFFFB38C	;94 $FFFFB774
+pucky equ $FFFFB376	;94 $FFFFB75E
+palfadenew equ $FFFFB942	;94 $FFFFBD28
+Ylist equ $FFFFB462	;94 $FFFFB84A
+OOlistpos equ $FFFFB482	;94 $FFFFB86A
+sflags5 equ $FFFFBEFC	;94 $FFFFC2F6
+cont1team equ $FFFFBF4C	;94 $FFFFC328
+cont2team equ $FFFFBF4E	;94 $FFFFC32A
+VisTeam equ $FFFFBF56	;94 $FFFFC332
+goaliemode1 equ $FFFFCC5E	;94 $FFFFD05A
+goaliemode2 equ $FFFFCC60	;94 $FFFFD05C
+BA_Sktr_SCnum equ $FFFFD00A	;94 $FFFFD406
+homehotcoldsave equ $FFFFD39C	;94 $FFFFD6D2. clearTeamStats keeps the first $1A0 bytes of the home hot / cold table (HmShots+$1A4) here
+awayhotcoldsave equ $FFFFD53C	;94 $FFFFD872. The same for AwShots+$1A4

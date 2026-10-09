@@ -18,6 +18,7 @@ SCstruct equ $80
 Xpos equ $0
 attribute equ $4		;frame attribute switch bits
 frame equ $6		;alice frame number
+oldframe equ $8		;last frame
 VRchar equ $12		;vram char for graphic
 Ypos equ $14
 Zpos equ $18
@@ -26,6 +27,16 @@ OldYpos equ $20
 OldZpos equ $24
 Xvel equ $28
 Yvel equ $2A
+impactp equ $2E		;last player to cause impact
+limpact equ $30		;last impact value
+impact equ $32		;impact value
+position equ $34		;player's position (0=goalie,1=l.def,2=r.def,3=l.wing,4=center,5=r.wing)
+assnum equ $36		;index to current assignment
+asslist equ $38		;list of assignments in order of execution
+radiusx equ $4A		;width of this graphic
+radiusy equ $4C		;height of this graphic
+Wallcos equ $4E		;cos of angle of last collision
+Wallsin equ $50		;sin of angle of last collision
 SCnum equ $52		;index number for this struct
 facedir equ $54		;direction of facing
 SPA equ $58		;animation (frames95 SPA offset)
@@ -33,10 +44,16 @@ SPAnum equ $5A		;index into animation
 SPAcnt equ $5C		;count down to next frame of animation
 nopuck equ $5E		;no puck coll until zero
 pflags equ $62
+pfdoff equ 0		;bit0-deceleration off
+pfna equ 1		;bit1-new assignment
+pfjoycon equ 3		;is player joystick controlled
+pfteam equ 6		;0-home(sprite0-5)/1-visitors(sprite6-11)
+pfgoal equ 7		;0=bottom, 1=top (to shoot at)
 pfalock equ 5		;lock out until anim is done
 pflags2 equ $63
 pf2aip equ 1		;animation in progress wait
 glitch equ $65		;counter to eliminate quick frame changes (de-glitch graphics)
+rostnum equ $6F
 pnum equ $66		;player's team location number
 
 ;bit numbers in gmode
@@ -50,3 +67,11 @@ sfhor equ 7		;screen is in horizontal mode
 ;bit numbers in sflags2
 sf2faceoff equ 0		;face off in progress
 sf2drec equ 2		;disable replay record
+
+;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
+tmdata equ $1E		;team data address
+tmsort equ $22		;address of first sort obj (word)
+tmgoalie equ $26		;goalie 1/2/none
+tmpde equ $34		;energy level of each roster player (94: $32)
+tmpdst equ $68		;-2=bench/-1=ice/0+=penalty box (94: $66)
+tmsize equ $366		;94: $364
