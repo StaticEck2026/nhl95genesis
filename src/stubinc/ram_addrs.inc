@@ -3,6 +3,11 @@
 ; The final consolidation pass will organize these into src/ram95.asm.
 M68K_RAM equ $FFFF0000
 VSCRLPM equ $FFFFAC00	;94 $FFFFB000. Hscroll table vram address (VDP reg $0D); first long Begin clears
+VSPRITES equ $FFFFAC02	;94 $FFFFB002. Sprite table vram address (VDP reg $05)
+VmMap1 equ $FFFFAC04	;94 $FFFFB004. Plane A vram address, then the map size shift (xyVmMap reads printm(VmMap1))
+Map1col1 equ $FFFFAC06	;94 $FFFFB006
+VmMap2 equ $FFFFAC08	;94 $FFFFB008. Plane B vram address
+VmMap3 equ $FFFFAC0C	;94 $FFFFB00C. Window vram address
 OptPlayMode equ $FFFFCC4C	;94 $FFFFD048. Start of the menu options
 OptLine equ $FFFFCC5C	;94 $FFFFD058
 music_global_tick_counter equ $FFFFCC72	;94 $FFFFD06E. Begin stores the VDP PAL bit here
@@ -11,6 +16,10 @@ TempOptPlayMode equ $FFFFCC78	;94 $FFFFD074
 PlayingSong equ $FFFFCFD8	;95 only. Song the sound driver is playing ($32-$55), -1 = none
 PALflag equ $FFFFDBBC	;94 $FFFFDEF2. Bit 0 set on a PAL (50 Hz) machine
 Stack equ $FFFFFDFA	;94 $FFFFFFFE. Begin's stack pointer; the sound driver RAM (SndDrvRAM) is above it
+printx equ $FFFFAC40	;94 $FFFFB028
+printy equ $FFFFAC42	;94 $FFFFB02A
+printa equ $FFFFAC44	;94 $FFFFB02C. Print attribute (palette / priority bits)
+printm equ $FFFFAC46	;94 $FFFFB02E. Print map offset from VmMap1
 vbint equ $FFFFAC52	;94 $FFFFB03A. Vertical blank handler address (VBjsr jumps through it)
 vcount equ $FFFFAC56	;94 $FFFFB03E. Vertical blank counter
 GameFlags equ $FFFFBF08	;95 only. Flag byte: bit 7 holds MakeSRAMChecksum during a batch of save RAM writes; bits 0, 1 pick the second shot / pass tables
@@ -26,6 +35,8 @@ SortCords equ $FFFFAC62	;94 $FFFFB04A. 16 sort objects of SCstruct bytes
 puckx equ $FFFFB362	;94 $FFFFB74A. SortCords+(puckscnum*SCstruct)
 puckc equ $FFFFB3C2	;94 $FFFFB7AA. Puck carrier SCnum, -1 = none
 CwdExciteLvl equ $FFFFB4BA	;94 $FFFFB8A2
+Hscroll equ $FFFFB938	;94 $FFFFBD1E
+Vscroll equ $FFFFB93A	;94 $FFFFBD20
 palcount equ $FFFFB940	;94 $FFFFBD26
 PadControlBits equ $FFFFBA76	;94 $FFFFBE78 (a word; PadControlBits34 $FFFFBE86). 95 keeps the 4 pads' nibbles in one long
 bholdtimer equ $FFFFBB04	;94 $FFFFBF06. B button hold timers of pads 1 / 2
@@ -139,3 +150,5 @@ fm_channel_structs equ $FFFFCFA8	;94 $FFFFD3A4
 fm_channel_struct6 equ $FFFFCFD0	;94 $FFFFD3CC
 fm_track_slots equ $FFFFCFD8	;94 $FFFFD3D4. 95 uses the first word as PlayingSong
 periodendtime equ $FFFFAC60	;94 $FFFFB048. 3rd-period song trigger time (CheckPeriodEnd)
+callbackPtr equ $FFFFCAF4	;94 $FFFFCF32. DecompressGraphics: remap table, or 0 to dma the chars
+dmaram equ $FFFFCC6E	;94 $FFFFD06A. Dma command long, written to the vdp as two words
