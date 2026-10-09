@@ -8,6 +8,10 @@ VmMap1 equ $FFFFAC04	;94 $FFFFB004. Plane A vram address, then the map size shif
 Map1col1 equ $FFFFAC06	;94 $FFFFB006
 VmMap2 equ $FFFFAC08	;94 $FFFFB008. Plane B vram address
 VmMap3 equ $FFFFAC0C	;94 $FFFFB00C. Window vram address
+smallfontchars equ $FFFFAC16	;94 $FFFFB012. First vram char of the small font (AddSmallFont)
+smallfontmap equ $FFFFAC1E	;95 only. Address of the small font map AddSmallFont loads
+framercset equ $FFFFAC30	;94 $FFFFB01E. First vram char of the framer tiles (AddFramer)
+framermapptr equ $FFFFAC3C	;95 only. Address of the framer map Framer reads (AddFramer, AddFramer2)
 OptPlayMode equ $FFFFCC4C	;94 $FFFFD048. Start of the menu options
 OptLine equ $FFFFCC5C	;94 $FFFFD058
 music_global_tick_counter equ $FFFFCC72	;94 $FFFFD06E. Begin stores the VDP PAL bit here
@@ -154,3 +158,16 @@ fm_track_slots equ $FFFFCFD8	;94 $FFFFD3D4. 95 uses the first word as PlayingSon
 periodendtime equ $FFFFAC60	;94 $FFFFB048. 3rd-period song trigger time (CheckPeriodEnd)
 callbackPtr equ $FFFFCAF4	;94 $FFFFCF32. DecompressGraphics: remap table, or 0 to dma the chars
 dmaram equ $FFFFCC6E	;94 $FFFFD06A. Dma command long, written to the vdp as two words
+lj1 equ $FFFFBAEC	;94 $FFFFBEEE. Last buttons read by ReadJoy1
+lj2 equ $FFFFBAEE	;94 $FFFFBEF0
+lj3 equ $FFFFBAF0	;94 $FFFFBEF2
+lj4 equ $FFFFBAF2	;94 $FFFFBEF4
+pad4way1 equ $FFFFBAF4	;94 $FFFFBEF6. Pad 1 byte read each vblank (ReadJoyData)
+pad4way2 equ $FFFFBAF5	;94 $FFFFBEF7
+pad4way3 equ $FFFFBAF6	;94 $FFFFBEF8
+pad4way4 equ $FFFFBAF7	;94 $FFFFBEF9
+menupadnum equ $FFFFBF26	;95 only. Pad (0-3) ReadMenuJoy reads
+ThreeStars equ $FFFFCAF8	;94 $FFFFCF36. 256 byte ring buffer of DecompressBytecode
+FourWayPlay equ $FFFFCC4A	;94 $FFFFD046. Four way adaptor in use
+shootoutclock equ $FFFFD05C	;94 $FFFFD454
+shootoutjiffy equ $FFFFD05E	;94 $FFFFD456

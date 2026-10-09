@@ -63,6 +63,7 @@ gmoffs equ 5		;offsides on
 dfok equ 0		;graphics are ready for transfer
 df32c equ 1		;32 column mode on
 dfng equ 2		;don't int graphics
+dfclock equ 3		;clock needs update
 ;bit numbers in sflags
 sfpz equ 0		;pause mode
 sfwrap equ 4		;replay has wrapped around
