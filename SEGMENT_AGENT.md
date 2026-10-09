@@ -8,7 +8,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 RAM (`ram95`) is skipped by the segment queue. The queue processes ROM segments only. RAM names come from the code segments as they are transcribed, not as a separate first pass. After ROM segments are matched, RAM will be organized as a final consolidation pass.
 
-The files in `src/nhl95.asm` are a starting map, not a confirmed split. Use https://github.com/abdulahmad/NHL94Genesis to decide where a segment starts and ends. Find the 94 routine that matches the 95 listing, then take the 95 range from the 95 listing, not from the 94 org. Split a placeholder when the 94 files are separate ranges here. Add a file when 95 has a system 94 does not have. Drop a placeholder when 95 has no matching code, and remove its include. Keep the includes in ROM order.
+The files in `src/nhl95.asm` come from the fingerprint map `tools/segmap95.json`: every 94 routine was located in `lst/nhl95.bin`, and the rows tile the ROM. It is a provisional split. Use https://github.com/abdulahmad/NHL94Genesis to confirm where a segment starts and ends. Find the 94 routine that matches the 95 listing, then take the 95 range from the 95 listing, not from the 94 org. Split a placeholder when the 94 files are separate ranges here. Add a file when 95 has a system 94 does not have. Drop a placeholder when 95 has no matching code, and remove its include. Keep the includes in ROM order.
 
 ## Sources
 
@@ -16,7 +16,7 @@ The files in `src/nhl95.asm` are a starting map, not a confirmed split. Use http
 - The listing is an IDA LST in ASM68K / MRI mode. It has no address column. A `loc_`, `sub_`, or `unk_` name is the address.
 - Style source: the matching file in https://github.com/abdulahmad/NHL94Genesis. Use https://github.com/abdulahmad/NHLPA93Genesis only when 94 does not have the routine. A 94 name wins when the body is the same routine.
 - Reference ROM: `lst/nhl95.bin`. It is 2 MB. Bytes and branch displacements come from it.
-- `src/nhl95.asm` is the include list, in the 94 file order. Put the confirmed org on the include line in the session that matches the file.
+- `src/nhl95.asm` is the include list, in 95 ROM order. Each include line has the mapped org. Correct it in the session that matches the file.
 - Stub includes: `src/stubinc/ports.inc`, `equals.inc`, `ram_addrs.inc`.
 
 ## Teams
@@ -63,44 +63,72 @@ Name it in the session that transcribes it. Do not leave a cleanup pass.
 
 ## ROM map
 
-The first unmatched ROM segment is the current segment. The order is the 94 file order. Orgs are blank until the listing confirms them.
+The first row that is not matched is the current segment. The rows are in 95 ROM order and tile $000000-$1FFFFF with the `$FF` fill ($1A7310-$1FFFFF, the `dcb.b` in `src/nhl95.asm`). They come from `tools/segmap95.json`: `python3 tools/fingerprint_map.py --ref <NHL94Genesis>` locates the 94 routines, `python3 tools/verify_segmap.py` checks the tiling and boundaries, `python3 tools/apply_segmap.py --ref <NHL94Genesis>` writes this table. Org and end are provisional until the row matches. Matched is the share of the row covered by 94 routines found at similarity 0.5 or more. Confidence is how sure the row's range is, not a byte match.
 
-| File | Status | Org | Note |
-|---|---|---|---|
-| main95 | not matched | $0 | Adapted from main94.asm: header, startup, vectors. Start label `Trap3` |
-| teamdata95 | not matched | org not confirmed | Adapted from teamdata94.asm: teams, palettes, credits text |
-| frames95 | not matched | org not confirmed | Adapted from frames94.asm: sprite animation tables |
-| ram95 | skipped | no org (equates only) | Adapted from ram94.asm: equates only, no ROM bytes. Skipped by the segment queue. RAM names come from code segments as transcribed, added to `stubinc/ram_addrs.inc`. A final consolidation pass may organize `src/ram95.asm` after ROM segments are complete |
-| hockey95 | not matched | org not confirmed | Adapted from hockey94.asm: game loop, pause |
-| menu95 | not matched | org not confirmed | Adapted from menu94.asm: menu core |
-| stats95 | not matched | org not confirmed | Adapted from stats94.asm: scores, line editor, roster, scoring and penalty summaries, player stats, crowd meter, goalie select |
-| replay95 | not matched | org not confirmed | Adapted from replay94.asm: replay |
-| input95 | not matched | org not confirmed | Adapted from input94.asm: controller input and line changes |
-| assign95 | not matched | org not confirmed | Adapted from assign94.asm: player assignments |
-| checks95 | not matched | org not confirmed | Adapted from checks94.asm: checks before the display code |
-| video95 | not matched | org not confirmed | Adapted from video94.asm: display helpers |
-| penalty95 | not matched | org not confirmed | Adapted from penalty94.asm: penalties, scoreboard, highlights |
-| collide95 | not matched | org not confirmed | Adapted from collide94.asm: puck, players, walls, fights, goals |
-| display95 | not matched | org not confirmed | Adapted from display94.asm: vblank, clock, crowd, rink scroll |
-| setup95 | not matched | org not confirmed | Adapted from setup94.asm: ice setup, intermission, playoff screen |
-| attract95 | not matched | org not confirmed | Adapted from attract94.asm: EA Sports attract screen |
-| data95 | not matched | org not confirmed | Adapted from data94.asm: menus, season results, string tables |
-| sram95 | not matched | org not confirmed | Adapted from sram94.asm: save data |
-| sound95 | not matched | org not confirmed | Adapted from sound94.asm: sound driver, then the sound data |
-| graphics95 | not matched | org not confirmed | Adapted from graphics94.asm: graphics only |
-| onetimer95 | not matched | org not confirmed | Adapted from onetimer94.asm: one-timer |
-| fourway95 | not matched | org not confirmed | Adapted from fourway94.asm: four-player adaptor |
-| crowd95 | not matched | org not confirmed | Adapted from crowd94.asm: crowd meter and hot / cold players |
-| optsetup95 | not matched | org not confirmed | Adapted from optsetup94.asm: game setup and options |
-| cards95 | not matched | org not confirmed | Adapted from cards94.asm: player cards and matchup palettes |
-| records95 | not matched | org not confirmed | Adapted from records94.asm: name entry and record holders |
-| shootout95 | not matched | org not confirmed | Adapted from shootout94.asm: shootout |
-| scout95 | not matched | org not confirmed | Adapted from scout94.asm: matchups and scouting report |
-| period95 | not matched | org not confirmed | Adapted from period94.asm: period stats and game statistics |
-| goalie95 | not matched | org not confirmed | Adapted from goalie94.asm: manual goalie |
-| title95 | not matched | org not confirmed | Adapted from title94.asm: song select, title, credits |
-| checksum95 | not matched | org not confirmed | Adapted from checksum94.asm: checksum |
+| File | Status | Org, start label | End | 94 file | Matched | Confidence | Note |
+|---|---|---|---|---|---|---|---|
+| main95 | not matched | $0, Trap3 | $000771 | main94 | 50% | medium | Vectors, header, SegaInit, then 95 code: region lock and its message (loc_2FA-$68F), jsr checksum, dc.l 0 ($69A, 94 kept it at the start of teamdata94), four rts exception stubs, and 94 Begin (hockey94) at loc_6A6 ending jmp $9AC8. TeamList is $772 |
+| teamdata95 | not matched | $772, no IDA label; 94 TeamList | $005A33 | teamdata94 | 0% | low | 94 TeamList |
+| frames95 | not matched | $5A34, no IDA label; 94 SPAlist | $0093FF | frames94 | 0% | low | SPAlist ($5A34, from movea.l #SPAlist operands), the SPA tables (frame numbers changed, so no byte match), then revframetbl at $8596 (94 kept it at the end of graphics94; RestoreReplayFrame reads it). $8C76-$93FF is unmatched data; byte_8DD8 is read by season code (sub_8E26A) |
+| ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. Skipped by the segment queue. RAM names go in `stubinc/ram_addrs.inc` as code is transcribed |
+| sram95 | not matched | $9400, no IDA label; 94 ScrollArrowTbl | $009AC7 | sram94 | 35% | medium | 94 ScrollArrowTbl ... ReadSRAM; moved in: stats94:ScrollArrowTbl |
+| hockey95 | not matched | $9AC8, loc_9AC8 | $00A203 | hockey94 | 0% | low | Game flow: 95 Begin (main95) ends jmp $9AC8. 94 StartGame is near $9BD2 (similarity 0.56) and StartPer near $9DC2 (0.74), both rewritten; sub_9F22, sub_9FD2, sub_A01C are called from here. Before it, $9972-$9AC7 is three new save RAM routines (movea.l #$200000) after 94 ReadSRAM |
+| display95_01 | not matched | $A204, sub_A204 | $00A655 | display94 | 70% | high | 94 setvideo ... ButtonLabelCharTable |
+| setup95_01 | not matched | $A656, sub_A656 | $00AF43 | setup94 | 53% | medium | 94 defaultsprites ... setteams; moved in: input94:holdplayer, input94:Acheck, input94:burst, title94:chgplayer (+3) |
+| sound95_01 | not matched | $AF44, sub_AF44 | $079901 | sound94 | 16% | low | 95 sound driver: sub_AF44 is the command dispatcher sub_676D8 calls; sub_BD7C releases the Z80 bus and the Z80 program starts at $BD86 (C3 00 06, JP $0600); the sound banks follow |
+| video95_01 | not matched | $79902, sub_79902 | $079D7F | video94 | 100% | high | 94 DoFill ... DoDMA; moved in: display94:DumpSprites, display94:DumpSprites2, display94:DoDMAlist, display94:SetScroll2 |
+| display95_02 | not matched | $79D80, sub_79D80 | $07A029 | display94 | 100% | high | 94 addframe ... updatescroll; moved in: data94:sizetab |
+| video95_02 | not matched | $7A02A, sub_7A02A | $07A761 | video94 | 74% | high | 94 forceblack ... PadDirTable; moved in: hockey94:VBjsr, display94:VBlank, sound94:p_music_vblank, display94:vb2 (+14) |
+| collide95_01 | not matched | $7A762, sub_7A762 | $07C511 | collide94 | 80% | high | 94 ProcessInputWithRepeat ... checkint; moved in: video94:ProcessInputWithRepeat, stats94:WaitVSyncAndReadInput, cards94:wallcollduringcheck |
+| video95_03 | not matched | $7C512, sub_7C512 | $07DE9F | video94 | 64% | high | 94 sroot ... TrimSpaces; moved in: checks94:vtoa, checks94:vtoa+$5A, display94:find3d, checks94:GetHot (+46) |
+| fourway95 | not matched | $7DEA0, sub_7DEA0 | $07E0DF | fourway94 | 80% | high | 94 LoadHomeTeamGfx ... Set4WayPlayerStub; moved in: title94:LoadHomeTeamGfx, title94:TeamGfxList, penalty94:EASNLogo, penalty94:EASNLogo+$14 (+2) |
+| sound95_02 | not matched | $7E0E0, no IDA label; 94 Z80_Program_Code | $07E4D5 | sound94 | 64% | high | 94 Z80_Program_Code |
+| menu95 | not matched | $7E4D6, sub_7E4D6 | $07F97D | menu94 | 12% | low | 94 seta2 ... PrintMenuItem; moved in: hockey94:seta2, hockey94:startpause, hockey94:startpause1, hockey94:startpause3 (+1) |
+| checks95_01 | not matched | $7F97E, no IDA label; 94 ManualGoalieMenu | $0807EB | checks94 | 76% | high | 94 ManualGoalieMenu ... assgoalietopuck; moved in: goalie94:ManualGoalieMenu, stats94:SelectGoalieMenu+$1A, stats94:DisplayPlayerSelectMenu, stats94:TimeoutMenu+$3E |
+| assign95_01 | not matched | $807EC, no IDA label; 94 assdefd | $080BE9 | assign94 | 80% | high | 94 assdefd ... asswingd |
+| checks95_02 | not matched | $80BEA, no IDA label; 94 asswingo | $08282D | checks94 | 88% | high | 94 asswingo ... check4bench; moved in: assign94:assdefo, assign94:assnothing, collide94:Setplass, input94:check4bench |
+| assign95_02 | not matched | $8282E, no IDA label; 94 assbench | $082BCF | assign94 | 97% | high | 94 assbench ... assepen |
+| onetimer95 | not matched | $82BD0, no IDA label; 94 assonetimer | $082FF9 | onetimer94 | 93% | high | 94 assonetimer ... EndOneTimer; moved in: title94:EndOneTimer |
+| checks95_03 | not matched | $82FFA, no IDA label; 94 assgoaliectrl | $08369D | checks94 | 55% | medium | 94 assgoaliectrl ... CPgoalie; moved in: assign94:asseben, cards94:setSlotBit, assign94:assgoaliebreakwait |
+| collide95_02 | not matched | $8369E, loc_8369E | $083EBF | collide94 | 88% | high | 94 CPgoalie ... HotColdLoop; moved in: checks94:CPgoalie, stats94:GetPlayerCount, crowd94:AttributeCalc, setup94:resetplstuff (+4) |
+| input95_01 | not matched | $83EC0, loc_83EC0 | $084FE5 | input94 | 93% | high | 94 doinput ... compshoot; moved in: onetimer94:OneTimerTarget, onetimer94:OneTimerNearTbl, onetimer94:OneTimerFarTbl, onetimer94:OneTimerGoalieTbl (+3) |
+| data95_01 | not matched | $84FE6, no IDA label | $087BA1 | data94 | 34% | medium | 94 DisplayPlayerList+$30 ... WriteLineData; moved in: stats94:DisplayPlayerList+$30, stats94:ExitAttributeScreen2, optsetup94:j_NewPO, stats94:getNameandAttrib (+18) |
+| setup95_02 | not matched | $87BA2, sub_87BA2 | $088045 | setup94 | 70% | high | 94 PlayoffScreen ... PlayoffScreenDataTable |
+| checks95_04 | not matched | $88046, unk_88046 | $088F05 | checks94 | 88% | high | 94 PlayoffTreeSetup ... puckfaceoff2+$2D0; moved in: data94:PlayoffTreeSetup, title94:DrawPlayoffSprite, display94:SetSframe, penalty94:UpdateScores (+3) |
+| penalty95 | not matched | $88F06, sub_88F06 | $08996D | penalty94 | 94% | high | 94 limitfo ... prefmes+$38; moved in: title94:LeadSong, title94:ClearLeadSong, title94:LeadSongExit |
+| data95_02 | not matched | $8996E, sub_8996E | $08A055 | data94 | 100% | high | 94 checkagr ... linelist; moved in: collide94:checkagr, display94:showref, penalty94:ClearPenaltyBuffer, title94:ClearPenalties (+4) |
+| input95_02 | not matched | $8A056, loc_8A056 | $08A3FD | input94 | 97% | high | 94 SetLCmode ... AvgCline; moved in: penalty94:linebar, penalty94:getlinee, penalty94:AvgCline |
+| checks95_05 | not matched | $8A3FE, no IDA label; 94 CompLine | $08B747 | checks94 | 27% | low | 94 CompLine ... goalieacc; moved in: penalty94:PrintScores1, attract94:EASportsScreen, period94:updatePPTeamTime, penalty94:ChkShotStat |
+| input95_03 | not matched | $8B748, loc_8B748 | $08B9A7 | input94 | 97% | high | 94 doinput_cbut ... getGoalieSCnum |
+| checks95_06 | not matched | $8B9A8, sub_8B9A8 | $08D399 | checks94 | 48% | medium | 94 dirtab ... demoread; moved in: crowd94:stopna2, penalty94:PenGoalStuff, data94:box, data94:DisplayPlayerAttributeMenu (+16) |
+| replay95 | not matched | $8D39A, sub_8D39A | $08DF59 | replay94 | 80% | high | 94 updatereplay ... ClampReplayView |
+| season95 | not matched | $8DF5A, sub_8DF5A | $0920BD | new | - | medium | New in 95: season mode. sub_8E06E is called from the main flow ($9B7C) and calls the season routines up to sub_91B6A; month names ($8F1E8), SEASON SETUP, period lengths; tables loc_91D84-loc_92090 are read by sub_8F35E / sub_8F3E0. Starts after ClampReplayView (replay94) and ends at loc_920BE, 94 GameStatisticsScreen (period94) |
+| period95 | not matched | $920BE, loc_920BE | $0925AD | period94 | 87% | high | 94 GameStatisticsScreen+$3E ... TeamStatTextTblNoPen |
+| stats95_01 | not matched | $925AE, locret_925AE | $0962ED | stats94 | 22% | low | 94 rtsStatTables ... CalculateTeamAttributeValues; moved in: period94:rtsStatTables, period94:PeriodStatsScreen+$52, period94:PeriodStatsScreen+$AC, period94:PeriodStatsScreen+$F0 (+9) |
+| trade95 | not matched | $962EE, sub_962EE | $097C53 | new | - | medium | New in 95: schedule day ('More games', 'Change day', $9636B) then trades ('Trade Player', 'INVALID TRADE', $96C29-$97325). sub_962EE is called from sub_92FBA (stats95_01) |
+| create95 | not matched | $97C54, sub_97C54 | $09ACE5 | new | - | medium | New in 95: create player (letter entry help text $981B6, 'Maximum Unallocated Points', the attribute names $9980C). sub_97C54 is called from trade95 (loc_97966); sub_9A9D4, sub_9AAE0, sub_9AB02 and sub_9AC02 are called from $9A6xx. It reuses 94 NameEntryFramer (cards94) at $986B6. Ends at sub_9ACE6, 94 NameEntryScreen |
+| cards95_01 | not matched | $9ACE6, sub_9ACE6 | $09B72F | cards94 | 81% | high | 94 NameEntryScreen+$11E ... WriteNameRecord |
+| records95 | not matched | $9B730, loc_9B730 | $09C019 | records94 | 84% | high | 94 UserNameEntry ... ClearWinRecords; moved in: cards94:WriteNameLog, cards94:ReadNameLog, cards94:NameLogIO, title94:ClearWinRecords |
+| cards95_02 | not matched | $9C01A, sub_9C01A | $09C6EF | cards94 | 67% | high | 94 UpdateRecords ... CountGoalies |
+| awards95 | not matched | $9C6F0, sub_9C6F0 | $09D9BF | new | - | medium | New in 95: end of season awards (HART MEMORIAL TROPHY ... CONN SMYTHE AWARD, $9C820). sub_9C6F0 is called from sub_9C01A (94 UpdateRecords) |
+| title95_01 | not matched | $9D9C0, unk_9D9C0 | $09DD3D | title94 | 77% | high | 94 ClearShootout ... ShootoutShootCheck; moved in: shootout94:ClearShootout |
+| shootout95 | not matched | $9DD3E, no IDA label; 94 NextShooter | $09E5EF | shootout94 | 85% | high | 94 NextShooter ... PrintShooterNames+$12; moved in: records94:RoundBigTxt |
+| checks95_07 | not matched | $9E5F0, no IDA label; 94 puckshootout | $09F58F | checks94 | 75% | high | 94 puckshootout ... GetLowestPen; moved in: collide94:SetupPenaltyShot, data94:PenaltyShotBox, data94:PenaltyShotBox+$2E, data94:PenaltyShotBox+$78 (+10) |
+| scout95 | not matched | $9F590, loc_9F590 | $0A00D5 | scout94 | 85% | high | 94 ScoutingReport ... BuildHotColdLists; moved in: crowd94:BuildHotColdLists |
+| setup95_03 | not matched | $A00D6, sub_A00D6 | $0A0B3D | setup94 | 58% | medium | 94 StartScoutText ... GetTeamRating; moved in: crowd94:CompareHotColdTotals, crowd94:GetHotColdTotal, period94:PrintPlayerNameRight, title94:HotColdIcon (+13) |
+| stats95_02 | not matched | $A0B3E, sub_A0B3E | $0A12A9 | stats94 | 58% | medium | 94 ScoringSummaryScreen+$88 ... DisplayPenaltyEntry |
+| title95_02 | not matched | $A12AA, sub_A12AA | $0A1A59 | title94 | 53% | medium | sub_A12AA is 94 newTitleScreen (called from the main flow at $9ACE); the first matched unit is newTitleScreen+$CA at $A1376 |
+| graphics95_01 | not matched | $A1A5A, unk_A1A5A | $1A1699 | graphics94 | 15% | low | 94 PicturePalette ... logoWPG |
+| title95_03 | not matched | $1A169A, unk_1A169A | $1A1A19 | title94 | 100% | high | 94 TeamLogoPalettes |
+| graphics95_02 | not matched | $1A1A1A, no IDA label | $1A6C27 | graphics94 | 0% | low | Unmatched 4bpp tiles after TeamLogoPalettes, zero padded to $1A6C28 |
+| credits95 | not matched | $1A6C28, no IDA label | $1A72BF | teamdata94 | 0% | medium | Credits ($1A6C28, '$ 1994 Electronic Arts') and the credits list, same length-prefixed String format as 94 Credits / CreditsList (teamdata94 $5776-$5B1B); the text changed, so no byte match |
+| checksum95 | not matched | $1A72C0, sub_1A72C0 | $1A730F | checksum94 | 100% | high | 94 ValidationRoutine |
 
 ## New in 95
 
-Add a file here when the listing shows a system 94 does not have. Do not add it before that.
+Add a file here when the listing shows a system 94 does not have.
+
+- `season95` `$08DF5A-$0920BD`: season mode. sub_8E06E is called from the main flow ($9B7C) and calls the season routines up to sub_91B6A; month names ($8F1E8), SEASON SETUP, period lengths; tables loc_91D84-loc_92090 are read by sub_8F35E / sub_8F3E0. Starts after ClampReplayView (replay94) and ends at loc_920BE, 94 GameStatisticsScreen (period94)
+- `trade95` `$0962EE-$097C53`: schedule day ('More games', 'Change day', $9636B) then trades ('Trade Player', 'INVALID TRADE', $96C29-$97325). sub_962EE is called from sub_92FBA (stats95_01)
+- `create95` `$097C54-$09ACE5`: create player (letter entry help text $981B6, 'Maximum Unallocated Points', the attribute names $9980C). sub_97C54 is called from trade95 (loc_97966); sub_9A9D4, sub_9AAE0, sub_9AB02 and sub_9AC02 are called from $9A6xx. It reuses 94 NameEntryFramer (cards94) at $986B6. Ends at sub_9ACE6, 94 NameEntryScreen
+- `awards95` `$09C6F0-$09D9BF`: end of season awards (HART MEMORIAL TROPHY ... CONN SMYTHE AWARD, $9C820). sub_9C6F0 is called from sub_9C01A (94 UpdateRecords)
