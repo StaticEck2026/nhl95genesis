@@ -48,6 +48,7 @@ gmode equ $FFFFBEF0	;94 $FFFFC2EA
 sflags equ $FFFFBEF2	;94 $FFFFC2EC
 sflags2 equ $FFFFBEF4	;94 $FFFFC2EE
 sflags3 equ $FFFFBEF6	;94 $FFFFC2F0
+sflags4 equ $FFFFBEFA	;94 $FFFFC2F4. Bit 4: reverse angle replay
 gmode2 equ $FFFFBF00	;94 $FFFFC2FA. Bit 0 shootout (main menu Shootout)
 sflags7 equ $FFFFBF02	;94 $FFFFC2FC. Bit 1 overtime
 sflags9 equ $FFFFBF06	;95 only. Bit 7 Practice Mode (main menu item 2)
@@ -88,6 +89,7 @@ OOlist equ $FFFFB4A2	;94 $FFFFB88A. Sort objects in draw order (SprSort)
 DMAList equ $FFFFB4CE	;94 $FFFFB8B4. Dma transfer list
 DMAlistend equ $FFFFB92E	;94 $FFFFBD14
 Vpos equ $FFFFB932	;94 $FFFFBD18
+Oldrow equ $FFFFB934	;94 $FFFFBD1A. Rink map row of the last updatescroll
 Hpos equ $FFFFB936	;94 $FFFFBD1C
 pads equ $FFFFB9CE	;94 $FFFFBDB4. 6 pad objects of $1C bytes (95 has no glove object; 94: 7 with glovestruct)
 Joy1Struct equ $FFFFB9EA	;94 $FFFFBDD0. pads+$1C

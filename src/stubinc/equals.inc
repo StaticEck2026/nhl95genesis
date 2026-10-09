@@ -19,6 +19,7 @@ Xpos equ $0
 attribute equ $4		;frame attribute switch bits
 frame equ $6		;alice frame number
 oldframe equ $8		;last frame
+VRoffs equ $A		;offsets to find each sprites start char. (max of 6 sprites / frame)
 VRchar equ $12		;vram char for graphic
 Ypos equ $14
 Zpos equ $18
