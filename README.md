@@ -10,7 +10,7 @@ Style source for a segment is the matching file in [NHL94Genesis](https://github
 
 ## Segment queue
 
-`src/nhl95.asm` is the include list, in the 94 file order. Every file under `src/` except the include list is a placeholder. No org is confirmed. `SEGMENT_AGENT.md` is the rule file. `PROMPT.md` is the Copilot prompt.
+`src/nhl95.asm` is the include list, in 95 ROM order from the fingerprint map `tools/segmap95.json` (how it was made: `tools/SEGMAP95.md`). Every file under `src/` except the include list is a placeholder. Each org is provisional until its segment matches. `SEGMENT_AGENT.md` is the rule file. `PROMPT.md` is the Copilot prompt.
 
 A 95 system that 94 does not have gets a new file when the listing shows it. Do not invent the org.
 
