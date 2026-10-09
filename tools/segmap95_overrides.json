@@ -1,0 +1,26 @@
+{
+ "cuts": [
+  {"start": "$000000", "end": "$000772", "base": "main95", "ref": "main94",
+   "note": "Vectors, header, SegaInit, then 95 code: region lock and its message (loc_2FA-$68F), jsr checksum, dc.l 0 ($69A, 94 kept it at the start of teamdata94), four rts exception stubs, and 94 Begin (hockey94) at loc_6A6 ending jmp $9AC8. TeamList is $772"},
+  {"start": "$005A34", "end": "$009400", "base": "frames95", "ref": "frames94",
+   "note": "SPAlist ($5A34, from movea.l #SPAlist operands), the SPA tables (frame numbers changed, so no byte match), then revframetbl at $8596 (94 kept it at the end of graphics94; RestoreReplayFrame reads it). $8C76-$93FF is unmatched data; byte_8DD8 is read by season code (sub_8E26A)"},
+  {"start": "$009AC8", "end": "$00A204", "name": "hockey95", "ref": "hockey94",
+   "note": "Game flow: 95 Begin (main95) ends jmp $9AC8. 94 StartGame is near $9BD2 (similarity 0.56) and StartPer near $9DC2 (0.74), both rewritten; sub_9F22, sub_9FD2, sub_A01C are called from here. Before it, $9972-$9AC7 is three new save RAM routines (movea.l #$200000) after 94 ReadSRAM"},
+  {"start": "$00AF44", "end": "$0676E8", "base": "sound95", "ref": "sound94",
+   "note": "95 sound driver: sub_AF44 is the command dispatcher sub_676D8 calls; sub_BD7C releases the Z80 bus and the Z80 program starts at $BD86 (C3 00 06, JP $0600); the sound banks follow"},
+  {"start": "$08DF5A", "end": "$0920BE", "name": "season95", "kind": "new code",
+   "note": "New in 95: season mode. sub_8E06E is called from the main flow ($9B7C) and calls the season routines up to sub_91B6A; month names ($8F1E8), SEASON SETUP, period lengths; tables loc_91D84-loc_92090 are read by sub_8F35E / sub_8F3E0. Starts after ClampReplayView (replay94) and ends at loc_920BE, 94 GameStatisticsScreen (period94)"},
+  {"start": "$0962EE", "end": "$097C54", "name": "trade95", "kind": "new code",
+   "note": "New in 95: schedule day ('More games', 'Change day', $9636B) then trades ('Trade Player', 'INVALID TRADE', $96C29-$97325). sub_962EE is called from sub_92FBA (stats95_01)"},
+  {"start": "$097C54", "end": "$09ACE6", "name": "create95", "kind": "new code",
+   "note": "New in 95: create player (letter entry help text $981B6, 'Maximum Unallocated Points', the attribute names $9980C). sub_97C54 is called from trade95 (loc_97966); sub_9A9D4, sub_9AAE0, sub_9AB02 and sub_9AC02 are called from $9A6xx. It reuses 94 NameEntryFramer (cards94) at $986B6. Ends at sub_9ACE6, 94 NameEntryScreen"},
+  {"start": "$09C6F0", "end": "$09D9C0", "name": "awards95", "kind": "new code",
+   "note": "New in 95: end of season awards (HART MEMORIAL TROPHY ... CONN SMYTHE AWARD, $9C820). sub_9C6F0 is called from sub_9C01A (94 UpdateRecords)"},
+  {"start": "$0A12AA", "end": "$0A1A5A", "base": "title95", "ref": "title94",
+   "note": "sub_A12AA is 94 newTitleScreen (called from the main flow at $9ACE); the first matched unit is newTitleScreen+$CA at $A1376"},
+  {"start": "$1A1A1A", "end": "$1A6C28", "base": "graphics95", "ref": "graphics94",
+   "note": "Unmatched 4bpp tiles after TeamLogoPalettes, zero padded to $1A6C28"},
+  {"start": "$1A6C28", "end": "$1A72C0", "name": "credits95", "ref": "teamdata94",
+   "note": "Credits ($1A6C28, '$ 1994 Electronic Arts') and the credits list, same length-prefixed String format as 94 Credits / CreditsList (teamdata94 $5776-$5B1B); the text changed, so no byte match"}
+ ]
+}
