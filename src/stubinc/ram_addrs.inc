@@ -9,7 +9,7 @@ Map1col1 equ $FFFFAC06	;94 $FFFFB006
 VmMap2 equ $FFFFAC08	;94 $FFFFB008. Plane B vram address
 VmMap3 equ $FFFFAC0C	;94 $FFFFB00C. Window vram address
 smallfontchars equ $FFFFAC16	;94 $FFFFB012. First vram char of the small font (AddSmallFont)
-smallfontmap equ $FFFFAC1E	;95 only. Address of the small font map AddSmallFont loads
+smallfontptr equ $FFFFAC1E	;95 only. Address of the small font map AddSmallFont loads
 framercset equ $FFFFAC30	;94 $FFFFB01E. First vram char of the framer tiles (AddFramer)
 framermapptr equ $FFFFAC3C	;95 only. Address of the framer map Framer reads (AddFramer, AddFramer2)
 OptPlayMode equ $FFFFCC4C	;94 $FFFFD048. Start of the menu options
@@ -196,3 +196,42 @@ NegChkBodyP equ $FFFFDC70	;95 only
 NegChkStickP equ $FFFFDC72	;95 only
 ChkBodySqP equ $FFFFDC74	;95 only. Body reach squared
 ChkStickSqP equ $FFFFDC76	;95 only. Stick reach squared
+CreatePoints equ $FFFF7536	;95 only. Create player: unallocated attribute points (IDA word_FF7536)
+bigfontptr equ $FFFFAC10	;95 only. Address of the big font map printbig uses
+BigFontChars equ $FFFFAC14	;94 $FFFFB010. First vram char of the big font
+clockdigitchars equ $FFFFAC26	;95 only. First vram char of the big clock digits (PutClockDigit)
+energybarchars equ $FFFFAC28	;94 $FFFFB016
+rinkvrcset equ $FFFFAC2A	;94 $FFFFB018. First vram char of the rink tiles
+gamesetuptilesetindex equ $FFFFAC2C	;94 $FFFFB01A. Crowd tiles 1st vram char
+EASNcset equ $FFFFAC32	;94 $FFFFB020
+basetileoffset equ $FFFFAC34	;94 $FFFFB022. Team block chars (setupTeamBlocksMap)
+spritechars equ $FFFFAC36	;94 $FFFFB024
+ExtraChars equ $FFFFAC38	;94 $FFFFB026
+printfontset equ $FFFFAC48	;94 $FFFFB030. Char set index of printsmall (ControlCode_SetFont)
+zamx equ $FFFFB4C6	;94 $FFFFB8AC
+SRAMbyte equ $FFFFBB46	;95 only. Save RAM byte read by ReadAttributeNibbleD7 / ProcessNibbleSeason (ReadSRAM)
+clockram equ $FFFFBB8C	;94 $FFFFBF86. The clock chars for the dma list (showclockdma)
+mesarea equ $FFFFBBAA	;94 $FFFFBFA4. Message String: length word, then TextBuffer
+TextBuffer equ $FFFFBBAC	;94 $FFFFBFA6
+PushWidthBuf equ $FFFFBC0E	;94 $FFFFC008. PushNumberWidth String
+PushNumberBuf equ $FFFFBC16	;94 $FFFFC010. End of the PushNumber digits
+homegoaliectl equ $FFFFBF1E	;95 only. Home goalie control (AssignPads: nonzero = pad does not take the goalie)
+awaygoaliectl equ $FFFFBF20	;95 only. Away goalie control
+crowdnoisedelay equ $FFFFBF2A	;94 $FFFFC304
+TeamBlockMaps equ $FFFFBF58	;95 only. Map words of the home and visitor team blocks (setupTeamBlocksMap, PutTeamBlock)
+teamblocksmapptr equ $FFFFBFC8	;95 only. Address of the team blocks map
+teamblockwidth equ $FFFFBFCC	;95 only. Team block width in chars
+PerTimeTotal equ $FFFFC026	;94 $FFFFC46C. Period length in seconds (ResetClock)
+TempPlOffset equ $FFFFC02A	;94 $FFFFC470. Player for GetTempPlayerName (bit 15: away team)
+nibblebuffer equ $FFFFCC24	;94 $FFFFD036. Word weights for WeightedRandomSelect
+RNGseed equ $FFFFCC6A	;94 $FFFFD066
+attribsum equ $FFFFD398	;95 only. CalcAttribRating: sum of the attribute bytes
+attribcount equ $FFFFD39A	;95 only. CalcAttribRating: count of them
+namelog equ $FFFFD060	;94 $FFFFD45A. The user name log, 12 bytes per name
+picturebuf equ $FFFFD6E8	;94 $FFFFDA1E. UnpackPicture output
+picturebits equ $FFFFDB6A	;94 $FFFFDEA0. UnpackPicture: the 3 packed bytes of the row
+waitxpad equ $FFFFDB9E	;94 $FFFFDED4. waitx: buttons held
+framerchars equ $FFFFDC30	;95 only. Char start of the framer tiles (setupice, before AddFramer2)
+jerseynum equ $FFFFDC3D	;95 only. Jersey number byte from GetJerseyNumber
+Map2col1 equ $FFFFAC0A	;94 $FFFFB00A
+Map3col1 equ $FFFFAC0E	;94 $FFFFB00E

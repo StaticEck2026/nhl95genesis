@@ -4,7 +4,7 @@
 ;	AddFramer, the 95 AddFramer2; moved in: hockey94 VBjsr, display94 VBlank, sound94 p_music_vblank (95: pads, then SoundCmd 1),
 ;	display94 vb2 and IRQ7, attract94 VBlank_SetOptions; then orjoy, the 95 orjoy4way, nodiag, ReadJoy1-4, ReadJoy, jdtab, sound94
 ;	ReadJoyData ... ResetZ80Bus (95 pauses the sound driver around the pad reads), then the 95 ReadMenuJoy. collide95_01 follows at $7A762.
-;	IDA dc.b written as instructions: forceblack2 ... AddSmallFont ($7A054-$7A263), AddFramer ($7A2EA), VBlank, vb2, VBlank_SetOptions,
+;	IDA dc.b written as instructions: forceblack2 ... AddSmallFont ($7A054-$7A263), AddFramer ($7A2EC), VBlank, vb2, VBlank_SetOptions,
 ;	ReadJoyData ... ResetZ80Bus ($7A55A-$7A6A9).
 ;	EA's compiler emits cmp #imm,Dn as CMP (Bxxx), SNASM emits CMPI (0Cxx). The source has the real cmp / cmpi; fixopcodes.js patches the
 ;	cmp encoding after assembly.
@@ -240,9 +240,9 @@ FlushOutputBuffer	;93 name. Write the full ring buffer to vram
 	movem.l	(sp)+,d0-d1/a0-a1
 	rts
 
-AddSmallFont	;$7A256. IDA dc.b, no xref. 93 name. 95 loads the map at the address in smallfontmap (94: SmallFontMap)
+AddSmallFont	;$7A256. IDA dc.b. 93 name. Jumped to from ReAddSmallFont (video95_03). 95 loads the map at the address in smallfontptr (94: SmallFontMap)
 	move.w	d4,(smallfontchars).w
-	movea.l	(smallfontmap).w,a2
+	movea.l	(smallfontptr).w,a2
 	addq.w	#8,a2
 	bra.w	DoDMA_clearCallbackPointer
 
@@ -297,7 +297,7 @@ Framer	;IDA: sub_7A270. Draw a d0 x d1 frame at printx / printy from the framer 
 	move.w	d3,(a0)
 	rts
 
-AddFramer	;$7A2EA. IDA dc.b, no xref. 93 name. Load the framer tiles at char d4 through DecompressGraphicsWithCallback with the remap table
+AddFramer	;$7A2EC. IDA dc.b. 93 name. Jumped to from ReAddFramer (video95_03). Load the framer tiles at char d4 through DecompressGraphicsWithCallback with the remap table
 	;after the jsr (colour 7 to 1); 95 also stores the map address in framermapptr
 	movea.l	#Framermap+8,a2
 	move.w	d4,(framercset).w
