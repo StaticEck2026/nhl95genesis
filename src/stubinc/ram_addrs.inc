@@ -73,3 +73,20 @@ delayedsong equ $FFFFDB98	;94 $FFFFDECE
 HmGoalieOpt equ $FFFFDC62	;95 only. Home team word goaliesave compares with 1 (IDA $808D4); Opening2 sets it to 1
 AwGoalieOpt equ $FFFFDC64	;95 only. Away team word, as HmGoalieOpt
 ShotTimer equ $FFFFDC7A	;95 only. Set to $1E by doshot, counted down by DoGameFrame
+OOlist equ $FFFFB4A2	;94 $FFFFB88A. Sort objects in draw order (SprSort)
+DMAList equ $FFFFB4CE	;94 $FFFFB8B4. Dma transfer list
+DMAlistend equ $FFFFB92E	;94 $FFFFBD14
+Vpos equ $FFFFB932	;94 $FFFFBD18
+Hpos equ $FFFFB936	;94 $FFFFBD1C
+pads equ $FFFFB9CE	;94 $FFFFBDB4. 6 pad objects of $1C bytes (95 has no glove object; 94: 7 with glovestruct)
+Joy1Struct equ $FFFFB9EA	;94 $FFFFBDD0. pads+$1C
+Joy3Struct equ $FFFFBA22	;94 $FFFFBE24. pads+$54 (94: pads+$70)
+Joy4Struct equ $FFFFBA3E	;94 $FFFFBE40. pads+$70 (94: pads+$8C)
+padcont equ $FFFFBA7A	;94 $FFFFBE7A. Label code of each pad object
+sso equ $FFFFBA86	;94 $FFFFBE88. Off screen arrow objects, $14 bytes each
+disflags equ $FFFFBB7E	;94 $FFFFBF78
+Satt equ $FFFFBC1E	;94 $FFFFC018. Sprite attribute table
+Sattsize equ $FFFFBEEE	;94 $FFFFC2E8
+BA_PS_flags equ $FFFFBEF8	;94 $FFFFC2F2
+cont3team equ $FFFFBF50	;94 $FFFFC32C
+cont4team equ $FFFFBF52	;94 $FFFFC32E

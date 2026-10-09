@@ -17,6 +17,7 @@
 	include	sram95.asm		; $009722  Adapted from sram94.asm: save data
 	include	hockey95.asm		; $009AC8  Adapted from hockey94.asm: game flow: StartGame, StartPer
 	include	display95_01.asm		; $00A204  Adapted from display94.asm: vblank, clock, crowd, rink scroll
+	include	replay95_01.asm		; $00A536  Adapted from replay94.asm: replay
 	include	setup95_01.asm		; $00A656  Adapted from setup94.asm: ice setup, intermission, playoff screen
 	include	sound95_01.asm		; $00AF44  Adapted from sound94.asm: sound driver, then the sound data
 	include	video95_01.asm		; $079902  Adapted from video94.asm: display helpers

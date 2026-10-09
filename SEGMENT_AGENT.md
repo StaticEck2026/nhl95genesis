@@ -4,7 +4,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 ## Current segment
 
-`display95_01`. Start label `sub_A204` (94 setvideo; DoGameFrame in hockey95 ends `jmp (setvideo).l`). The mapped org is `$A204`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
+`setup95_01`. Start label `sub_A656` (94 defaultsprites; it follows updateanim at the end of replay95_01). The mapped org is `$A656`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
 
 RAM (`ram95`) is not a queue segment. It has no ROM bytes, so there is nothing to byte-verify, and the queue moves past its row. That does not put RAM off limits. RAM names come from the code segments as they are transcribed, not from a separate first pass: add each one to `src/stubinc/ram_addrs.inc`, which the stubs include. `src/ram95.asm` is the RAM map those names are consolidated into, and you may add to it whenever it fits. When the stubs are removed, the RAM definitions end up in `src/ram95.asm`. The full build includes both files and a stub includes only `ram_addrs.inc`, so define each name in one file, and keep a name a stub uses in `ram_addrs.inc` until the stubs are removed.
 
@@ -74,7 +74,8 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 | ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. `skipped` only means this is not a queue segment: there is nothing to byte-verify, so the queue moves past it. RAM names still go in `stubinc/ram_addrs.inc` as code is transcribed, and `src/ram95.asm` may be added to |
 | sram95 | matched, 934 bytes $009722-$009AC7 | $9722, sub_9722; 94 InitSaveRAM | $009AC7 | sram94 | 35% | high | 94 InitSaveRAM ... ReadSRAM ($8000 save RAM bytes, 94: $2000), then three new season leader list routines (BuildLeaderList, BuildLeaderListSum, BuildLeaderListPct, IDA dc.b at $9972). Start moved from $9400 when frames95 was split: $9400-$9721 is schedule95 data |
 | hockey95 | matched, 1852 bytes $009AC8-$00A203 | $9AC8, loc_9AC8 | $00A203 | hockey94 | 0% | high | Game flow: 94 Opening / Opening2 (setup94), the 95 main menu exits (season, trades, create player), StartGame and StartPer (no jump between them), the 95 IntermissionMenu, Gameloop, DoGameFrame with 94 periodicevents in line, then 94 updateplayers (replay94) at $A01C |
-| display95_01 | not matched | $A204, sub_A204 | $00A655 | display94 | 70% | high | 94 setvideo ... ButtonLabelCharTable |
+| display95_01 | matched, 818 bytes $00A204-$00A535 | $A204, sub_A204 | $00A535 | display94 | 70% | high | 94 setvideo, setsortcords, checksso, setffo, uppads, FormatControllerDisplay, RenderSmallFontChar, ButtonLabelCharTable. The old placeholder ran to $A655: updateanim (replay94) is split out as replay95_01 |
+| replay95_01 | matched, 288 bytes $00A536-$00A655 | $A536, sub_A536 | $00A655 | replay94 | - | high | 94 updateanim, split from the display95_01 placeholder (same session, inside its range) |
 | setup95_01 | not matched | $A656, sub_A656 | $00AF43 | setup94 | 53% | medium | 94 defaultsprites ... setteams; moved in: input94:holdplayer, input94:Acheck, input94:burst, title94:chgplayer (+3) |
 | sound95_01 | not matched | $AF44, sub_AF44 | $079901 | sound94 | 16% | low | 95 sound driver: sub_AF44 is the command dispatcher sub_676D8 calls; sub_BD7C releases the Z80 bus and the Z80 program starts at $BD86 (C3 00 06, JP $0600); the sound banks follow |
 | video95_01 | not matched | $79902, sub_79902 | $079D7F | video94 | 100% | high | 94 DoFill ... DoDMA; moved in: display94:DumpSprites, display94:DumpSprites2, display94:DoDMAlist, display94:SetScroll2 |
