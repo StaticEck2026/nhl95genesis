@@ -6,7 +6,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 `main95`. Start label `Trap3` (the vector table at `$000000`). The confirmed org is `$0`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
 
-RAM (`ram95`) is skipped by the segment queue. The queue processes ROM segments only. RAM names come from the code segments as they are transcribed, not as a separate first pass. After ROM segments are matched, RAM will be organized as a final consolidation pass.
+RAM (`ram95`) is not a queue segment. It has no ROM bytes, so there is nothing to byte-verify, and the queue moves past its row. That does not put RAM off limits. RAM names come from the code segments as they are transcribed, not from a separate first pass: add each one to `src/stubinc/ram_addrs.inc`, which the stubs include. `src/ram95.asm` is the RAM map those names are consolidated into, and you may add to it whenever it fits. When the stubs are removed, the RAM definitions end up in `src/ram95.asm`. The full build includes both files and a stub includes only `ram_addrs.inc`, so define each name in one file, and keep a name a stub uses in `ram_addrs.inc` until the stubs are removed.
 
 The files in `src/nhl95.asm` come from the fingerprint map `tools/segmap95.json`: every 94 routine was located in `lst/nhl95.bin`, and the rows tile the ROM. It is a provisional split. Use https://github.com/abdulahmad/NHL94Genesis to confirm where a segment starts and ends. Find the 94 routine that matches the 95 listing, then take the 95 range from the 95 listing, not from the 94 org. Split a placeholder when the 94 files are separate ranges here. Add a file when 95 has a system 94 does not have. Drop a placeholder when 95 has no matching code, and remove its include. Keep the includes in ROM order.
 
@@ -49,7 +49,7 @@ After every matched segment, delete `output/nhl95.bin` and `output/modified_nhl9
 - Data goes in the segment of the code that owns it. Sound data follows the sound driver. Graphics are incbins from `extractAssets95.js`, named for the asset, never for an IDA address. A map reference is `Label+8`. Team palettes are `.pal` incbins.
 - A new ROM map row gets its include in `src/nhl95.asm` in ROM order in the same session.
 - Do not copy a 94 name onto a 95 address because the low 16 bits match. Do not copy a 94 org.
-- RAM names go in `stubinc/ram_addrs.inc` as you transcribe code segments. Add each new RAM name to that file when you first encounter it. Do not wait for a RAM consolidation pass.
+- RAM names go in `stubinc/ram_addrs.inc` as you transcribe code segments. Add each new RAM name to that file when you first encounter it. Do not wait for a RAM consolidation pass. You may also add to `src/ram95.asm`, the RAM map the names are consolidated into. Define each name in only one of the two files.
 
 ## Naming
 
@@ -70,7 +70,7 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 | main95 | not matched | $0, Trap3 | $000771 | main94 | 50% | medium | Vectors, header, SegaInit, then 95 code: region lock and its message (loc_2FA-$68F), jsr checksum, dc.l 0 ($69A, 94 kept it at the start of teamdata94), four rts exception stubs, and 94 Begin (hockey94) at loc_6A6 ending jmp $9AC8. TeamList is $772 |
 | teamdata95 | not matched | $772, no IDA label; 94 TeamList | $005A33 | teamdata94 | 0% | low | 94 TeamList |
 | frames95 | not matched | $5A34, no IDA label; 94 SPAlist | $0093FF | frames94 | 0% | low | SPAlist ($5A34, from movea.l #SPAlist operands), the SPA tables (frame numbers changed, so no byte match), then revframetbl at $8596 (94 kept it at the end of graphics94; RestoreReplayFrame reads it). $8C76-$93FF is unmatched data; byte_8DD8 is read by season code (sub_8E26A) |
-| ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. Skipped by the segment queue. RAM names go in `stubinc/ram_addrs.inc` as code is transcribed |
+| ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. `skipped` only means this is not a queue segment: there is nothing to byte-verify, so the queue moves past it. RAM names still go in `stubinc/ram_addrs.inc` as code is transcribed, and `src/ram95.asm` may be added to |
 | sram95 | not matched | $9400, no IDA label; 94 ScrollArrowTbl | $009AC7 | sram94 | 35% | medium | 94 ScrollArrowTbl ... ReadSRAM; moved in: stats94:ScrollArrowTbl |
 | hockey95 | not matched | $9AC8, loc_9AC8 | $00A203 | hockey94 | 0% | low | Game flow: 95 Begin (main95) ends jmp $9AC8. 94 StartGame is near $9BD2 (similarity 0.56) and StartPer near $9DC2 (0.74), both rewritten; sub_9F22, sub_9FD2, sub_A01C are called from here. Before it, $9972-$9AC7 is three new save RAM routines (movea.l #$200000) after 94 ReadSRAM |
 | display95_01 | not matched | $A204, sub_A204 | $00A655 | display94 | 70% | high | 94 setvideo ... ButtonLabelCharTable |
