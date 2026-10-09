@@ -171,3 +171,28 @@ ThreeStars equ $FFFFCAF8	;94 $FFFFCF36. 256 byte ring buffer of DecompressByteco
 FourWayPlay equ $FFFFCC4A	;94 $FFFFD046. Four way adaptor in use
 shootoutclock equ $FFFFD05C	;94 $FFFFD454
 shootoutjiffy equ $FFFFD05E	;94 $FFFFD456
+repeatdelayframes equ $FFFFAC5A	;94 $FFFFB042. Key repeat count down (ProcessInputWithRepeat)
+puckz equ $FFFFB37A	;94 $FFFFB762
+wcradiusx equ $FFFFB93C	;94 $FFFFBD22. Wall collision radius x (checkwallcoll)
+wcradiusy equ $FFFFB93E	;94 $FFFFBD24
+TempWord1 equ $FFFFBB10	;94 $FFFFBF12. A scratch word
+ChkBodyG equ $FFFFBB6A	;94 $FFFFBF64. Goalie body reach (checkpuckcoll)
+ChkBodySqG equ $FFFFBB6C	;94 $FFFFBF66. Long: reach squared
+NegChkBodyG equ $FFFFBB70	;94 $FFFFBF6A
+ltplayer equ $FFFFBB80	;94 $FFFFBF7A
+xc1 equ $FFFFBB94	;94 $FFFFBF8E. Scroll lock x (sfslock)
+yc1 equ $FFFFBB96	;94 $FFFFBF90. Scroll lock y
+collflag equ $FFFFBBA6	;94 $FFFFBFA0. Set by a player collision (checkcx)
+lastplayer equ $FFFFBAD8	;94 $FFFFBEDA
+passplayer equ $FFFFBADE	;94 $FFFFBEE0
+sflags6 equ $FFFFBEFE	;94 $FFFFC2F8
+InjCntDown equ $FFFFC016	;94 $FFFFC3EC
+FallYPos equ $FFFFD01E	;94 $FFFFD41A. Ypos of the player falling into the boards
+PlayerChked equ $FFFFDBA4	;94 $FFFFDEDC. Last player FallDown made fall
+PlayerChking equ $FFFFDBA8	;94 $FFFFDEE0. The player who hit him
+ChkBodyP equ $FFFFDC6C	;95 only. Skater body reach for the puck (checkpuckcoll)
+ChkStickP equ $FFFFDC6E	;95 only. Skater stick reach
+NegChkBodyP equ $FFFFDC70	;95 only
+NegChkStickP equ $FFFFDC72	;95 only
+ChkBodySqP equ $FFFFDC74	;95 only. Body reach squared
+ChkStickSqP equ $FFFFDC76	;95 only. Stick reach squared

@@ -28,12 +28,15 @@ OldYpos equ $20
 OldZpos equ $24
 Xvel equ $28
 Yvel equ $2A
+Zvel equ $2C
 impactp equ $2E		;last player to cause impact
 limpact equ $30		;last impact value
 impact equ $32		;impact value
 position equ $34		;player's position (0=goalie,1=l.def,2=r.def,3=l.wing,4=center,5=r.wing)
 assnum equ $36		;index to current assignment
 asslist equ $38		;list of assignments in order of execution
+temp4 equ $46
+temp5 equ $48
 radiusx equ $4A		;width of this graphic
 radiusy equ $4C		;height of this graphic
 Wallcos equ $4E		;cos of angle of last collision
@@ -46,6 +49,7 @@ SPAcnt equ $5C		;count down to next frame of animation
 nopuck equ $5E		;no puck coll until zero
 pflags equ $62
 pfdoff equ 0		;bit0-deceleration off
+pfnc equ 2		;bit2-no collision mode
 pfna equ 1		;bit1-new assignment
 pfjoycon equ 3		;is player joystick controlled
 pfteam equ 6		;0-home(sprite0-5)/1-visitors(sprite6-11)
@@ -56,8 +60,14 @@ pf2aip equ 1		;animation in progress wait
 glitch equ $65		;counter to eliminate quick frame changes (de-glitch graphics)
 rostnum equ $6F
 pnum equ $66		;player's team location number
+weight equ $67
+shotspd equ $6C
+stickhand equ $71
+handed equ $76		;bit0 set is left handed
 
 ;bit numbers in gmode
+gmclock equ 0		;game clock is stopped
+gmhl equ 4		;hilight mode
 gmoffs equ 5		;offsides on
 ;bit numbers in disflags
 dfok equ 0		;graphics are ready for transfer
@@ -66,11 +76,15 @@ dfng equ 2		;don't int graphics
 dfclock equ 3		;clock needs update
 ;bit numbers in sflags
 sfpz equ 0		;pause mode
+sfspdir equ 2		;set pass dir mode
+sfssdir equ 3		;set shot dir mode
+sfslock equ 6		;scroll lock to xc1/yc1
 sfwrap equ 4		;replay has wrapped around
 sfhor equ 7		;screen is in horizontal mode
 ;bit numbers in sflags2
 sf2faceoff equ 0		;face off in progress
 sf2drec equ 2		;disable replay record
+sf2shot equ 4		;shot was taken
 
 ;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
 tmdata equ $1E		;team data address
@@ -78,4 +92,5 @@ tmsort equ $22		;address of first sort obj (word)
 tmgoalie equ $26		;goalie 1/2/none
 tmpde equ $34		;energy level of each roster player (94: $32)
 tmpdst equ $68		;-2=bench/-1=ice/0+=penalty box (94: $66)
+tmflags equ $30		;flags
 tmsize equ $366		;94: $364
