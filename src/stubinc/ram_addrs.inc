@@ -235,3 +235,9 @@ framerchars equ $FFFFDC30	;95 only. Char start of the framer tiles (setupice, be
 jerseynum equ $FFFFDC3D	;95 only. Jersey number byte from GetJerseyNumber
 Map2col1 equ $FFFFAC0A	;94 $FFFFB00A
 Map3col1 equ $FFFFAC0E	;94 $FFFFB00E
+pad4wayword equ $FFFFBAF8	;94 $FFFFBEFA. The pad word the unused Read4WayPad1-4 swap a pad's saved word into (Read4WayPort1)
+pad4wayword2 equ $FFFFBAFA	;95 only. The same for Read4WayPort2
+pad4waysave1 equ $FFFFBAFC	;94 $FFFFBEFE. Read4WayPad1 saved pad word
+pad4waysave2 equ $FFFFBAFE	;94 $FFFFBF00
+pad4waysave3 equ $FFFFBB00	;94 $FFFFBF02
+pad4waysave4 equ $FFFFBB02	;94 $FFFFBF04
