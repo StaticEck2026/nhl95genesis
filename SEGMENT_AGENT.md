@@ -4,7 +4,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 ## Current segment
 
-`frames95`. No IDA label at `$005A34` (94 `SPAlist`; it follows playoffseats at the end of teamdata95). The mapped org is `$5A34`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
+`schedule95`. Start label `byte_8DD8` (the season schedule after revframetbl at the end of frames95). The confirmed start is `$8DD8`; the end is `$009721`, before `sub_9722` (94 InitSaveRAM). Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
 
 RAM (`ram95`) is not a queue segment. It has no ROM bytes, so there is nothing to byte-verify, and the queue moves past its row. That does not put RAM off limits. RAM names come from the code segments as they are transcribed, not from a separate first pass: add each one to `src/stubinc/ram_addrs.inc`, which the stubs include. `src/ram95.asm` is the RAM map those names are consolidated into, and you may add to it whenever it fits. When the stubs are removed, the RAM definitions end up in `src/ram95.asm`. The full build includes both files and a stub includes only `ram_addrs.inc`, so define each name in one file, and keep a name a stub uses in `ram_addrs.inc` until the stubs are removed.
 
@@ -69,9 +69,10 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 |---|---|---|---|---|---|---|---|
 | main95 | matched, 1906 bytes $000000-$000771 | $0, Trap3 | $000771 | main94 | 50% | high | Vectors, header, SegaInit, then 95 code: region lock and its message (loc_2FA-$68F), jsr checksum, dc.l 0 ($69A, 94 kept it at the start of teamdata94), four rts exception stubs, and 94 Begin (hockey94) at loc_6A6 ending jmp $9AC8. TeamList is $772 |
 | teamdata95 | matched, 21186 bytes $000772-$005A33 | $772, no IDA label; 94 TeamList | $005A33 | teamdata94 | 0% | high | 94 TeamList, the 28 team blocks ($7E2-$5833), then playoffseats ($5834). Team palettes are the `*95.pal` slices in extractAssets95.js |
-| frames95 | not matched | $5A34, no IDA label; 94 SPAlist | $0093FF | frames94 | 0% | low | SPAlist ($5A34, from movea.l #SPAlist operands), the SPA tables (frame numbers changed, so no byte match), then revframetbl at $8596 (94 kept it at the end of graphics94; RestoreReplayFrame reads it). $8C76-$93FF is unmatched data; byte_8DD8 is read by season code (sub_8E26A) |
+| frames95 | matched, 13220 bytes $005A34-$008DD7 | $5A34, no IDA label; 94 SPAlist | $008DD7 | frames94 | 0% | high | SPAlist ($5A34, movea.l #$5A34), 78 SPA tables (94: 66, new order and frame numbers), then revframetbl $8596-$8DD7 (1057 words, incbin; 94 kept it at the end of graphics94; RestoreReplayFrame reads it at $8DD46). The rest of the old placeholder is schedule95 |
+| schedule95 | not matched | $8DD8, byte_8DD8 | $009721 | new | - | medium | New in 95: season schedule data, split from the frames95 placeholder. byte_8DD8 = $C0 (192 days), then team numbers; read by season code (sub_8E26A, sub_8E2AC: movea.l #$8DD8 / #$8DD9). Ends before sub_9722 (94 InitSaveRAM). The fingerprint ScrollArrowTbl hit at $9400 is inside this data |
 | ram95 | skipped | no org (equates only) | - | ram94 | - | - | Equates only, no ROM bytes. `skipped` only means this is not a queue segment: there is nothing to byte-verify, so the queue moves past it. RAM names still go in `stubinc/ram_addrs.inc` as code is transcribed, and `src/ram95.asm` may be added to |
-| sram95 | not matched | $9400, no IDA label; 94 ScrollArrowTbl | $009AC7 | sram94 | 35% | medium | 94 ScrollArrowTbl ... ReadSRAM; moved in: stats94:ScrollArrowTbl |
+| sram95 | not matched | $9722, sub_9722; 94 InitSaveRAM | $009AC7 | sram94 | 35% | medium | 94 InitSaveRAM ... ReadSRAM. Start moved from $9400 when frames95 was split: $9400-$9721 is schedule95 data (the ScrollArrowTbl hit is false); the include line still says $009400 |
 | hockey95 | not matched | $9AC8, loc_9AC8 | $00A203 | hockey94 | 0% | low | Game flow: 95 Begin (main95) ends jmp $9AC8. 94 StartGame is near $9BD2 (similarity 0.56) and StartPer near $9DC2 (0.74), both rewritten; sub_9F22, sub_9FD2, sub_A01C are called from here. Before it, $9972-$9AC7 is three new save RAM routines (movea.l #$200000) after 94 ReadSRAM |
 | display95_01 | not matched | $A204, sub_A204 | $00A655 | display94 | 70% | high | 94 setvideo ... ButtonLabelCharTable |
 | setup95_01 | not matched | $A656, sub_A656 | $00AF43 | setup94 | 53% | medium | 94 defaultsprites ... setteams; moved in: input94:holdplayer, input94:Acheck, input94:burst, title94:chgplayer (+3) |
@@ -128,6 +129,7 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 
 Add a file here when the listing shows a system 94 does not have.
 
+- `schedule95` `$008DD8-$009721`: season schedule data (byte_8DD8 = $C0 days, then team numbers), read by the season code (sub_8E26A, sub_8E2AC). Split from the frames95 placeholder
 - `season95` `$08DF5A-$0920BD`: season mode. sub_8E06E is called from the main flow ($9B7C) and calls the season routines up to sub_91B6A; month names ($8F1E8), SEASON SETUP, period lengths; tables loc_91D84-loc_92090 are read by sub_8F35E / sub_8F3E0. Starts after ClampReplayView (replay94) and ends at loc_920BE, 94 GameStatisticsScreen (period94)
 - `trade95` `$0962EE-$097C53`: schedule day ('More games', 'Change day', $9636B) then trades ('Trade Player', 'INVALID TRADE', $96C29-$97325). sub_962EE is called from sub_92FBA (stats95_01)
 - `create95` `$097C54-$09ACE5`: create player (letter entry help text $981B6, 'Maximum Unallocated Points', the attribute names $9980C). sub_97C54 is called from trade95 (loc_97966); sub_9A9D4, sub_9AAE0, sub_9AB02 and sub_9AC02 are called from $9A6xx. It reuses 94 NameEntryFramer (cards94) at $986B6. Ends at sub_9ACE6, 94 NameEntryScreen

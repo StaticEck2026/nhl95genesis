@@ -12,6 +12,7 @@
 	include	main95.asm		; $000000  Adapted from main94.asm: header, startup, vectors
 	include	teamdata95.asm		; $000772  Adapted from teamdata94.asm: teams, palettes, credits text
 	include	frames95.asm		; $005A34  Adapted from frames94.asm: sprite animation tables
+	include	schedule95.asm		; $008DD8  New in 95: season schedule data
 	include	ram95.asm		;          Adapted from ram94.asm: equates only
 	include	sram95.asm		; $009400  Adapted from sram94.asm: save data
 	include	hockey95.asm		; $009AC8  Adapted from hockey94.asm: game flow: StartGame, StartPer
