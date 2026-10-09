@@ -14,7 +14,7 @@
 	include	frames95.asm		; $005A34  Adapted from frames94.asm: sprite animation tables
 	include	schedule95.asm		; $008DD8  New in 95: season schedule data
 	include	ram95.asm		;          Adapted from ram94.asm: equates only
-	include	sram95.asm		; $009400  Adapted from sram94.asm: save data
+	include	sram95.asm		; $009722  Adapted from sram94.asm: save data
 	include	hockey95.asm		; $009AC8  Adapted from hockey94.asm: game flow: StartGame, StartPer
 	include	display95_01.asm		; $00A204  Adapted from display94.asm: vblank, clock, crowd, rink scroll
 	include	setup95_01.asm		; $00A656  Adapted from setup94.asm: ice setup, intermission, playoff screen
