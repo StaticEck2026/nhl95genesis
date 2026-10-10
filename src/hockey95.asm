@@ -312,7 +312,7 @@ IntermissionMenu	;IDA: sub_9FD2. 95 only. Before the period: at game over (gsp 4
 .0
 	btst	#0,(gmode2).w
 	bne.w	.menu
-	jsr	(AutoLineChange).l
+	jsr	(SetupTeamForIntermission).l
 	moveq	#$F,d0	;Sortobjs-1
 	movea.w	#(SortCords-M68K_RAM),a0
 .1

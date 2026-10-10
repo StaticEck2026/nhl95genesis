@@ -318,9 +318,9 @@ ExitAttributeScreen2	;IDA: loc_8546E. 94 stats94 name. TeamRosterScreen start: f
 	jmp	DrawMenuScreen
 
 getNameandAttrib	;IDA: sub_8547A (93 GetNameandAttrib). Print player d0's name, then at x $21 (94 $1E) the column d4 picks (attribjmp; above 2
-	;a rating through CalcAttrib, the jump offset in the low word). 95 keeps the team and player in attribteam / attribplayer
+	;a rating through CalcAttrib, the jump offset in the low word). 95 keeps the team and player in screenarg / attribplayer
 	movem.l	d0-d4/a0-a1/a4-a5,-(sp)
-	move.w	$28(a2),(attribteam).w
+	move.w	$28(a2),(screenarg).w
 	move.w	d0,(attribplayer).w
 	pea	.1(pc)
 	jsr	(getname).l
@@ -427,7 +427,7 @@ AttribRating	;IDA: loc_85604. IDA: DispAttribValue (94). d0 * 100 / d1; 95 scale
 	mulu.w	#$64,d0
 	divu.w	d1,d0
 	movem.l	d0/d7,-(sp)
-	move.w	(attribteam).w,d7
+	move.w	(screenarg).w,d7
 	move.w	(attribplayer).w,d0
 	jsr	(SeasonPlayerOut).l
 	movem.l	(sp)+,d0/d7

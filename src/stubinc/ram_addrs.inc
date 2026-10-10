@@ -345,7 +345,7 @@ setupdir equ $FFFFD2EA	;95 only. Last setup key: 0 up, 1 down, 2 left, 3 right, 
 setuplines equ $FFFFD2EC	;95 only. Number of setup lines for the mode
 setupshown equ $FFFFD2EE	;95 only. Setup lines shown
 seasonsetupreq equ $FFFFDC32	;95 only. Nonzero: GameSetUp opens on Continue Season
-attribteam equ $FFFFDC34	;95 only. getNameandAttrib team
+screenarg equ $FFFFDC34	;95 only. getNameandAttrib: the team number; DrawTeamScreen2 ... 6: the background bitmap address (long)
 attribplayer equ $FFFFDC36	;95 only. getNameandAttrib player
 databuffer equ $FFFFCC7A	;94 $FFFFD076. Line data buffer (ReadLineData / WriteLineData)
 playoffspritex equ $FFFFB4C8	;94 $FFFFB8AE. Playoff sprite x offset while the tree is scrolled (UpdatePlayoffScroll)
@@ -370,3 +370,9 @@ RefStep equ $FFFFC01C	;94 $FFFFC3F2
 RefPen equ $FFFFC01E	;94 $FFFFC3F4
 PenSum equ $FFFFC198	;94 $FFFFC5DE. Penalty summary, 4 bytes per penalty (PenSumLength)
 RefRamMap equ $FFFFDBBE	;94 $FFFFC3F6. The ref window map in RAM ($38 words, PushRef)
+smallfont4chars equ $FFFFAC1C	;95 only. Fourth small font chars (DrawTeamScreen2 ... 4)
+tradeteam1 equ $FFFFCC32	;95 only. Trade Players: the first team (word), its 8 byte block
+tradeteam2 equ $FFFFCC3A	;95 only. Trade Players: the second team
+screen6chars1 equ $FFFFD02A	;95 only. DrawTeamScreen6: the team block chars
+screen6chars2 equ $FFFFD02C	;95 only. DrawTeamScreen6: the Screen6Tiles1 chars
+screen6chars3 equ $FFFFD02E	;95 only. DrawTeamScreen6: the Screen6Tiles2 chars
