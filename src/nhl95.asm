@@ -46,7 +46,7 @@
 	include	data95_02.asm		; $08996E  Adapted from data94.asm: menus, season results, string tables
 	include	input95_02.asm		; $08A056  Adapted from input94.asm: controller input and line changes
 	include	checks95_05.asm		; $08A3FE  Adapted from checks94.asm: checks before the display code
-	include	input95_03.asm		; $08B748  Adapted from input94.asm: controller input and line changes
+	include	input95_03.asm		; $08B734  Adapted from input94.asm: controller input and line changes
 	include	checks95_06.asm		; $08B9A8  Adapted from checks94.asm: checks before the display code
 	include	replay95.asm		; $08D39A  Adapted from replay94.asm: replay
 	include	season95.asm		; $08DF5A  New in 95: season mode
