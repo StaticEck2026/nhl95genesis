@@ -3733,7 +3733,7 @@ HighlightsScreen	;no IDA label. 95 season NHL HIGHLIGHTS screen: draw bg/title, 
 	moveq	#0,d5
 	jsr	(dobitmap).l
 	jsr	(PrintHighlightsTitle).l
-	jsr	(GetHighlightRecord).l
+	jsr	(HighlightsHelp).l
 	clr.w	(rosterscroll).w
 	move.w	#$FFFF,(setupdir).w
 	move.w	#$18,(palcount).w

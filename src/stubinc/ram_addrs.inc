@@ -439,3 +439,13 @@ screentimer equ $FFFFD280	;94 $FFFFD5B6. Line editor: the selected list row
 redrawicons equ $FFFFBC18	;94 $FFFFC012. Line editor: the line drawn last (-1 = redraw)
 LeaderTeamTbls equ $FFFFD6E8	;95 only. League Leaders: 7 team value tables of $1A bytes (shares PlayoffSchedule)
 StandingsRecs equ $FFFFDAA0	;95 only. ReadStandings buffer (3 bytes a team) used by League Leaders
+TradeFromTeam equ $FFFFBB14	;95 only. Trade: the team giving the player (shares TempRawSpd)
+TradeToTeam equ $FFFFBB16	;95 only. Trade: the team getting the player (shares TempMaxSpd)
+TradeBuf equ $FFFF1388	;95 only. Trade: work buffer
+RosterTable equ $FFFF1B4C	;95 only. Season rosters ($38 bytes a team, save RAM $1B4C): roster ids, then the goalie, forward and defense counts
+TradeData equ $FFFF2710	;95 only. Trade screen state (list sizes, cursors, chosen counts)
+TradeWork equ $FFFF2AF8	;95 only. Trade screen work words
+TradeRoster1 equ $FFFF3A98	;95 only. Trade screen: HomeTeam roster rows
+RosterRatings equ $FFFF5700	;95 only. Default roster ratings ($20 bytes a team, DefaultRosters)
+TradeRoster2 equ $FFFF88B8	;95 only. Trade screen: VisTeam roster rows
+CreatedPlayerBuf equ $FFFFDC3C	;95 only. Created player record read from save RAM (GetCreatedName reads it at +2)
