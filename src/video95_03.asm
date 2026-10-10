@@ -1759,12 +1759,12 @@ ReAddSmallFont	;$7D84E. IDA dc.b, no xref. 95 only. AddSmallFont again at smallf
 	move.w	(smallfontchars).w,d4
 	jmp	(AddSmallFont).l
 
-AddFonts	;IDA: sub_7D858. 95 only. Load the small font at d4 (smallfontchars, smallfontptr = SmallFontMap) and the big font after it
+AddFonts	;IDA: sub_7D858. 95 only. Load the small font at d4 (smallfontchars, smallfontptr = SmallFontMap2) and the big font after it
 	;(BigFontChars, BigFontMap). Called from setupice
 	move.w	d4,(smallfontchars).w
-	movea.l	#SmallFontMap+8,a2
+	movea.l	#SmallFontMap2+8,a2
 	jsr	(DoDMA_clearCallbackPointer).l
-	move.l	#SmallFontMap,(smallfontptr).l
+	move.l	#SmallFontMap2,(smallfontptr).l
 	move.w	d4,(BigFontChars).w
 	movea.l	#BigFontMap+8,a2
 	jsr	(DoDMA_clearCallbackPointer).l

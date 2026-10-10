@@ -47,11 +47,11 @@ CrowdFrameTbl	;IDA: unk_A0B96. 95 only. updatecrowdf crowd animation frames, -1 
 	dc.b	4,5,4,3,2,3,4,5,4,5,$B,$C,6,7,8,9
 	dc.b	$FF,$FF
 
-showcrowd	;IDA: sub_A0BF8. display94 showcrowd. Crowd sprites (CrowdSprites): up to 3 frames per PBnum nibble (ShowCrowdPb), then the crowdframe frame (ShowCrowdFrame);
+showcrowd	;IDA: sub_A0BF8. display94 showcrowd. Crowd sprites (CrowdFrameList): up to 3 frames per PBnum nibble (ShowCrowdPb), then the crowdframe frame (ShowCrowdFrame);
 	;none in a reverse angle replay (sflags4 bit 4). a6 = sprite table, d6 = link counter
 	btst	#4,(sflags4).w
 	bne.w	rtsShowCrowd
-	movea.l	#CrowdSprites,a1
+	movea.l	#CrowdFrameList,a1
 	adda.l	4(a1),a1
 	move.w	(Hpos).w,d4
 	move.w	(Vpos).w,d5

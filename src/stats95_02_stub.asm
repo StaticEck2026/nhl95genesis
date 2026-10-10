@@ -30,7 +30,7 @@ ExitAttributeScreen2 = $8546E	;IDA: loc_8546E. used at $A0DEE, $A10EE (data95_01
 PenaltyNames = $89C2E		;IDA: unk_89C2E. used at $A1250 (data95_02)
 DrawTeamScreen2 = $8ACEC	;IDA: sub_8ACEC. used at $A0D28, $A1030 (checks95_05)
 ControllerBgMap = $164AC8	;IDA: unk_164AC8. used at $A0D1E, $A1026 (graphics95_01)
-CrowdSprites = $18B628		;IDA: unk_18B628. used at $A0C02 (graphics95_01)
+CrowdFrameList = $18B628		;IDA: unk_18B628. used at $A0C02 (graphics95_01)
 
 ; Main segment code
 	include	stats95_02.asm

@@ -55,7 +55,7 @@ GetCreatedName = $96494		;IDA: sub_96494. used at $7CE7E (create95)
 GetRosterName = $9649E		;IDA: sub_9649E. used at $7CEE8, $7CF60. a1 = name String of player d0 of team d7 (season roster aware)
 GetJerseyNumber = $965A8	;IDA: sub_965A8. used at $7CCAC, $7CD4C, $7CD92, $7CDD6. jerseynum = the jersey number byte of player d0 of team d7
 Rinktilelist = $C4A7C		;IDA: unk_C4A7C. used at $7D4F6, $7D6F0, $7DD82 (graphics95_01)
-SmallFontMap = $139E02		;IDA: unk_139E02. used at $7D85C, $7D868 (graphics95_01)
+SmallFontMap2 = $139E02		;IDA: unk_139E02. used at $7D85C, $7D868 (graphics95_01)
 HotSpotList = $137B66		;IDA: unk_137B66. used at $7C686. Hot spot x / y bytes by frame (GetHot; graphics95_01)
 ClockDigitsBitmap = $13FC18	;IDA: unk_13FC18. used at $7C998. Big clock digits (PutClockDigit; graphics95_01)
 EnergyBarMap = $14C4C8		;#x+8 at $7DDA2 (graphics95_01)
