@@ -8,28 +8,28 @@
 ;	LoadRosterFont), $861CE and $87468-$874A5 (InitializeGameStructures, OptionRNG); these are read from the retail bytes. IDA also
 ;	hid the printz / printz2 Strings and the DecompressGraphicsWithCallback remap bytes as instructions. Local labels are numbered;
 ;	the IDA local names are not kept.
-;	New RAM names are in stubinc/ram_addrs.inc: the 94 setup and card words (logoteam ... cardteamnum, setupfirstline,
-;	setupprevline), the playoff words (gsstruct ... potree), and the 95 setup words (setupline, setupvalues, setupdir ...).
+;	New RAM names are in stubinc/ram_addrs.inc: the 94 setup and card words (logoteam ... cardteamnum, DispAttribCtr,
+;	setupprevline), the playoff words (gsstruct ... potree), and the 95 setup words (SelectedPlayerIdx, setupvalues, setupdir ...).
 ;	EA's compiler emits cmp #imm,Dn as CMP (Bxxx), SNASM emits CMPI (0Cxx). The source has the real cmp / cmpi; fixopcodes.js patches the
 ;	cmp encoding after assembly.
 
 	rts	;unused (the byte after compshoot)
 
 TeamRosterScreen	;IDA: sub_84FE8. 93 name (94 stats94). "Team Roster" screen for team a2: DrawTeamScreen, then the player list (DisplayPlayerList)
-	;with page (setupline: goalies, offense, defense; C), column (setupfirstline: left / right) and row scroll (rosterscroll: up / down).
+	;with page (SelectedPlayerIdx: goalies, offense, defense; C), column (DispAttribCtr: left / right) and row scroll (rosterscroll: up / down).
 	;B goes to the other team; start exits (ExitAttributeScreen2). 95 rewrote the 94 scrolling screen. Called from the menu95 item lists
 	moveq	#0,d0
 	moveq	#$1C,d1
 	jsr	(DrawTeamScreen).l
 	movem.l	a0-a6,-(sp)
-	move.l	#RosterTeamBlocksMap,(teamblocksmapptr).l
+	move.l	#Teamblocksmap,(teamblocksmapptr).l
 	jsr	(setupTeamBlocksMap).l
 	movem.l	(sp)+,a0-a6
 	moveq	#0,d0
-	move.w	d0,(setupline).w
+	move.w	d0,(SelectedPlayerIdx).w
 	move.w	d4,(homepicchars).w
 	addi.w	#$24,d4
-	clr.w	(setupfirstline).w
+	clr.w	(DispAttribCtr).w
 .0
 	movem.l	a0-a6,-(sp)
 	move.w	$28(a2),d3
@@ -67,8 +67,8 @@ TeamRosterScreen	;IDA: sub_84FE8. 93 name (94 stats94). "Team Roster" screen for
 	jsr	(printz).l
 	String	$BD,1,8,0
 	bsr.w	DisplayPlayerList
-	clr.w	(setuplastline).w
-	clr.w	(rosterlock).w
+	clr.w	(VertLineScrolling).w
+	clr.w	(PlayerScrollCtr).w
 .2
 	jsr	(vcountwait).l
 	jsr	(ReadMenuJoy).l
@@ -84,17 +84,17 @@ TeamRosterScreen	;IDA: sub_84FE8. 93 name (94 stats94). "Team Roster" screen for
 	neg.w	d0
 	btst	#2,d1
 	bne.w	.7
-	tst.w	(rosterlock).w
+	tst.w	(PlayerScrollCtr).w
 	bne.w	.6
 	moveq	#-2,d0
 	neg.w	d0
 	btst	#5,d1
 	beq.w	.4
 	clr.w	(rosterscroll).w
-	addq.w	#1,(setupline).w
-	cmpi.w	#2,(setupline).w
+	addq.w	#1,(SelectedPlayerIdx).w
+	cmpi.w	#2,(SelectedPlayerIdx).w
 	ble.w	.3
-	clr.w	(setupline).w
+	clr.w	(SelectedPlayerIdx).w
 .3
 	jsr	(DisplayPlayerList).l
 	bra.s	.2
@@ -120,9 +120,9 @@ TeamRosterScreen	;IDA: sub_84FE8. 93 name (94 stats94). "Team Roster" screen for
 .6
 	bra.w	.2
 .7
-	add.w	(setupfirstline).w,d0
+	add.w	(DispAttribCtr).w,d0
 	bmi.s	.6
-	move.w	d0,(setupfirstline).w
+	move.w	d0,(DispAttribCtr).w
 	bsr.w	DisplayPlayerList
 	bra.s	.6
 .8
@@ -132,21 +132,21 @@ TeamRosterScreen	;IDA: sub_84FE8. 93 name (94 stats94). "Team Roster" screen for
 	movea.w	#$C288,a2
 	bra.w	.0
 	rts	;unused
-	clr.w	(rosterlock).w	;unused
+	clr.w	(PlayerScrollCtr).w	;unused
 	rts
 
-DisplayPlayerList	;IDA: sub_851E0. 93 name (94 stats94). Draw roster page setupline: the title (PlayerStatMenuTxt), the scroll marks, the column header
+DisplayPlayerList	;IDA: sub_851E0. 93 name (94 stats94). Draw roster page SelectedPlayerIdx: the title (PlayerStatMenuTxt), the scroll marks, the column header
 	;(PAttribColumns, or GAttribColumns for goalies) and up to 5 rows from rosterscroll: getNameandAttrib, then the lines the player
 	;is on (PrintPlayerLines); the first row is highlighted
 	jsr	(printz2).l
 	String	$F8,4,3,2,8,$F9,1,0
-	move.w	(setupline).w,d0
+	move.w	(SelectedPlayerIdx).w,d0
 	lea	PlayerStatMenuTxt(pc),a1
 	jsr	(SkipStrings).l
 	jsr	(printsmall).l
-	tst.w	(setupline).w
+	tst.w	(SelectedPlayerIdx).w
 	beq.w	.1
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	beq.w	.0
 	jsr	(GetDefenseStart).l
 	move.w	d0,(TempWord2).w
@@ -182,8 +182,8 @@ DisplayPlayerList	;IDA: sub_851E0. 93 name (94 stats94). Draw roster page setupl
 	String	$FD,$16,$FC,8
 .5
 	movea.l	#PAttribColumns,a1
-	move.w	(setupfirstline).w,d0
-	tst.w	(setupline).w
+	move.w	(DispAttribCtr).w,d0
+	tst.w	(SelectedPlayerIdx).w
 	bne.w	.7
 	movea.l	#GAttribColumns,a1
 	bra.w	.7
@@ -194,7 +194,7 @@ DisplayPlayerList	;IDA: sub_851E0. 93 name (94 stats94). Draw roster page setupl
 	tst.w	(a1)
 	dbmi	d0,.6
 	bpl.w	.8
-	subq.w	#1,(setupfirstline).w
+	subq.w	#1,(DispAttribCtr).w
 	bra.s	.5
 .8
 	jsr	(printsmall).l
@@ -308,7 +308,7 @@ PrintPlayerLines	;IDA: sub_8535E. 95 only. Print at printx the lines player d0 o
 	String	'G'
 	String	'G'
 
-PlayerStatMenuTxt	;IDA: unk_85438. 93 name. Roster page titles (SkipStrings by setupline). The four String 'G' before it (93 GoalieRowText) are not read
+PlayerStatMenuTxt	;IDA: unk_85438. 93 name. Roster page titles (SkipStrings by SelectedPlayerIdx). The four String 'G' before it (93 GoalieRowText) are not read
 	String	'    Goalies     '
 	String	'    Offense     '
 	String	'    Defense     '
@@ -650,7 +650,7 @@ PlayerPositionText	;IDA: unk_85A8A. 93 name. Position names for the line slots (
 GameSetUp	;IDA: sub_85A9E (94 optsetup94). The game setup screen, rewritten for 95: ReadLineData, ReadPassBits, the options from TmpOptLine2 /
 	;TempOptPlayMode. In a season (GameFlags bit 5) take the season options (ReadSeasonHeader) and the matchup (StepSeasonTeam).
 	;Then setoptions, and the line cursor loop: FixModeOptions, PrintOptions, the logos or matchup bitmaps, GameSetUp_2 for a key;
-	;up / down move setupline, left / right step setupvalues (WrapOptionUp / Down), start stores them (SetupStart) and sets the
+	;up / down move SelectedPlayerIdx, left / right step setupvalues (WrapOptionUp / Down), start stores them (SetupStart) and sets the
 	;pads (SetPojoyMode, FigureJoy). Called from hockey95
 	jsr	(ReadLineData).l
 	movea.l	#pwddatabuffer,a3
@@ -708,12 +708,12 @@ GameSetUp	;IDA: sub_85A9E (94 optsetup94). The game setup screen, rewritten for 
 	move.b	#7,(a0)
 .7
 	bsr.w	setoptions
-	clr.w	(setupline).w
+	clr.w	(SelectedPlayerIdx).w
 	clr.w	(setupprevline).w
-	clr.w	(setupfirstline).w
+	clr.w	(DispAttribCtr).w
 	move.w	#7,(setupshown).w
-	move.w	(setupshown).w,(setuplastline).w
-	subq.w	#1,(setuplastline).w
+	move.w	(setupshown).w,(VertLineScrolling).w
+	subq.w	#1,(VertLineScrolling).w
 	move.w	#$FFFF,(setupdir).w
 	move.w	#$18,(palcount).w
 	bclr	#2,(disflags).w
@@ -732,7 +732,7 @@ GameSetUp	;IDA: sub_85A9E (94 optsetup94). The game setup screen, rewritten for 
 	bsr.w	DrawMatchupBitmaps
 .10
 	bsr.w	GameSetUp_2
-	move.w	(setupline).w,(setupprevline).w
+	move.w	(SelectedPlayerIdx).w,(setupprevline).w
 	tst.w	d1
 	bne.w	.13
 	bra.w	.23
@@ -759,60 +759,60 @@ GameSetUp	;IDA: sub_85A9E (94 optsetup94). The game setup screen, rewritten for 
 	btst	#3,d1
 	beq.w	.8
 	move.w	#3,(setupdir).w
-	move.w	(setupline).w,d0
+	move.w	(SelectedPlayerIdx).w,d0
 	movea.l	#setupvalues,a0
 	addq.b	#1,(a0,d0.w)
 	bsr.w	WrapOptionUp
 	bra.w	.8
 .17
 	move.w	#2,(setupdir).w
-	move.w	(setupline).w,d0
+	move.w	(SelectedPlayerIdx).w,d0
 	movea.l	#setupvalues,a0
 	subq.b	#1,(a0,d0.w)
 	bsr.w	WrapOptionDown
 	bra.w	.8
 .18
 	move.w	#0,(setupdir).w
-	tst.w	(setupline).w
+	tst.w	(SelectedPlayerIdx).w
 	beq.w	.8
-	subq.w	#1,(setupline).w
+	subq.w	#1,(SelectedPlayerIdx).w
 	cmpi.b	#$C,(setupvalues).w
 	bne.w	.19
-	cmpi.w	#3,(setupline).w
+	cmpi.w	#3,(SelectedPlayerIdx).w
 	bne.w	.19
-	subq.w	#1,(setupline).w
+	subq.w	#1,(SelectedPlayerIdx).w
 .19
 	btst	#4,(setupcardflags).w
 	beq.w	.8
-	cmpi.w	#2,(setupline).w
+	cmpi.w	#2,(SelectedPlayerIdx).w
 	bne.w	.8
-	subq.w	#1,(setupline).w
+	subq.w	#1,(SelectedPlayerIdx).w
 	bra.w	.8
 .20
 	move.w	#$FFFF,(setupdir).w
 	movem.w	d0,-(sp)
 	move.w	(setuplines).w,d0
 	subq.w	#1,d0
-	cmp.w	(setupline).w,d0
+	cmp.w	(SelectedPlayerIdx).w,d0
 	movem.w	(sp)+,d0
 	beq.w	.8
 	move.w	#1,(setupdir).w
-	addq.w	#1,(setupline).w
+	addq.w	#1,(SelectedPlayerIdx).w
 	cmpi.b	#$C,(setupvalues).w
 	bne.w	.21
-	cmpi.w	#3,(setupline).w
+	cmpi.w	#3,(SelectedPlayerIdx).w
 	beq.w	.22
-	cmpi.w	#5,(setupline).w
+	cmpi.w	#5,(SelectedPlayerIdx).w
 	bne.w	.21
-	subq.w	#1,(setupline).w
+	subq.w	#1,(SelectedPlayerIdx).w
 	bra.w	.8
 .21
 	btst	#4,(setupcardflags).w
 	beq.w	.8
-	cmpi.w	#2,(setupline).w
+	cmpi.w	#2,(SelectedPlayerIdx).w
 	bne.w	.8
 .22
-	addq.w	#1,(setupline).w
+	addq.w	#1,(SelectedPlayerIdx).w
 	bra.w	.8
 .23
 	clr.w	(demoflag).w
@@ -935,26 +935,26 @@ WrapOptionDown	;IDA: sub_85ECC. The down half: a negative setupvalues(d0) goes t
 .0
 	rts
 
-MoveMenuFrame	;IDA: sub_85EE6. 93 setoptions .nms. Keep setupline inside setupfirstline ... setuplastline; in a season (GameFlags bit 5) line 0 is skipped
-	move.w	(setupline).w,d0
-	sub.w	(setupfirstline).w,d0
+MoveMenuFrame	;IDA: sub_85EE6. 93 setoptions .nms. Keep SelectedPlayerIdx inside DispAttribCtr ... VertLineScrolling; in a season (GameFlags bit 5) line 0 is skipped
+	move.w	(SelectedPlayerIdx).w,d0
+	sub.w	(DispAttribCtr).w,d0
 	bpl.w	.0
-	add.w	d0,(setupfirstline).w
-	add.w	d0,(setuplastline).w
+	add.w	d0,(DispAttribCtr).w
+	add.w	d0,(VertLineScrolling).w
 	bra.w	.1
 .0
-	move.w	(setupline).w,d0
-	sub.w	(setuplastline).w,d0
+	move.w	(SelectedPlayerIdx).w,d0
+	sub.w	(VertLineScrolling).w,d0
 	bmi.w	.1
 	beq.w	.1
-	add.w	d0,(setuplastline).w
-	add.w	d0,(setupfirstline).w
+	add.w	d0,(VertLineScrolling).w
+	add.w	d0,(DispAttribCtr).w
 .1
 	btst	#5,(GameFlags).w
 	beq.w	.2
-	tst.w	(setupline).w
+	tst.w	(SelectedPlayerIdx).w
 	bne.w	.2
-	addq.w	#1,(setupline).w
+	addq.w	#1,(SelectedPlayerIdx).w
 .2
 	rts
 
@@ -980,9 +980,9 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	cmpi.b	#$B,(a0)
 	bne.w	.9
 .0
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	beq.w	.1
-	cmpi.w	#2,(setupline).w
+	cmpi.w	#2,(SelectedPlayerIdx).w
 	beq.w	.2
 	bra.w	.7
 .1
@@ -1043,7 +1043,7 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	bpl.w	.12
 	move.w	#$19,d0
 .12
-	cmpi.w	#2,(setupline).w
+	cmpi.w	#2,(SelectedPlayerIdx).w
 	bne.w	.13
 	move.b	d0,2(a0)
 	move.b	d0,(Opt2Team+1).w
@@ -1103,7 +1103,7 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 .23
 	btst	#5,(GameFlags).w
 	beq.w	.25
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	bne.w	.25
 	cmpi.w	#3,(setupdir).w
 	bne.w	.24
@@ -1126,9 +1126,9 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	beq.w	.29
 	bsr.w	SetupStart
 	bset	#4,(setupcardflags).w
-	cmpi.w	#0,(setupline).w
+	cmpi.w	#0,(SelectedPlayerIdx).w
 	beq.w	.27
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	bne.w	.31
 .27
 	cmpi.w	#2,(setupdir).w
@@ -1156,9 +1156,9 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	bne.w	.34
 	bsr.w	SetupStart
 	bset	#4,(setupcardflags).w
-	cmpi.w	#0,(setupline).w
+	cmpi.w	#0,(SelectedPlayerIdx).w
 	beq.w	.32
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	bne.w	.34
 .32
 	cmpi.w	#2,(setupdir).w
@@ -1174,7 +1174,7 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	bne.w	.36
 	bsr.w	SetupStart
 	bset	#4,(setupcardflags).w
-	cmpi.w	#3,(setupline).w
+	cmpi.w	#3,(SelectedPlayerIdx).w
 	bge.w	.36
 	cmpi.w	#2,(setupdir).w
 	beq.w	.35
@@ -1194,36 +1194,36 @@ FixModeOptions	;IDA: sub_85F2E. 94 only (rewritten). Set setuplines / setupshown
 	cmpi.w	#1,(setupdir).w
 	bne.w	.40
 .37
-	cmpi.w	#5,(setupline).w
+	cmpi.w	#5,(SelectedPlayerIdx).w
 	bne.w	.39
 .38
-	addq.w	#1,(setupline).w
+	addq.w	#1,(SelectedPlayerIdx).w
 	movem.w	d0,-(sp)
-	move.w	(setupline).w,d0
+	move.w	(SelectedPlayerIdx).w,d0
 	cmp.w	(setuplines).w,d0
 	movem.w	(sp)+,d0
 	blt.s	.37
-	move.w	(setupprevline).w,(setupline).w
+	move.w	(setupprevline).w,(SelectedPlayerIdx).w
 	bra.s	.37
 .39
-	cmpi.w	#6,(setupline).w
+	cmpi.w	#6,(SelectedPlayerIdx).w
 	beq.s	.38
-	cmpi.w	#7,(setupline).w
+	cmpi.w	#7,(SelectedPlayerIdx).w
 	beq.s	.38
 	bra.w	.44
 .40
 	cmpi.w	#0,(setupdir).w
 	bne.w	.44
 .41
-	cmpi.w	#5,(setupline).w
+	cmpi.w	#5,(SelectedPlayerIdx).w
 	bne.w	.43
 .42
-	subq.w	#1,(setupline).w
+	subq.w	#1,(SelectedPlayerIdx).w
 	bra.s	.41
 .43
-	cmpi.w	#6,(setupline).w
+	cmpi.w	#6,(SelectedPlayerIdx).w
 	beq.s	.42
-	cmpi.w	#7,(setupline).w
+	cmpi.w	#7,(SelectedPlayerIdx).w
 	beq.s	.42
 	bra.w	*+4	;to the next instruction
 .44
@@ -1273,9 +1273,9 @@ EraseCardText	;IDA: sub_86360. 95 only. Erase the card text areas: 5 rows at $FF
 	rts
 
 PrintOptions	;IDA: sub_863A6. 93 setoptions .ps (94 PrintOptions). Print the option names (PrintOptionName) and values (GameSetUp_4) of lines
-	;setupfirstline ... setuplastline from row $B, then the scroll marks at x 2: '{' when lines are above, '}' when more follow
+	;DispAttribCtr ... VertLineScrolling from row $B, then the scroll marks at x 2: '{' when lines are above, '}' when more follow
 	bsr.w	MoveMenuFrame
-	move.w	(setupfirstline).w,d0
+	move.w	(DispAttribCtr).w,d0
 	move.w	#$B,(printy).w
 .0
 	move.w	#4,(printx).w
@@ -1284,12 +1284,12 @@ PrintOptions	;IDA: sub_863A6. 93 setoptions .ps (94 PrintOptions). Print the opt
 	bsr.w	GameSetUp_4
 	addq.w	#2,(printy).w
 	addq.w	#1,d0
-	cmp.w	(setuplastline).w,d0
+	cmp.w	(VertLineScrolling).w,d0
 	ble.s	.0
 	move.w	#2,(printx).w
 	move.w	#$B,(printy).w
 	movea.l	#ScrollClearTxt,a1
-	tst.w	(setupfirstline).w
+	tst.w	(DispAttribCtr).w
 	beq.w	.1
 	movea.l	#ScrollUpTxt,a1
 .1
@@ -1300,7 +1300,7 @@ PrintOptions	;IDA: sub_863A6. 93 setoptions .ps (94 PrintOptions). Print the opt
 	movem.w	d0,-(sp)
 	move.w	(setuplines).w,d0
 	subq.w	#1,d0
-	cmp.w	(setuplastline).w,d0
+	cmp.w	(VertLineScrolling).w,d0
 	movem.w	(sp)+,d0
 	beq.w	.2
 	cmpi.w	#1,(setupshown).w
@@ -1366,7 +1366,7 @@ GameSetUp_4	;IDA: sub_86460 (93 setoptions .psd). Print the value of setup line 
 	bne.w	.5
 	movea.l	#.10,a1
 .5
-	cmp.w	(setupline).w,d0
+	cmp.w	(SelectedPlayerIdx).w,d0
 	bne.w	.7
 .6
 	bsr.w	PrintSetupTextHi
@@ -1374,7 +1374,7 @@ GameSetUp_4	;IDA: sub_86460 (93 setoptions .psd). Print the value of setup line 
 .7
 	btst	#4,(setupcardflags).w
 	beq.w	.8
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	bne.w	.8
 	cmp.w	#2,d0
 	beq.s	.6
@@ -1440,7 +1440,7 @@ PrintOptionName	;IDA: sub_865CC. 94 PrintOptionNames, one line. Print option nam
 	beq.w	.3
 	movea.l	#BlankNameTxt,a1
 .3
-	cmp.w	(setupline).w,d0
+	cmp.w	(SelectedPlayerIdx).w,d0
 	bne.w	.5
 .4
 	bsr.w	PrintSetupTextHi
@@ -1448,7 +1448,7 @@ PrintOptionName	;IDA: sub_865CC. 94 PrintOptionNames, one line. Print option nam
 .5
 	btst	#4,(setupcardflags).w
 	beq.w	.6
-	cmpi.w	#1,(setupline).w
+	cmpi.w	#1,(SelectedPlayerIdx).w
 	bne.w	.6
 	cmp.w	#2,d0
 	beq.s	.4
@@ -2841,7 +2841,7 @@ ReadLineData	;IDA: sub_87B30 (94 title94). Read the saved lines from save RAM. C
 	movem.l	d0-d1/a0,-(sp)
 	move.l	#$100,d1
 	move.l	#$7EF6,d0
-	movea.l	#OptUserRec+$22,a0
+	movea.l	#databuffer,a0
 	jsr	(ReadSRAM).l
 	bclr	#4,(sflags).w
 	move.w	#$FFFF,(lastsfx).w
@@ -2853,12 +2853,12 @@ WriteLineData	;IDA: sub_87B66 (94 title94). Write the lines to save RAM and the 
 	movem.l	d0-d1/a0,-(sp)
 	move.l	#$100,d1
 	move.l	#$7EF6,d0
-	movea.l	#OptUserRec+$22,a0
+	movea.l	#databuffer,a0
 	jsr	(WriteSRAM).l
 	jsr	(MakeSRAMChecksum).l
 	bclr	#4,(sflags).w
 	move.w	#$FFFF,(lastsfx).w
 	move.l	#$FFFF0000,(recbpr).w
 	movem.l	(sp)+,d0-d1/a0
-.0
+rtsLineData	;The shared rts; PlayoffScreen (setup95_02) branches to it
 	rts

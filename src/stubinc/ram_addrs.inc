@@ -335,10 +335,10 @@ SeasonPen equ $FFFFD1A9	;95 only. Season penalties
 SeasonLine equ $FFFFD1AA	;95 only. Season line changes
 seasonteamsel equ $FFFFD1AC	;95 only. Offset of the season matchup in SeasonTeams, -1 none
 SeasonTeams equ $FFFFD1DC	;95 only. Season team list (BuildSeasonTeamList)
-setupfirstline equ $FFFFD276	;94 $FFFFD422. First setup line shown (TeamRosterScreen: attribute page)
-setuplastline equ $FFFFD278	;95 only. Last setup line shown
-rosterlock equ $FFFFD27A	;95 only. TeamRosterScreen: nonzero stops the page keys
-setupline equ $FFFFD27C	;95 only. Setup cursor line (TeamRosterScreen: roster page 0-2)
+DispAttribCtr equ $FFFFD276	;94 $FFFFD5AC. Roster attribute page; game setup: first line shown (94 setupfirstline)
+VertLineScrolling equ $FFFFD278	;94 $FFFFD5AE. Game setup: last line shown
+PlayerScrollCtr equ $FFFFD27A	;94 $FFFFD5B0. Scroll step (playoff screen); TeamRosterScreen: nonzero stops the page keys
+SelectedPlayerIdx equ $FFFFD27C	;94 $FFFFD5B2. Roster page 0-2; game setup: cursor line
 setupvalues equ $FFFFD282	;95 only. 8 setup line values (mode, teams, ...)
 setupprevline equ $FFFFD2E8	;94 $FFFFD424
 setupdir equ $FFFFD2EA	;95 only. Last setup key: 0 up, 1 down, 2 left, 3 right, -1 none
@@ -347,3 +347,7 @@ setupshown equ $FFFFD2EE	;95 only. Setup lines shown
 seasonsetupreq equ $FFFFDC32	;95 only. Nonzero: GameSetUp opens on Continue Season
 attribteam equ $FFFFDC34	;95 only. getNameandAttrib team
 attribplayer equ $FFFFDC36	;95 only. getNameandAttrib player
+databuffer equ $FFFFCC7A	;94 $FFFFD076. Line data buffer (ReadLineData / WriteLineData)
+playoffspritex equ $FFFFB4C8	;94 $FFFFB8AE. Playoff sprite x offset while the tree is scrolled (UpdatePlayoffScroll)
+playoffspritey equ $FFFFB4CA	;94 $FFFFB8B0
+clampcounter equ $FFFFB4CC	;94 $FFFFB8B2
