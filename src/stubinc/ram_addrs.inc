@@ -295,3 +295,55 @@ onetimertargetx equ $FFFFD018	;94 $FFFFD414
 onetimertargety equ $FFFFD01A	;94 $FFFFD416
 onetimerheight equ $FFFFD01C	;94 $FFFFD418
 shotpflags equ $FFFFDC7C	;95 only. pflags of the last shooter (doshot)
+createdcount equ $FFFF55F0	;95 only. Created players read from save RAM (ReadCreatedPlayers)
+smallfont3chars equ $FFFFAC1A	;95 only. Third small font chars (the highlight remap)
+rosterscroll equ $FFFFBB1A	;95 only. First player row shown by DisplayPlayerList
+linemarkbuf equ $FFFFBB1E	;95 only. PrintPlayerLines String: the lines a player is on
+HmGoals equ $FFFFC294	;94 $FFFFC6DA. Home team struct goals
+AwGoals equ $FFFFC5FA	;94 $FFFFCA3E
+statsbuffer equ $FFFFC954	;94 $FFFFCD96. Unpacked playoff stat words (ReadTeamStats)
+gsstruct equ $FFFFCA24	;94 $FFFFCE66. Game structs, 8 games of $10 bytes
+gamenum equ $FFFFCAA4	;94 $FFFFCEE6. Index of the current game in gsstruct
+postarts equ $FFFFCAA6	;94 $FFFFCEE8
+bosgames equ $FFFFCAA8	;94 $FFFFCEEA
+potreeteam equ $FFFFCAAC	;94 $FFFFCEEE
+pojoy equ $FFFFCAAE	;94 $FFFFCEF0
+WinBits equ $FFFFCAB0	;94 $FFFFCEF2
+potree equ $FFFFCAB2	;94 $FFFFCEF4
+Opt1Team equ $FFFFCC50	;94 $FFFFD04C
+Opt2Team equ $FFFFCC52	;94 $FFFFD04E
+OptGoalie equ $FFFFCC56	;94 $FFFFD052
+OptUserRec equ $FFFFCC58	;94 $FFFFD054. 0 = On
+pwddatabuffer equ $FFFFCC8C	;94 $FFFFD088
+outputbuffer equ $FFFFCC96	;94 $FFFFD092
+tpassbits equ $FFFFCD7A	;94 $FFFFD176
+logoteam equ $FFFFD030	;94 $FFFFD428
+setuphome equ $FFFFD032	;94 $FFFFD42A
+setupvis equ $FFFFD034	;94 $FFFFD42C
+setupcardflags equ $FFFFD036	;94 $FFFFD42E
+homepicchars equ $FFFFD038	;94 $FFFFD430
+vispicchars equ $FFFFD03A	;94 $FFFFD432
+cardroster equ $FFFFD03C	;94 $FFFFD434
+cardtimer equ $FFFFD044	;94 $FFFFD43C
+featuredplayer equ $FFFFD046	;94 $FFFFD43E
+carddelay equ $FFFFD048	;94 $FFFFD440
+cardprintx equ $FFFFD04A	;94 $FFFFD442
+cardprinty equ $FFFFD04C	;94 $FFFFD444
+cardteamnum equ $FFFFD04E	;94 $FFFFD446
+SeasonPerlen equ $FFFFD1A8	;95 only. Season period length (ReadSeasonHeader)
+SeasonPen equ $FFFFD1A9	;95 only. Season penalties
+SeasonLine equ $FFFFD1AA	;95 only. Season line changes
+seasonteamsel equ $FFFFD1AC	;95 only. Offset of the season matchup in SeasonTeams, -1 none
+SeasonTeams equ $FFFFD1DC	;95 only. Season team list (BuildSeasonTeamList)
+setupfirstline equ $FFFFD276	;94 $FFFFD422. First setup line shown (TeamRosterScreen: attribute page)
+setuplastline equ $FFFFD278	;95 only. Last setup line shown
+rosterlock equ $FFFFD27A	;95 only. TeamRosterScreen: nonzero stops the page keys
+setupline equ $FFFFD27C	;95 only. Setup cursor line (TeamRosterScreen: roster page 0-2)
+setupvalues equ $FFFFD282	;95 only. 8 setup line values (mode, teams, ...)
+setupprevline equ $FFFFD2E8	;94 $FFFFD424
+setupdir equ $FFFFD2EA	;95 only. Last setup key: 0 up, 1 down, 2 left, 3 right, -1 none
+setuplines equ $FFFFD2EC	;95 only. Number of setup lines for the mode
+setupshown equ $FFFFD2EE	;95 only. Setup lines shown
+seasonsetupreq equ $FFFFDC32	;95 only. Nonzero: GameSetUp opens on Continue Season
+attribteam equ $FFFFDC34	;95 only. getNameandAttrib team
+attribplayer equ $FFFFDC36	;95 only. getNameandAttrib player
