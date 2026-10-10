@@ -290,7 +290,7 @@ GridCursorMove	;IDA: loc_98054. move character-grid cursor (d5, 0-$1D) by d0 and
 	addq.w	#1,(printx).w
 	bsr.w	PrintGridLetter
 	movea.l	#NameEntryBuf,a0
-	movea.l	#LetterGrid,a1
+	movea.l	#CreateLetterGrid,a1
 	move.b	(a1,d5.w),d0
 	move.b	d0,(a0,d4.w)
 	bra.w	CreatePlayerLoop
@@ -328,7 +328,7 @@ NameEntry	;IDA: sub_98116. Create Player name entry: toggle grid/edit mode, draw
 	bsr.w	NameEntryBg
 	jsr	(printz).l
 	String	$BF,$A,$F,$0
-	movea.l	#LetterGrid,a0
+	movea.l	#CreateLetterGrid,a0
 	moveq	#4,d0
 .0
 	moveq	#5,d1
@@ -480,7 +480,7 @@ FixFirstLetter	;IDA: sub_9840A. Normalize first letter of name buffer to a lette
 .0
 	move.w	d0,d5
 .1
-	movea.l	#LetterGrid,a0
+	movea.l	#CreateLetterGrid,a0
 	move.b	(a0,d5.w),(NameEntryBuf).w
 .2
 	movem.l	(sp)+,d0-d4/a0-a6
@@ -488,7 +488,7 @@ FixFirstLetter	;IDA: sub_9840A. Normalize first letter of name buffer to a lette
 
 FindGridLetter	;IDA: sub_98438. Find char d0 in letter grid table, return index in d0 ($1E if not found)
 	movem.l	d1-d3/a0-a6,-(sp)
-	movea.l	#LetterGrid,a0
+	movea.l	#CreateLetterGrid,a0
 	move.b	d0,d1
 .0
 	clr.w	d0
@@ -512,7 +512,7 @@ PrintGridLetter	;IDA: sub_98464. If grid mode, print letter d5 of the grid table
 	movea.l	#StatBuf,a1
 	move.w	#4,(a1)
 	move.b	#0,3(a1)
-	movea.l	#LetterGrid,a0
+	movea.l	#CreateLetterGrid,a0
 	move.b	(a0,d5.w),d0
 	move.b	d0,2(a1)
 	jmp	(print).l
@@ -680,7 +680,7 @@ PrintEditName	;IDA: sub_985D2. Print 18-char name from a1 with - padding, highli
 	movem.l	(sp)+,d0-d7/a0-a6
 	rts
 
-LetterGrid	;IDA: unk_98696. 95 only. Name entry letter grid (6 per row), $FF end
+CreateLetterGrid	;IDA: unk_98696. 95 only. Name entry letter grid (6 per row), $FF end
 	dc.b	'ABCDEFGHIJKLMNOPQRSTUVWXYZ.12 -',$FF;letter grid characters (5 rows of 6)
 
 NameEntryFramer	;IDA: sub_986B6. cards94 NameEntryFramer. Framer with the name entry frame charset (nameframechars)

@@ -467,3 +467,4 @@ CreateListRow equ $FFFFD0F6	;95 only. Create player list: the current row
 CreateListOldRow equ $FFFFD0F8	;95 only. Create player list: the row with the markers
 nameframechars equ $FFFFD13C	;95 only. Name entry frame chars (NameEntryFramer)
 NameEntryMode equ $FFFFD38E	;95 only. Create player: 0 list mode, else name edit mode
+nameentryvis equ $FFFFD0FA	;94 $FFFFD4EE. Name entry: the team (pad) entering a name (UserNameEntry)
