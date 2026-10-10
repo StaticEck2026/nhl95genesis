@@ -9,7 +9,7 @@
 ;	cmp encoding after assembly.
 
 LoadHomeTeamGfx	;IDA: sub_7DEA0 (title94). Load the HomeTeam graphics of TeamGfxList to VRAM d4 - $18 (DoDMA_clearCallbackPointer). Called from setupice
-	;and ReloadIceGfx (video95_03)
+	;and ClrHor (video95_03)
 	move.w	d0,-(sp)
 	subi.w	#$18,d4
 	movea.l	#TeamGfxList,a2
@@ -48,7 +48,7 @@ EASNLogo	;IDA: sub_7DF32 (penalty94). 93 name. Draw the EASN logo map at x 2, y 
 .x
 	rts
 
-setupEASNmap	;IDA: sub_7DF6A (penalty94 EASNLogo+$14). Load the EASN logo tiles at EASNcset. Called from setupice and ReloadIceGfx (video95_03)
+setupEASNmap	;IDA: sub_7DF6A (penalty94 EASNLogo+$14). Load the EASN logo tiles at EASNcset. Called from setupice and ClrHor (video95_03)
 	move.w	(EASNcset).w,d4
 	movea.l	#EASNmap+8,a2
 	jsr	(DoDMA_clearCallbackPointer).l

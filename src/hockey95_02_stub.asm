@@ -30,7 +30,7 @@ InitMenuState = $7E526		;IDA: sub_7E526. used at $7E3CC (menu95)
 HandleMenuInput = $7E560	;IDA: sub_7E560. used at $7E40C (menu95)
 SetPauseMenuItems = $7E6CA	;IDA: sub_7E6CA. used at $7E3C0. 95: menulist / menuitemoffset by game mode (menu95)
 PauseScreenDraw = $7E816	;no IDA label. jsr (x).l at $7E4C8. The pause screen draw code (menu95)
-ClrHor = $7EBBE			;IDA: sub_7EBBE. used at $7E47C. Rebuild the vertical rink screen (menu95)
+RestoreGameScreen = $7EBBE	;IDA: sub_7EBBE. used at $7E47C. Rebuild the game screen after the pause (menu95)
 PracticeGoalies = $8CADE	;IDA: sub_8CADE. used at $7E424 (checks95_06)
 
 ; Main segment code

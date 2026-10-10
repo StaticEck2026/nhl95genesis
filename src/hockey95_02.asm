@@ -6,7 +6,7 @@
 
 Pausemode	;IDA: sub_7E36C (hockey94 PauseMode). Game is in pause mode now: fade out, stop the sound (unless sflags9 bit 5), run the pause menu
 	;(SetPauseMenuItems, InitMenuState, HandleMenuInput) until it ends or, with no pad on a team, $708 frames pass without a button; then reload
-	;the sound driver (SoundCmd 9, 0 Z80Program, 6 SoundBanks, 7) and restore the screen (ClrHor, setvideo) and fade in. Called from DoGameFrame
+	;the sound driver (SoundCmd 9, 0 Z80Program, 6 SoundBanks, 7) and restore the screen (RestoreGameScreen, setvideo) and fade in. Called from DoGameFrame
 	move.w	(smallfontchars).w,-(sp)
 	clr.w	(menucursor).w
 	clr.l	(menuitemoffset).w
@@ -72,7 +72,7 @@ Pausemode	;IDA: sub_7E36C (hockey94 PauseMode). Game is in pause mode now: fade 
 	jsr	(SoundCmd).l
 .7
 	move.w	(sp)+,(sflags).w
-	jsr	(ClrHor).l
+	jsr	(RestoreGameScreen).l
 	movea.l	#VDP_DATA,a0
 	move.w	#$9100,4(a0)
 	move.w	#$9200,4(a0)

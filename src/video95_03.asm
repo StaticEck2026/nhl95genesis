@@ -5,11 +5,11 @@
 ;	makepde / getpde, title94 ReadGoaliePulled, stats94 ReadAttributeNibble / GetDefenseStart / ProcessNibble (95: season data versions),
 ;	data94 player name formatting (95: by team struct a2 or team number d7), cards94 CalcAttrib and its weight lists, video94 PushTime,
 ;	PushNumber, PushNumberWidth, appendz, appstring, setup94 setupTeamBlocksMap / CopyTeamBlockMapData, video94 DoDMA_nd2, TeamLogoBitmaps,
-;	hockey94 ResetClock / GetPeriodTime, the 95 ReloadIceGfx / AssignPads, video94 waitx, penalty94 PrintScores1 / PrintTeamNameAndScore,
+;	hockey94 ResetClock / GetPeriodTime, penalty94 ClrHor, the 95 AssignPads, video94 waitx, penalty94 PrintScores1 / PrintTeamNameAndScore,
 ;	checks94 chkpk / chkpk2, video94 printbigz ... PutBigTile, data94 bfasciicon, title94 UnpackPicture, penalty94 RestoreTeamEnergy,
 ;	checks94 WeightedRandomSelect, cards94 AppendTeamName ... TrimSpaces, then setup94 setupice. fourway95 (94 LoadHomeTeamGfx) follows at $7DEA0.
 ;	IDA dc.b written as instructions: the ControlCodeJumpTable code, GetDefenseStart, GetForwards, ProcessNibble ... getnameD7,
-;	FormatPlayerNameLast ... FormatLastName, FormatLastNameAlt, PushNumberWidthZero, GetTeamLogo, DrawTeamLogo, ReloadIceGfx, AssignPads,
+;	FormatPlayerNameLast ... FormatLastName, FormatLastNameAlt, PushNumberWidthZero, GetTeamLogo, DrawTeamLogo, ClrHor, AssignPads,
 ;	ReAddFramer, ReAddSmallFont, chkpk, printbigz2, printbig2, RestoreTeamEnergy, AppendTeamName ... TrimSpaces. IDA hid the printz Strings
 ;	in showclock, getname and PrintScores1 as instructions; they are String here.
 ;	EA's compiler emits cmp #imm,Dn as CMP (Bxxx), SNASM emits CMPI (0Cxx). The source has the real cmp / cmpi; fixopcodes.js patches the
@@ -1498,8 +1498,8 @@ GetPeriodTime	;IDA: sub_7D4CA. IDA: ClockLength. Return d0 = period length in se
 .times	;period length in seconds by OptPerlen
 	dc.w	$12C,$258,$4B0,$1E
 
-ReloadIceGfx	;$7D4E2. IDA dc.b, no xref. 95 only. Reload the rink tiles, LoadHomeTeamGfx and the EASN map at their chars, SprSort, and unless
-	;paused clear the screen (eraser)
+ClrHor	;$7D4E2. IDA dc.b, no xref. 94 ClrHor (penalty94): revert the graphics back to vertical ice rink mode: the rink tiles, LoadHomeTeamGfx
+	;and the EASN map at their chars, SprSort, and unless paused clear the screen (eraser). 95 no longer prints the scores here
 	movem.l	d0-d7/a0-a6,-(sp)
 	bclr	#7,(sflags).w
 	move.w	#$3E8,(Oldrow).w

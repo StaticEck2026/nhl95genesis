@@ -248,3 +248,9 @@ menuitemoffset equ $FFFFCAEA	;95 only. Long: offset of the shown items in menuli
 pausetimeout equ $FFFFDBB4	;95 only. Long: Pausemode frames left without a button while no pad is on a team
 menutimer equ $FFFFDC2E	;95 only. Set to $3C by Pausemode
 menucursor equ $FFFFDC68	;95 only. Pause menu column (Pausemode sets 2)
+smallfont2chars equ $FFFFAC18	;94 $FFFFB014. Second small font chars (the pause font with another remap)
+pauselogochars equ $FFFFAC22	;95 only. Pause screen: chars of the info page bitmap
+tabchars equ $FFFFAC24	;95 only. Pause screen: chars of the tab bitmap (DrawTab)
+faceoffvrcset equ $FFFFAC2E	;94 $FFFFB01C
+demoflag equ $FFFFCC68	;94 $FFFFD064
+penaltymsgs equ $FFFFDC82	;95 only. Queue of penalty messages, a word each (penalty, player), 0 ends (ShowPenaltyMessages)
