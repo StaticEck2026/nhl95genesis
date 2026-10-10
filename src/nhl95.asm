@@ -55,7 +55,7 @@
 	include	trade95.asm		; $0962EE  New in 95: schedule and trades
 	include	create95.asm		; $097C54  New in 95: create player
 	include	cards95_01.asm		; $09ACE6  Adapted from cards94.asm: player cards and matchup palettes
-	include	records95.asm		; $09B730  Adapted from records94.asm: name entry and record holders
+	include	records95.asm		; $09B6F4  Adapted from records94.asm: name entry and record holders
 	include	cards95_02.asm		; $09C01A  Adapted from cards94.asm: player cards and matchup palettes
 	include	awards95.asm		; $09C6F0  New in 95: end of season awards
 	include	title95_01.asm		; $09D9C0  Adapted from title94.asm: song select, title, credits

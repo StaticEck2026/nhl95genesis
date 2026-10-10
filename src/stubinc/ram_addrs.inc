@@ -58,7 +58,7 @@ gmode2 equ $FFFFBF00	;94 $FFFFC2FA. Bit 0 shootout (main menu Shootout)
 sflags7 equ $FFFFBF02	;94 $FFFFC2FC. Bit 1 overtime
 sflags9 equ $FFFFBF06	;95 only. Bit 7 Practice Mode (main menu item 2)
 sflags10 equ $FFFFBF0A	;95 only. Main menu: bit 2 Trade Players, bit 4 Create Player, bit 5 Sign Free Agents, bit 6 Release Players
-sflags11 equ $FFFFBF0C	;95 only. Bit 6 Regular Game (main menu item 1; kept over the Opening2 RAM clear), bit 5 set around IntermissionMenu
+sflags11 equ $FFFFBF0C	;95 only. Bit 7 user records count (UserNameEntry: at most one pad per team), bit 6 Regular Game (main menu item 1; kept over the Opening2 RAM clear), bit 5 set around IntermissionMenu
 sflags12 equ $FFFFBF0E	;95 only. Bit 7 Opening2 skips the sound restart (set by Opening), bit 0 set while IntermissionMenu runs Pausemode
 lastpuckc equ $FFFFBF1C	;95 only. The puck carrier CheckNewCarrier saw last
 CurCrowdMeter equ $FFFFBF34	;94 $FFFFC30E. StartPer clears it as 94 does
@@ -468,3 +468,16 @@ CreateListOldRow equ $FFFFD0F8	;95 only. Create player list: the row with the ma
 nameframechars equ $FFFFD13C	;95 only. Name entry frame chars (NameEntryFramer)
 NameEntryMode equ $FFFFD38E	;95 only. Create player: 0 list mode, else name edit mode
 nameentryvis equ $FFFFD0FA	;94 $FFFFD4EE. Name entry: the team (pad) entering a name (UserNameEntry)
+pad1user equ $FFFFCC42	;94 homeuser $FFFFD042. Name log entry picked by pad 1 (UserNameEntry, NameEntryScreen a5)
+pad2user equ $FFFFCC44	;94 awayuser $FFFFD044. Name log entry picked by pad 2
+pad3user equ $FFFFCC46	;95 only. Name log entry picked by pad 3
+pad4user equ $FFFFCC48	;95 only. Name log entry picked by pad 4
+recties equ $FFFFBB50	;94 $FFFFBF4A. Record Holders: the row ties (PrintWinRecords)
+reclosses equ $FFFFBB52	;94 $FFFFBF4C. Record Holders: the row losses (PrintWinRecords)
+recwincount equ $FFFFBB54	;95 only. Record Holders: the row wins (PrintWinRecords; 94 recwins)
+recsort1 equ $FFFFD13E	;94 $FFFFD532. Record Holders row order sorted on record byte 0 (ReadTeamRecords), read by PrintPlayerRecords
+recsort2 equ $FFFFD146	;94 $FFFFD53A. Record Holders row order sorted on record byte 4 (ReadTeamRecords, sflags6 bit 6)
+winsort equ $FFFFD14E	;94 $FFFFD542. Record Holders win row order (CalcWinPercents), read by PrintWinRecords
+winpcts equ $FFFFD156	;94 $FFFFD54A. The win % byte of each of the 8 records (CalcWinPercents)
+winties equ $FFFFD15E	;94 $FFFFD552. The ties word of each record (record bytes $C-$D)
+wingames equ $FFFFD16E	;94 $FFFFD562. The games word of each record (record bytes $A-$B)
