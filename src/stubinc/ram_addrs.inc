@@ -545,3 +545,5 @@ HomeTeamRosterPtr equ $FFFFC2A6	;94 $FFFFC6EC. HmShots+$1E: the team data addres
 AwayTeamRosterPtr equ $FFFFC60C	;94 $FFFFCA50. AwShots+$1E: the team data address
 crowdcnt equ $FFFFB4B8	;94 $FFFFB8A0. updatecrowdf: frames to the next crowd frame
 crowdtblidx equ $FFFFB4C4	;95 only. updatecrowdf: the CrowdFrameTbl index
+cupframe equ $FFFFDB6A	;95 only. StanleyCupScreen: the CupSprites animation frame. Shares picturebits
+cupticks equ $FFFFDBB4	;95 only. StanleyCupScreen: frame count of the animation step. Shares pausetimeout
