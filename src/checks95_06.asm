@@ -735,7 +735,7 @@ PlaceBoardFall	;IDA: sub_8C1FA. 95 only. Board fall animations (SPA $26C8, $276A
 .14
 	rts
 
-Goal	;IDA: loc_8C304. (checks94 checkgoal .goal) A goal: the shootout count (shootoutteam, sohomegoals / soawaygoals), GoalHighlight, the
+Goal	;IDA: loc_8C304. (checks94 checkgoal .goal) A goal: the shootout count (shootoutteam, sohomegoals / soawaygoals), EndPenaltyShotPlay, the
 	;score summary (ScoreSum), the assignments of both teams (AssignTeam), PenGoalStuff
 	btst	#2,(BA_PS_flags).w
 	beq.w	.6
@@ -770,7 +770,7 @@ Goal	;IDA: loc_8C304. (checks94 checkgoal .goal) A goal: the shootout count (sho
 	addq.w	#1,(sohomegoals).w
 .5
 	bset	#0,(sflags8).w
-	jsr	(GoalHighlight).l
+	jsr	(EndPenaltyShotPlay).l
 	bra.w	.7
 .6
 	btst	#0,(gmode).w

@@ -559,12 +559,12 @@ MoveTradedPlayer	;IDA: sub_9684A. 95 only. Insert traded player TempWord1 of tea
 	move.w	(TempWord1).w,d1
 	andi.w	#$FF,d1
 	move.w	(TradeFromTeam).w,d7
-	jsr	(LineSlotGet).l
+	jsr	(GetInjuryGames).l
 	adda.l	#$E,a2
 	move.w	d0,(a2)
 	clr.w	d0
-	jsr	(LineSlotSet).l
-	jsr	(LineSlotUpdate).l
+	jsr	(SetInjuryGames).l
+	jsr	(DeleteInjurySlot).l
 	bclr	#7,(GameFlags).w
 	jsr	(MakeSRAMChecksum).l
 	movem.l	(sp)+,d0-d7/a0-a6
@@ -709,11 +709,11 @@ RemoveTradedPlayer	;IDA: sub_96A54. 95 only. Remove the traded player from his o
 	move.w	(TempWord2).w,d1
 	andi.w	#$FF,d1
 	move.w	(TradeToTeam).w,d7
-	jsr	(LineSlotRemove).l
+	jsr	(InsertInjurySlot).l
 	movea.l	(sp)+,a2
 	adda.l	#$E,a2
 	move.w	(a2),d0
-	jsr	(LineSlotSet).l
+	jsr	(SetInjuryGames).l
 	bclr	#7,(GameFlags).w
 	jsr	(MakeSRAMChecksum).l
 	movem.l	(sp)+,d0-d7/a0-a6

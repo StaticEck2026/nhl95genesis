@@ -512,3 +512,8 @@ sopathdir equ $FFFFD6E4	;94 $FFFFDA1A. passdir at the end of the path (PSandSOpa
 sopathend equ $FFFFD6E6	;94 $FFFFDA1C. Shoot distance at the end of the path (ShootoutShootCheck)
 BA_Team equ $FFFFD008	;94 $FFFFD404. Penalty shot / shootout: the shooting team (0 home, 1 away)
 TestList equ $FFFFD282	;94 $FFFFD5B8. Shootout shooters: the selected slot (0-4 shooters, 5 goalie). Shares setupvalues
+BA_Goalie_Offset equ $FFFFD010	;94 $FFFFD40C. Penalty shot: the goalie (getBAplayerInfo)
+BA_Checker_Offset equ $FFFFD012	;94 $FFFFD40E. Penalty shot: the checker (PenaltyShotBox " by")
+pspenalty equ $FFFFD014	;94 $FFFFD410. Penalty shot: the penalty (PenShotChk)
+savednewpnum equ $FFFFBF42	;94 $FFFFC31E. Penalty shot: the shooter newpnum ($61) kept by SetupPenaltyShot
+injurygames equ $FFFFDC6A	;95 only. Season: the games of the last injury (SetInjuryGames, CheckInjury)

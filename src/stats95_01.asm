@@ -549,7 +549,7 @@ SaveSimGame	;IDA: sub_92CAE
 	bsr.w	AddTeamSeasonStats
 	move.w	(HmShots+$28).w,d0
 	move.w	(AwShots+$28).w,d1
-	jsr	(SaveTeamGamePlayed).l
+	jsr	(TickTeamInjuries).l
 	movem.l	(sp)+,d0-d7/a0-a6
 	rts
 
