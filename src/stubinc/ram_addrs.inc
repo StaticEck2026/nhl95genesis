@@ -183,6 +183,8 @@ ChkBodyG equ $FFFFBB6A	;94 $FFFFBF64. Goalie body reach (checkpuckcoll)
 ChkBodySqG equ $FFFFBB6C	;94 $FFFFBF66. Long: reach squared
 NegChkBodyG equ $FFFFBB70	;94 $FFFFBF6A
 onetimerplayer equ $FFFFBB72	;94 $FFFFBF6C
+onetimerclock equ $FFFFBB74	;94 $FFFFBF6E
+onetimerflags equ $FFFFBB7C	;94 $FFFFBF76
 ltplayer equ $FFFFBB80	;94 $FFFFBF7A
 ltx equ $FFFFBB82	;94 $FFFFBF7C. Last touch x (a2touchpuck)
 lty equ $FFFFBB84	;94 $FFFFBF7E. Last touch y
@@ -266,6 +268,7 @@ OptNOP equ $FFFFCC4E	;94 $FFFFD04A. Options menu: number of players
 TmpPuckX equ $FFFFDB80	;94 $FFFFDEB6. Goalie AI: the puck x it plays (assgoaliecpu)
 penboxattr equ $FFFFDBBA	;95 only. Attribute byte (4(a3)) of the player going into the penalty box: asspenalty saves it, assdopen puts it back
 inputjoy equ $FFFFDBA2	;94 $FFFFDED8
+TmpJoyPuckCarrier equ $FFFFDBA4	;94 $FFFFDEDA
 sopathx equ $FFFFD6E0	;94 $FFFFDA16
 puckvz equ $FFFFB38E	;94 $FFFFB776
 passdir equ $FFFFBADA	;94 $FFFFBEDC. Direction of the pass (chk4pass)

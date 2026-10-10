@@ -35,6 +35,7 @@
 	include	checks95_02.asm		; $080BEA  Adapted from checks94.asm: checks before the display code
 	include	assign95_02.asm		; $08282E  Adapted from assign94.asm: player assignments
 	include	onetimer95.asm		; $082BD0  Adapted from onetimer94.asm: one-timer
+	include	checks95_08.asm		; $082FC2  Adapted from checks94.asm: assshoot
 	include	checks95_03.asm		; $082FFA  Adapted from checks94.asm: checks before the display code
 	include	collide95_02.asm		; $08369E  Adapted from collide94.asm: puck, players, walls, fights, goals
 	include	input95_01.asm		; $083EC0  Adapted from input94.asm: controller input and line changes
