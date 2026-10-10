@@ -179,6 +179,7 @@ puckz equ $FFFFB37A	;94 $FFFFB762
 wcradiusx equ $FFFFB93C	;94 $FFFFBD22. Wall collision radius x (checkwallcoll)
 wcradiusy equ $FFFFB93E	;94 $FFFFBD24
 TempWord1 equ $FFFFBB10	;94 $FFFFBF12. A scratch word
+TempWord2 equ $FFFFBB12	;94 $FFFFBF14. A scratch word (setplayer: the attribute number for AttributeCalc)
 ChkBodyG equ $FFFFBB6A	;94 $FFFFBF64. Goalie body reach (checkpuckcoll)
 ChkBodySqG equ $FFFFBB6C	;94 $FFFFBF66. Long: reach squared
 NegChkBodyG equ $FFFFBB70	;94 $FFFFBF6A
@@ -280,3 +281,9 @@ iflags equ $FFFFBB86	;94 $FFFFBF80
 icingPlayer equ $FFFFBB87	;94 $FFFFBF81. The low byte of iflags: SCnum of the player who iced it
 TempLegSpd equ $FFFFBB1C	;94 $FFFFBF1E. A scratch word: leg speed (doplayeracc); assdefo keeps the furthest y of the other forwards here
 recwins equ $FFFFBB4C	;94 $FFFFBF4E. A scratch word (record page wins; assdefo clears it)
+PlList equ $FFFFCAD2	;94 $FFFFCF14. SetPlList: the players wanted on the ice (6 bytes), then their positions (6 bytes)
+PPBonus equ $FFFFCAF0	;94 $FFFFCF2E. setplayer attribute bonuses: power play
+PKBonus equ $FFFFCAF1	;94 $FFFFCF2F. Penalty kill
+ThirdPBonus equ $FFFFCAF2	;94 $FFFFCF30. Third period, behind or tied
+HmAwBonus equ $FFFFCAF3	;94 $FFFFCF31. Home / away
+rosterteam equ $FFFFBB4E	;95 only. setplayer: the team number ($28 of the team struct) for GetRosterName / GetJerseyNumber
