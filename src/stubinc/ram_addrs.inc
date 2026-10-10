@@ -543,3 +543,5 @@ awaycoldidx equ $FFFFBB5E	;94 $FFFFBF58. Hot / cold list index, away cold (NextA
 homecoldidx equ $FFFFBB60	;94 $FFFFBF5A. Hot / cold list index, home cold (NextHomeColdPlayer)
 HomeTeamRosterPtr equ $FFFFC2A6	;94 $FFFFC6EC. HmShots+$1E: the team data address (TeamList entry)
 AwayTeamRosterPtr equ $FFFFC60C	;94 $FFFFCA50. AwShots+$1E: the team data address
+crowdcnt equ $FFFFB4B8	;94 $FFFFB8A0. updatecrowdf: frames to the next crowd frame
+crowdtblidx equ $FFFFB4C4	;95 only. updatecrowdf: the CrowdFrameTbl index
