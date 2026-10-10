@@ -545,6 +545,34 @@ const assets = [
     { name: 'MatchupPalWPGA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19BA, end: 0x001A19DA }, // WPG TeamLogoPalettes, 94 file, same bytes
     { name: 'MatchupPalASEA95.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19DA, end: 0x001A19FA }, // ASE TeamLogoPalettes, differs from 94 MatchupPalASEA.pal
     { name: 'MatchupPalASWA95.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19FA, end: 0x001A1A1A }, // ASW TeamLogoPalettes, differs from 94 MatchupPalASWA.pal
+    // NHL 95 graphics95_02 ArenaGfxBank ($1A1A1A): the home team graphics, $30A bytes per team in bank order (TeamGfxList, fourway95).
+    { name: 'ArenaGfxANH.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A1A1A, end: 0x001A1D24 }, // ArenaGfxBank+$0, ANH
+    { name: 'ArenaGfxBUF.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A1D24, end: 0x001A202E }, // ArenaGfxBank+$30A, BUF
+    { name: 'ArenaGfxCGY.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A202E, end: 0x001A2338 }, // ArenaGfxBank+$614, CGY
+    { name: 'ArenaGfxCHI.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A2338, end: 0x001A2642 }, // ArenaGfxBank+$91E, CHI
+    { name: 'ArenaGfxDAL.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A2642, end: 0x001A294C }, // ArenaGfxBank+$C28, DAL
+    { name: 'ArenaGfxDET.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A294C, end: 0x001A2C56 }, // ArenaGfxBank+$F32, DET
+    { name: 'ArenaGfxEDM.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A2C56, end: 0x001A2F60 }, // ArenaGfxBank+$123C, EDM
+    { name: 'ArenaGfxFLA.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A2F60, end: 0x001A326A }, // ArenaGfxBank+$1546, FLA
+    { name: 'ArenaGfxHFD.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A326A, end: 0x001A3574 }, // ArenaGfxBank+$1850, HFD
+    { name: 'ArenaGfxLA.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A3574, end: 0x001A387E }, // ArenaGfxBank+$1B5A, LA
+    { name: 'ArenaGfxMTL.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A387E, end: 0x001A3B88 }, // ArenaGfxBank+$1E64, MTL
+    { name: 'ArenaGfxNJ.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A3B88, end: 0x001A3E92 }, // ArenaGfxBank+$216E, NJ
+    { name: 'ArenaGfxNYI.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A3E92, end: 0x001A419C }, // ArenaGfxBank+$2478, NYI
+    { name: 'ArenaGfxNYR.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A419C, end: 0x001A44A6 }, // ArenaGfxBank+$2782, NYR
+    { name: 'ArenaGfxOTW.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A44A6, end: 0x001A47B0 }, // ArenaGfxBank+$2A8C, OTW
+    { name: 'ArenaGfxPHI.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A47B0, end: 0x001A4ABA }, // ArenaGfxBank+$2D96, PHI
+    { name: 'ArenaGfxPIT.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A4ABA, end: 0x001A4DC4 }, // ArenaGfxBank+$30A0, PIT
+    { name: 'ArenaGfxQUE.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A4DC4, end: 0x001A50CE }, // ArenaGfxBank+$33AA, QUE
+    { name: 'ArenaGfxSJ.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A50CE, end: 0x001A53D8 }, // ArenaGfxBank+$36B4, SJ
+    { name: 'ArenaGfxSTL.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A53D8, end: 0x001A56E2 }, // ArenaGfxBank+$39BE, STL
+    { name: 'ArenaGfxTB.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A56E2, end: 0x001A59EC }, // ArenaGfxBank+$3CC8, TB
+    { name: 'ArenaGfxTOR.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A59EC, end: 0x001A5CF6 }, // ArenaGfxBank+$3FD2, TOR
+    { name: 'ArenaGfxVAN.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A5CF6, end: 0x001A6000 }, // ArenaGfxBank+$42DC, VAN
+    { name: 'ArenaGfxWSH.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A6000, end: 0x001A630A }, // ArenaGfxBank+$45E6, WSH
+    { name: 'ArenaGfxWPG.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A630A, end: 0x001A6614 }, // ArenaGfxBank+$48F0, WPG
+    { name: 'ArenaGfxBOS.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A6614, end: 0x001A691E }, // ArenaGfxBank+$4BFA, BOS
+    { name: 'ArenaGfxASEASW.bin', folder: 'NHL95/Graphics/ArenaGfx', start: 0x001A691E, end: 0x001A6C28 }, // ArenaGfxBank+$4F04, ASE / ASW
 ];
 const outRoot = path.join('Extracted');
 const rom = fs.readFileSync(romPath);
