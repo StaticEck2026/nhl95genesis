@@ -241,3 +241,10 @@ pad4waysave1 equ $FFFFBAFC	;94 $FFFFBEFE. Read4WayPad1 saved pad word
 pad4waysave2 equ $FFFFBAFE	;94 $FFFFBF00
 pad4waysave3 equ $FFFFBB00	;94 $FFFFBF02
 pad4waysave4 equ $FFFFBB02	;94 $FFFFBF04
+menuitem equ $FFFFCADE	;94 $FFFFCF20. Menu state: selected item, then (+2) first item shown
+menulist equ $FFFFCAE2	;94 $FFFFCF24. Menu item list (InitMenuState)
+menudraw equ $FFFFCAE6	;94 $FFFFCF28. Menu screen draw routine
+menuitemoffset equ $FFFFCAEA	;95 only. Long: offset of the shown items in menulist (SetPauseMenuItems)
+pausetimeout equ $FFFFDBB4	;95 only. Long: Pausemode frames left without a button while no pad is on a team
+menutimer equ $FFFFDC2E	;95 only. Set to $3C by Pausemode
+menucursor equ $FFFFDC68	;95 only. Pause menu column (Pausemode sets 2)

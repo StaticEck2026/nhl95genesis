@@ -229,6 +229,8 @@ const assets = [
     { name: 'sfx_shotfh_pcm.bin', folder: 'NHL95/Sound', start: 0x000786EA, end: 0x000792A2 }, // 94 file, same bytes (94 $2B430)
     { name: 'sfx_puckget_pcm.bin', folder: 'NHL95/Sound', start: 0x000792A2, end: 0x00079502 }, // 94 file, same bytes (94 $2BFE8)
     { name: 'fm_instrument_patches.bin', folder: 'NHL95/Sound', start: 0x00079502, end: 0x00079902 }, // 94 file, same bytes (94 $2C248)
+    { name: 'z80_snd_drv93.bin', folder: 'NHL95/Sound', start: 0x0007E0E1, end: 0x0007E358 }, // sound95_02: the 94 Z80 driver after its first byte, up to the ld bc of the FM patch bank address (93 / 94 file, same bytes; 94 $1AD91)
+    { name: 'z80_snd_drv93_end.bin', folder: 'NHL95/Sound', start: 0x0007E35D, end: 0x0007E36B }, // sound95_02: rest of the 94 Z80 driver (93 / 94 file, same bytes; 94 $1B00D)
 ];
 const outRoot = path.join('Extracted');
 const rom = fs.readFileSync(romPath);

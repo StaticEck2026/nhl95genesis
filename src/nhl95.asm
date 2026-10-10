@@ -28,6 +28,7 @@
 	include	video95_03.asm		; $07C512  Adapted from video94.asm: display helpers
 	include	fourway95.asm		; $07DEA0  Adapted from fourway94.asm: four-player adaptor
 	include	sound95_02.asm		; $07E0E0  Adapted from sound94.asm: sound driver, then the sound data
+	include	hockey95_02.asm		; $07E36C  Adapted from hockey94.asm: pause mode
 	include	menu95.asm		; $07E4D6  Adapted from menu94.asm: menu core
 	include	checks95_01.asm		; $07F97E  Adapted from checks94.asm: checks before the display code
 	include	assign95_01.asm		; $0807EC  Adapted from assign94.asm: player assignments
