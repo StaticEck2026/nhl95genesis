@@ -86,8 +86,8 @@ HmTeam equ $FFFFD394	;94 $FFFFD6CA
 SongIndex equ $FFFFD396	;94 $FFFFD6CC
 songdelay equ $FFFFDB96	;94 $FFFFDECC
 delayedsong equ $FFFFDB98	;94 $FFFFDECE
-HmGoalieOpt equ $FFFFDC62	;95 only. Home team word goaliesave compares with 1 (IDA $808D4); Opening2 sets it to 1
-AwGoalieOpt equ $FFFFDC64	;95 only. Away team word, as HmGoalieOpt
+HmDefMode equ $FFFFDC62	;95 only. Home team defense mode: at 1 (Opening2 sets it) assdefd chases the carrier (assdefdchase) and asswingd covers (assign95_01)
+AwDefMode equ $FFFFDC64	;95 only. Away team defense mode, as HmDefMode
 ShotTimer equ $FFFFDC7A	;95 only. Set to $1E by doshot, counted down by DoGameFrame
 OOlist equ $FFFFB4A2	;94 $FFFFB88A. Sort objects in draw order (SprSort)
 DMAList equ $FFFFB4CE	;94 $FFFFB8B4. Dma transfer list

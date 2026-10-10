@@ -49,8 +49,8 @@ Opening2	;IDA: loc_9ADA. Restart the sound (unless coming from Opening), reset t
 	beq.w	.1
 	jsr	(PracticeGoalies).l
 .1
-	move.w	#1,(HmGoalieOpt).w
-	move.w	#1,(AwGoalieOpt).w
+	move.w	#1,(HmDefMode).w
+	move.w	#1,(AwDefMode).w
 	jsr	(SeasonMain).l	;95 season mode
 	btst	#2,(sflags10).w	;main menu Trade Players
 	beq.w	.2
