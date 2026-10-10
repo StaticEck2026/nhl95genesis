@@ -147,6 +147,7 @@ MaxCwdExciteLvl equ $FFFFB4BC	;94 $FFFFB8A4
 NumCwdExciteLvl equ $FFFFB4BE	;94 $FFFFB8A6
 SumCwdExciteLvl equ $FFFFB4C0	;94 $FFFFB8A8
 ltack equ $FFFFBC1A	;94 $FFFFC014. Last tackle sound
+PBnum equ $FFFFC014	;94 $FFFFC3EA. Players in the penalty boxes: home in the high nibble, away in the low
 sflags8 equ $FFFFBF04	;94 $FFFFC2FE
 music_needs_z80_update equ $FFFFCD84	;94 $FFFFD180. The 94 sound driver RAM below (sound95_01), unused by 95
 Z80_command_buffer equ $FFFFCD86	;94 $FFFFD182
@@ -263,6 +264,7 @@ demoflag equ $FFFFCC68	;94 $FFFFD064
 penaltymsgs equ $FFFFDC82	;95 only. Queue of penalty messages, a word each (penalty, player), 0 ends (ShowPenaltyMessages)
 OptNOP equ $FFFFCC4E	;94 $FFFFD04A. Options menu: number of players
 TmpPuckX equ $FFFFDB80	;94 $FFFFDEB6. Goalie AI: the puck x it plays (assgoaliecpu)
+penboxattr equ $FFFFDBBA	;95 only. Attribute byte (4(a3)) of the player going into the penalty box: asspenalty saves it, assdopen puts it back
 inputjoy equ $FFFFDBA2	;94 $FFFFDED8
 sopathx equ $FFFFD6E0	;94 $FFFFDA16
 puckvz equ $FFFFB38E	;94 $FFFFB776

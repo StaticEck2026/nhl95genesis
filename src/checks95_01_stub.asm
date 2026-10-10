@@ -71,7 +71,7 @@ puckfaceoff2 = $886AE		;no IDA label. asstab entry 4, used at $7FD0C (checks95_0
 assfaceoff = $88AF6		;no IDA label. asstab entry $10, used at $7FD3C (checks95_04)
 assfaceoffp1 = $88B0C		;no IDA label. asstab entry $11, used at $7FD40 (checks95_04)
 AddPenalty2 = $8916E		;IDA: sub_8916E. used at $7FF7E (penalty95)
-GoalieReadySPA = $8B9A8	;IDA: sub_8B9A8. used at $7FF20. 95 only: d1 = the goalie ready animation by the puck distance (checks95_06)
+GoalieReadySPA = $8B9A8	;IDA: sub_8B9A8. used at $7FF20. 95 only: d1 = the goalie ready animation by the puck distance (input95_03)
 stopna = $8BB1A			;IDA: sub_8BB1A. used at $8036A (checks95_06)
 SetSPA = $8BC9A			;IDA: sub_8BC9A. used at $7FE80, $7FF26, $80112, $80710 (checks95_06)
 playeracc = $8C086		;IDA: loc_8C086. used at $80370 (checks95_06)
