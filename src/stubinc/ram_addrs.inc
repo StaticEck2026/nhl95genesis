@@ -376,3 +376,19 @@ tradeteam2 equ $FFFFCC3A	;95 only. Trade Players: the second team
 screen6chars1 equ $FFFFD02A	;95 only. DrawTeamScreen6: the team block chars
 screen6chars2 equ $FFFFD02C	;95 only. DrawTeamScreen6: the Screen6Tiles1 chars
 screen6chars3 equ $FFFFD02E	;95 only. DrawTeamScreen6: the Screen6Tiles2 chars
+TempRawSpd equ $FFFFBB14	;94 $FFFFBF16
+TempMaxSpd equ $FFFFBB16	;94 $FFFFBF18
+sflags13 equ $FFFFBF10	;95 only. Bit 2: the Stanley Cup was won (clockcont_0; GameOver shows StanleyCupScreen)
+cupwinner equ $FFFFBF12	;95 only. Team number of the Stanley Cup winner
+ScoreSum equ $FFFFC02E	;94 $FFFFC474. Goal summary, 6 bytes per goal (ScoreSumbytes)
+homegoalies equ $FFFFD050	;94 $FFFFD448
+awaygoalies equ $FFFFD052	;94 $FFFFD44A
+sohomegoals equ $FFFFD180	;95 only. Shootout goals, home
+soawaygoals equ $FFFFD182	;95 only. Shootout goals, away
+shootoutteam equ $FFFFD1A0	;95 only. Shootout: 0 home shoots, 1 away
+padcursorchars equ $FFFFD1B0	;95 only. ControllerSetupScreen: PadCursorMap chars
+padiconchars1 equ $FFFFD1B6	;95 only. ControllerSetupScreen: PadIconMap1 ... 4 chars (PadIconChars)
+padiconchars2 equ $FFFFD1B8
+padiconchars3 equ $FFFFD1BA
+padiconchars4 equ $FFFFD1BC
+turnstep equ $FFFFDC66	;95 only. doplayeracc: the turn step for the facing change
