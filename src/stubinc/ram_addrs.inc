@@ -287,3 +287,11 @@ PKBonus equ $FFFFCAF1	;94 $FFFFCF2F. Penalty kill
 ThirdPBonus equ $FFFFCAF2	;94 $FFFFCF30. Third period, behind or tied
 HmAwBonus equ $FFFFCAF3	;94 $FFFFCF31. Home / away
 rosterteam equ $FFFFBB4E	;95 only. setplayer: the team number ($28 of the team struct) for GetRosterName / GetJerseyNumber
+passspeed equ $FFFFBADC	;94 $FFFFBEDE
+fodir1 equ $FFFFBB9E	;94 $FFFFBF98. Faceoff pull direction (dpad) of the bottom goal team
+fodir2 equ $FFFFBBA0	;94 $FFFFBF9A. Of the top goal team
+passmodetimer equ $FFFFBF40	;94 $FFFFC31C
+onetimertargetx equ $FFFFD018	;94 $FFFFD414
+onetimertargety equ $FFFFD01A	;94 $FFFFD416
+onetimerheight equ $FFFFD01C	;94 $FFFFD418
+shotpflags equ $FFFFDC7C	;95 only. pflags of the last shooter (doshot)

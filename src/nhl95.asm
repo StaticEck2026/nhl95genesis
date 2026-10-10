@@ -38,7 +38,7 @@
 	include	checks95_08.asm		; $082FC2  Adapted from checks94.asm: assshoot
 	include	checks95_03.asm		; $082FFA  Adapted from checks94.asm: checks before the display code
 	include	collide95_02.asm		; $0836AC  Adapted from collide94.asm: puck, players, walls, fights, goals
-	include	input95_01.asm		; $083EC0  Adapted from input94.asm: controller input and line changes
+	include	input95_01.asm		; $083EB2  Adapted from input94.asm: controller input and line changes
 	include	data95_01.asm		; $084FE6  Adapted from data94.asm: menus, season results, string tables
 	include	setup95_02.asm		; $087BA2  Adapted from setup94.asm: ice setup, intermission, playoff screen
 	include	checks95_04.asm		; $088046  Adapted from checks94.asm: checks before the display code
