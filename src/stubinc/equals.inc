@@ -76,6 +76,9 @@ handed equ $76		;bit0 set is left handed
 
 ;bit numbers in gmode
 gmclock equ 0		;game clock is stopped
+gmdir equ 1		;0 = home team goes up
+gmpen equ 2		;penalty has been called
+gmpendel equ 3		;delayed penalty has been called
 gmhl equ 4		;hilight mode
 gmoffs equ 5		;offsides on
 ;bit numbers in disflags

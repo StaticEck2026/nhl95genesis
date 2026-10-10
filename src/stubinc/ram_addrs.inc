@@ -267,10 +267,12 @@ penaltymsgs equ $FFFFDC82	;95 only. Queue of penalty messages, a word each (pena
 OptNOP equ $FFFFCC4E	;94 $FFFFD04A. Options menu: number of players
 TmpPuckX equ $FFFFDB80	;94 $FFFFDEB6. Goalie AI: the puck x it plays (assgoaliecpu)
 penboxattr equ $FFFFDBBA	;95 only. Attribute byte (4(a3)) of the player going into the penalty box: asspenalty saves it, assdopen puts it back
+shootoutdelay equ $FFFFDB9A	;94 $FFFFDED0
 inputjoy equ $FFFFDBA2	;94 $FFFFDED8
 TmpJoyPuckCarrier equ $FFFFDBA4	;94 $FFFFDEDA
 sopathx equ $FFFFD6E0	;94 $FFFFDA16
 puckvz equ $FFFFB38E	;94 $FFFFB776
+shotplayer equ $FFFFBAD6	;94 $FFFFBED8. The last shooter (SCnum)
 passdir equ $FFFFBADA	;94 $FFFFBEDC. Direction of the pass (chk4pass)
 threat equ $FFFFBAE2	;94 $FFFFBEE4. Direction of the threat on the puck handler (chk4pass)
 puckcross equ $FFFFBAE4	;94 $FFFFBEE6. Puck crossing x and frames at each goal line, for the goalies
