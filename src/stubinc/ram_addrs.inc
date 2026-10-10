@@ -400,3 +400,30 @@ replayactive equ $FFFFBA70	;94 $FFFFBE1E
 glovecords equ $FFFFBAE0	;94 $FFFFBEE2
 replayicontimer equ $FFFFDB7E	;94 $FFFFDEB4
 replaydelay equ $FFFFDBB8	;94 $FFFFDEF0
+SeasonGoalSum equ $FFFFBB1E	;95 only. Season goal total of the human games (a long; save RAM $1B44 with SeasonGameCount). Shares linemarkbuf
+SeasonGameCount equ $FFFFBB22	;95 only. Human season games counted in SeasonGoalSum
+CalTeam equ $FFFFCAF8	;95 only. CalendarScreen team (StandingsScreen: the group size). Shares ThreeStars
+CalMonth equ $FFFFCAFA	;95 only. CalendarScreen month (StandingsScreen: the 26 team points table)
+CalDay equ $FFFFCAFC	;95 only. CalendarScreen schedule day
+CalX equ $FFFFCAFE	;95 only. CalendarScreen day column
+CalY equ $FFFFCB00	;95 only. CalendarScreen day row
+CalMonths equ $FFFFCB02	;95 only. CalendarScreen last month of the season
+CalFirst equ $FFFFCB06	;95 only. CalendarScreen first day shown
+CalLast equ $FFFFCB08	;95 only. CalendarScreen last day shown
+CalGamePtr equ $FFFFCB0A	;95 only. CalendarScreen game entry of the day
+CalGames equ $FFFFCB0E	;95 only. CalendarScreen day game list (ReadDayGames)
+StandingsMode equ $FFFFCB14	;95 only. StandingsScreen group: bit 0 conference, bit 1 division
+StandingsOrder equ $FFFFCB16	;95 only. StandingsScreen games of the 26 teams
+StandingsBuf equ $FFFFCB30	;95 only. StandingsScreen records (ReadStandings, 3 bytes a team)
+StandingsList equ $FFFFCB7E	;95 only. StandingsScreen teams of the group, sorted
+SimFlags equ $FFFFCC30	;95 only. Bit 0 save the cup winner, bit 1 a game was simulated (SaveSimGame)
+seasonchars1 equ $FFFFD1AE	;95 only. Games today screen chars (GamesTodayMap3)
+seasonchars2 equ $FFFFD1B2	;95 only. Games today screen chars (GamesTodayMap1)
+GamesTodayDay equ $FFFFD1B4	;95 only. GamesToday: SeasonDay on entry
+calresultchars equ $FFFFD1BE	;95 only. CalendarScreen CalResultMap chars
+calbgchars equ $FFFFD1C0	;95 only. CalendarScreen CalendarBgMap chars
+SimWeights equ $FFFFD1C2	;95 only. SimTeamGoals: the 10 goal weights
+SeasonFlags equ $FFFFD1A7	;95 only. The byte after SeasonDay: bit 1 best of seven, bit 2 multi-game injuries, bit 3 regular season over, bit 4 playoffs over, bit 5 playoffs
+PlayoffSchedule equ $FFFFD6E8	;95 only. Playoff schedule (ReadPlayoffSchedule); a day list starts at +1
+optbgchars equ $FFFFDC38	;95 only. SeasonOptionsGfx: the wait box chars
+AutoplayDay equ $FFFFDC79	;95 only. Play Until A Day: the last day to autoplay, 0 none
