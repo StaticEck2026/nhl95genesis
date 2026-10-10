@@ -392,3 +392,11 @@ padiconchars2 equ $FFFFD1B8
 padiconchars3 equ $FFFFD1BA
 padiconchars4 equ $FFFFD1BC
 turnstep equ $FFFFDC66	;95 only. doplayeracc: the turn step for the facing change
+replayend equ $FFFFAB80	;94 $FFFFAF54. End of the replay frames ($62 bytes each from M68K_RAM); updatereplay, suba4 and adda43 wrap here
+ReplayIconChars equ $FFFFAC3A	;95 only. VRAM char of the replay icon (ReplayMode loads it after ReplayMap)
+crowdframe equ $FFFFB4B2	;94 $FFFFB89A
+ReplayStarStruct equ $FFFFBA5A	;94 $FFFFBE08
+replayactive equ $FFFFBA70	;94 $FFFFBE1E
+glovecords equ $FFFFBAE0	;94 $FFFFBEE2
+replayicontimer equ $FFFFDB7E	;94 $FFFFDEB4
+replaydelay equ $FFFFDBB8	;94 $FFFFDEF0

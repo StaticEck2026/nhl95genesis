@@ -92,15 +92,18 @@ sfpz equ 0		;pause mode
 sfspdir equ 2		;set pass dir mode
 sfssdir equ 3		;set shot dir mode
 sfslock equ 6		;scroll lock to xc1/yc1
+sfscrl equ 5		;replay scroll is manual cont
 sfwrap equ 4		;replay has wrapped around
 sfhor equ 7		;screen is in horizontal mode
 ;bit numbers in sflags2
 sf2faceoff equ 0		;face off in progress
 sf2drec equ 2		;disable replay record
+sf2replay equ 3		;replay in progress
 sf2shot equ 4		;shot was taken
 sf2pwrplay equ 5		;power play in progress
 sf2pwrtm equ 6		;0 for team 1 in power play
 sf2offsig equ 7		;offsides little ref on
+sf3rmplay equ 1		;play mode on for replay (sflags3)
 
 ;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
 tmscore equ $C		;score
