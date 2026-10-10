@@ -35,6 +35,9 @@ impact equ $32		;impact value
 position equ $34		;player's position (0=goalie,1=l.def,2=r.def,3=l.wing,4=center,5=r.wing)
 assnum equ $36		;index to current assignment
 asslist equ $38		;list of assignments in order of execution
+temp1 equ $40
+temp2 equ $42
+temp3 equ $44
 temp4 equ $46
 temp5 equ $48
 radiusx equ $4A		;width of this graphic
@@ -60,6 +63,7 @@ pf2aip equ 1		;animation in progress wait
 glitch equ $65		;counter to eliminate quick frame changes (de-glitch graphics)
 rostnum equ $6F
 pnum equ $66		;player's team location number
+aidef equ $6B		;defense rating
 weight equ $67
 shotspd equ $6C
 stickhand equ $71
@@ -87,6 +91,7 @@ sf2drec equ 2		;disable replay record
 sf2shot equ 4		;shot was taken
 
 ;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
+tmscore equ $C		;score
 tmdata equ $1E		;team data address
 tmsort equ $22		;address of first sort obj (word)
 tmgoalie equ $26		;goalie 1/2/none

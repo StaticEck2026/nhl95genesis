@@ -46,7 +46,7 @@ ManualGoalieMenu = $7F97E	;no IDA label. used at $7F682, $7F72C, $7F7C0, $7F828,
 SelectGoalieMenu = $7FA66	;no IDA label. used at $7F66A, $7F714, $7F7A8, $7F8A4. Pause menu CHANGE GOALIE (checks95_01)
 TimeoutMenu = $7FB94		;no IDA label. used at $7F698, $7F742. Pause menu TIMEOUT (checks95_01)
 PauseScores = $7FC04		;no IDA label. used at $7EAA6. 95: both team scores in big digits on the pause screen (checks95_01)
-PrintPadMenuItem = $7FCBA	;IDA: sub_7FCBA. used at $7EF54. 95: the pad's menu item variant (checks95_01)
+SetMenuPadSide = $7FCBA	;IDA: sub_7FCBA. used at $7EF54. 95 only: sflags bit 1 = the team of pad menupadnum is above 1 (checks95_01)
 TeamRosterScreen = $84FE8	;no IDA label. used at $7F39C, $7F41A, $7F46C. Pause menu TEAM ROSTER (data95_01)
 FaceoffScreen = $88E42		;IDA: sub_88E42. used at $7ECB2. 95: the face off screen
 PenaltyNames = $89C2E		;IDA: unk_89C2E. used at $7F17E. Penalty name Strings by penalty number (ShowPenaltyMessages)

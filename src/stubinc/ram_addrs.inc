@@ -254,3 +254,9 @@ tabchars equ $FFFFAC24	;95 only. Pause screen: chars of the tab bitmap (DrawTab)
 faceoffvrcset equ $FFFFAC2E	;94 $FFFFB01C
 demoflag equ $FFFFCC68	;94 $FFFFD064
 penaltymsgs equ $FFFFDC82	;95 only. Queue of penalty messages, a word each (penalty, player), 0 ends (ShowPenaltyMessages)
+OptNOP equ $FFFFCC4E	;94 $FFFFD04A. Options menu: number of players
+TmpPuckX equ $FFFFDB80	;94 $FFFFDEB6. Goalie AI: the puck x it plays (assgoaliecpu)
+puckvz equ $FFFFB38E	;94 $FFFFB776
+threat equ $FFFFBAE2	;94 $FFFFBEE4. Direction of the threat on the puck handler (chk4pass)
+puckcross equ $FFFFBAE4	;94 $FFFFBEE6. Puck crossing x and frames at each goal line, for the goalies
+iflags equ $FFFFBB86	;94 $FFFFBF80

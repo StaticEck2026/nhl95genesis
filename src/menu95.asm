@@ -45,6 +45,7 @@ DrawMenuScreen	;IDA: loc_7E536. 93 name. Call the draw routine, clear the menu b
 	movea.l	(menudraw).w,a0
 	jsr	(a0)
 	bsr.w	ClearMenuBox
+RedrawMenu	;95 only, no IDA label. Print the menu items and fade in. Called from the checks95_01 menu items after they clear the box
 	jsr	(printz2).l
 	String	$FE,4,$FC,$C
 	jsr	(SetMenuPrintX).l
@@ -722,7 +723,7 @@ PrintMenuItem	;IDA: sub_7EF38. 93 name. printsmall item String a1 (advanced past
 	bne.w	.9
 	move.l	a1,-(sp)
 	movea.l	#.11,a1
-	bsr.w	PrintPadMenuItem
+	bsr.w	SetMenuPadSide
 	btst	#1,(sflags).w
 	beq.w	.6
 	tst.w	(goaliemode2).w
