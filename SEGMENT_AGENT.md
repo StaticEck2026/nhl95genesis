@@ -4,7 +4,7 @@ This file is the queue. Do not rewrite it as a whole file. Edit the current row 
 
 ## Current segment
 
-`credits95`. Start label: none (Credits, `$1A6C28`, the title credits Strings; IDA has no label). The mapped org is `$1A6C28`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
+`checksum95`. Start label: `sub_1A72C0` (94 ValidationRoutine, checksum94; it follows the credits). The mapped org is `$1A72C0`. Confirm every org against `lst/nhl95.bin.lst` before the first verify. The 94 addresses are not 95 addresses.
 
 RAM (`ram95`) is not a queue segment. It has no ROM bytes, so there is nothing to byte-verify, and the queue moves past its row. That does not put RAM off limits. RAM names come from the code segments as they are transcribed, not from a separate first pass: add each one to `src/stubinc/ram_addrs.inc`, which the stubs include. `src/ram95.asm` is the RAM map those names are consolidated into, and you may add to it whenever it fits. When the stubs are removed, the RAM definitions end up in `src/ram95.asm`. The full build includes both files and a stub includes only `ram_addrs.inc`, so define each name in one file, and keep a name a stub uses in `ram_addrs.inc` until the stubs are removed.
 
@@ -126,7 +126,7 @@ The first row that is not matched is the current segment. The rows are in 95 ROM
 | graphics95_01 | matched, 1047616 bytes $0A1A5A-$1A1699 | $A1A5A, unk_A1A5A | $1A1699 | graphics94 | 15% | low | 94 PicturePalette ... logoWPG. 283 incbins (extractAssets95.js) plus the FeaturedPicIdx / FeaturedPictures tables: NoPlayerPicture (94 PicturePalette), the generic and 156 player pictures (Card<player>), the rink, Sprites / Spritetiles / frameSprData, HotSpotList, the fonts, the screen maps and bitmaps, the award pictures, the team logos. video95_03 SmallFontMap ($139E02) renamed SmallFontMap2, stats95_02 CrowdSprites renamed CrowdFrameList (no byte change) |
 | title95_03 | matched, 896 bytes $1A169A-$1A1A19 | $1A169A, unk_1A169A | $1A1A19 | title94 | 100% | high | 94 TeamLogoPalettes. 28 .pal incbins; 25 are the same bytes as the 94 files (94 names), DAL / ASE / ASW differ (stem + 95) |
 | graphics95_02 | matched, 21006 bytes $1A1A1A-$1A6C27 | $1A1A1A, no IDA label | $1A6C27 | graphics94 | 0% | low | ArenaGfxBank (94 graphics94 ArenaGfxBank): 27 blocks of $30A bytes, the home team graphics of LoadHomeTeamGfx through TeamGfxList (fourway95); one incbin per team. Not padding: the last block (ASE / ASW) ends at $1A6C27 |
-| credits95 | not matched | $1A6C28, no IDA label | $1A72BF | teamdata94 | 0% | medium | Credits ($1A6C28, '$ 1994 Electronic Arts') and the credits list, same length-prefixed String format as 94 Credits / CreditsList (teamdata94 $5776-$5B1B); the text changed, so no byte match |
+| credits95 | matched, 1688 bytes $1A6C28-$1A72BF | $1A6C28, no IDA label | $1A72BF | teamdata94 | 0% | medium | Credits ($1A6C28, '$ 1994 Electronic Arts') and the credits list, same length-prefixed String format as 94 Credits / CreditsList (teamdata94 $5776-$5B1B); the text changed, so no byte match. Credits and CreditsList as String lines (generated from the retail bytes), ending with dc.w -1 |
 | checksum95 | not matched | $1A72C0, sub_1A72C0 | $1A730F | checksum94 | 100% | high | 94 ValidationRoutine |
 
 ## New in 95
