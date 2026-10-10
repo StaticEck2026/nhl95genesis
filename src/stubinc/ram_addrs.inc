@@ -362,3 +362,11 @@ RefCnt equ $FFFFC01A	;94 $FFFFC3F0
 TickerNum equ $FFFFCAEE	;94 $FFFFCF2C
 arenaanim equ $FFFFD37E	;94 $FFFFD6B4
 faceoffanim equ $FFFFD388	;94 $FFFFD6BE
+PenBuf equ $FFFFBFCE	;94 $FFFFC3A4. New penalties: player byte pairs, 0 ends
+Pencntdwn equ $FFFFC010	;94 $FFFFC3E6
+Penaltytimer equ $FFFFC012	;94 $FFFFC3E8
+penmsgtimer equ $FFFFC018	;94 $FFFFC3EE
+RefStep equ $FFFFC01C	;94 $FFFFC3F2
+RefPen equ $FFFFC01E	;94 $FFFFC3F4
+PenSum equ $FFFFC198	;94 $FFFFC5DE. Penalty summary, 4 bytes per penalty (PenSumLength)
+RefRamMap equ $FFFFDBBE	;94 $FFFFC3F6. The ref window map in RAM ($38 words, PushRef)

@@ -349,7 +349,7 @@ attribjmp	;IDA: off_854BE. getNameandAttrib column handlers, offsets from attrib
 AttribStatus	;IDA: loc_854CA. 93 name. Player d0's status word at $68(a2) (94 $66): Ice, Bench, Inj. P, Inj. G, or penalty time. 95: an injured player
 	;(status 3) shows his games out from InjuryGamesTbl (GetInjuryGames)
 	add.w	d0,d0
-	move.w	$68(a2,d0.w),d0
+	move.w	tmpdst(a2,d0.w),d0
 	bpl.w	.3
 	not.w	d0
 	cmp.w	#3,d0
@@ -410,7 +410,7 @@ InjuryGamesTbl	;IDA: unk_85580. 95 only. AttribStatus Strings for an injury of 0
 
 AttribEnergy	;IDA: loc_855E4. 93 name. Energy: word $34(a2) (94 $32) / 40, at most 100 (AttribPrintPct)
 	add.w	d0,d0
-	move.w	$34(a2,d0.w),d0
+	move.w	tmpde(a2,d0.w),d0
 	ext.l	d0
 	divu.w	#$28,d0
 	cmp.w	#$64,d0
