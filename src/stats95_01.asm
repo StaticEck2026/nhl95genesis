@@ -1049,7 +1049,7 @@ WriteTeamPlayerStats	;IDA: sub_932F8
 	movem.l	(sp)+,d0-d7/a0-a6
 	rts
 
-ReadTeamRecord	;no IDA label
+ReadSeasonTeamRecord	;no IDA label. 95 only. Read the season record of team d7 (save RAM $3D10, or $7D2D with SeasonDay bit 5) to a0
 	movem.l	d0-d7/a0-a6,-(sp)
 	move.w	d7,d0
 	mulu.w	#$A,d0
@@ -1634,7 +1634,7 @@ SeasonTeamStatsRun	;no IDA label
 	String	$BE,$8,$2,'Playoff',$BE,$17,$2,'Teams'
 .2
 	movea.l	#StatBuf,a0
-	jsr	(ReadTeamRecord).l
+	jsr	(ReadSeasonTeamRecord).l
 	jsr	(printz2).l
 	String	$F8,$4,$2,$B,$1A,$F9,$1,'A,B^-^Switch^Teams',$F9,$0,$0
 	jsr	(printz).l

@@ -481,3 +481,8 @@ winsort equ $FFFFD14E	;94 $FFFFD542. Record Holders win row order (CalcWinPercen
 winpcts equ $FFFFD156	;94 $FFFFD54A. The win % byte of each of the 8 records (CalcWinPercents)
 winties equ $FFFFD15E	;94 $FFFFD552. The ties word of each record (record bytes $C-$D)
 wingames equ $FFFFD16E	;94 $FFFFD562. The games word of each record (record bytes $A-$B)
+recuser1 equ $FFFFBB1E	;95 only. UpdateRecords: a user (name log entry) word (GetTeamUser, GetPadUser). Shares linemarkbuf
+recuser2 equ $FFFFBB20	;95 only. UpdatePlayerRecords: the other team's user word (GetPadUser)
+homeplayers equ $FFFFD054	;94 $FFFFD44C. Players of the home team (CountPlayers)
+awayplayers equ $FFFFD056	;94 $FFFFD44E. Players of the away team (CountPlayers)
+CrowdPeak equ $FFFFBF3A	;94 $FFFFC314. The crowd peak of the game (UpdateCrowdRecord)
