@@ -516,6 +516,35 @@ const assets = [
     { name: 'logoWPG.map.jim', folder: 'NHL95/Graphics', start: 0x001A08B8, end: 0x001A0D2E }, // logoWPG
     { name: 'logoASE.map.jim', folder: 'NHL95/Graphics', start: 0x001A0D2E, end: 0x001A11E4 }, // logoASE
     { name: 'logoASW.map.jim', folder: 'NHL95/Graphics', start: 0x001A11E4, end: 0x001A169A }, // logoASW
+    // NHL 95 title95_03 TeamLogoPalettes ($1A169A): one 32 byte palette per team; 25 are the same bytes as the 94 files (94 names), DAL / ASE / ASW differ.
+    { name: 'MatchupPalANHA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A169A, end: 0x001A16BA }, // ANH TeamLogoPalettes, 94 file, same bytes
+    { name: 'TeamLogoPalBOS.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A16BA, end: 0x001A16DA }, // BOS TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalBUFA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A16DA, end: 0x001A16FA }, // BUF TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalCGYA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A16FA, end: 0x001A171A }, // CGY TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalCHIA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A171A, end: 0x001A173A }, // CHI TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalDALA95.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A173A, end: 0x001A175A }, // DAL TeamLogoPalettes, differs from 94 MatchupPalDALA.pal
+    { name: 'MatchupPalDETA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A175A, end: 0x001A177A }, // DET TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalEDMA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A177A, end: 0x001A179A }, // EDM TeamLogoPalettes, 94 file, same bytes
+    { name: 'TeamLogoPalFLA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A179A, end: 0x001A17BA }, // FLA TeamLogoPalettes, 94 file, same bytes
+    { name: 'TeamLogoPalHFD.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A17BA, end: 0x001A17DA }, // HFD TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalLAA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A17DA, end: 0x001A17FA }, // LA TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalMTLA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A17FA, end: 0x001A181A }, // MTL TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalNJA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A181A, end: 0x001A183A }, // NJ TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalNYIA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A183A, end: 0x001A185A }, // NYI TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalNYRA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A185A, end: 0x001A187A }, // NYR TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalOTWA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A187A, end: 0x001A189A }, // OTW TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalPHIA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A189A, end: 0x001A18BA }, // PHI TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalPITA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A18BA, end: 0x001A18DA }, // PIT TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalQUEA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A18DA, end: 0x001A18FA }, // QUE TeamLogoPalettes, 94 file, same bytes
+    { name: 'TeamLogoPalSJ.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A18FA, end: 0x001A191A }, // SJ TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalSTLA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A191A, end: 0x001A193A }, // STL TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalTBA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A193A, end: 0x001A195A }, // TB TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalTORA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A195A, end: 0x001A197A }, // TOR TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalVANA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A197A, end: 0x001A199A }, // VAN TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalWSHA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A199A, end: 0x001A19BA }, // WSH TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalWPGA.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19BA, end: 0x001A19DA }, // WPG TeamLogoPalettes, 94 file, same bytes
+    { name: 'MatchupPalASEA95.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19DA, end: 0x001A19FA }, // ASE TeamLogoPalettes, differs from 94 MatchupPalASEA.pal
+    { name: 'MatchupPalASWA95.pal', folder: 'NHL95/Graphics/Pals', start: 0x001A19FA, end: 0x001A1A1A }, // ASW TeamLogoPalettes, differs from 94 MatchupPalASWA.pal
 ];
 const outRoot = path.join('Extracted');
 const rom = fs.readFileSync(romPath);
