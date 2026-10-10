@@ -517,3 +517,22 @@ BA_Checker_Offset equ $FFFFD012	;94 $FFFFD40E. Penalty shot: the checker (Penalt
 pspenalty equ $FFFFD014	;94 $FFFFD410. Penalty shot: the penalty (PenShotChk)
 savednewpnum equ $FFFFBF42	;94 $FFFFC31E. Penalty shot: the shooter newpnum ($61) kept by SetupPenaltyShot
 injurygames equ $FFFFDC6A	;95 only. Season: the games of the last injury (SetInjuryGames, CheckInjury)
+scoutunused equ $FFFFD264	;94 $FFFFD59A. Cleared by ScoutingReport, never read
+matchuphome equ $FFFFD266	;94 $FFFFD59C. The home player of the matchup (GetMatchupPlayers)
+homerating equ $FFFFD26A	;94 $FFFFD5A0. The home rating of the matchup (PrintMatchupRatings)
+visrating equ $FFFFD26C	;94 $FFFFD5A2. The visitors rating of the matchup
+advframe equ $FFFFD26E	;94 $FFFFD5A4. Advantage marks step (PrintAdvantageMarks)
+advcount equ $FFFFD270	;94 $FFFFD5A6. Advantage marks frame count
+matchupslot equ $FFFFD274	;94 $FFFFD5AA. The line slot of the matchup (GetMatchupPlayer)
+hoticonchars equ $FFFFDBAC	;95 only. First vram char of the hot icon (ScoutingReport, HotIconMap)
+coldiconchars equ $FFFFDBAE	;95 only. First vram char of the cold icon (ColdIconMap)
+homeusers equ $FFFFCAF8	;95 only. ScoutingReport: the count of the home users, then their name log entries (GetHomeUsers). Shares ThreeStars
+awayusers equ $FFFFCB02	;95 only. ScoutingReport: the count of the away users, then their name log entries (GetAwayUsers)
+scoutwait equ $FFFFDBB4	;94 $FFFFDEEC. ScoutingReport: frames to wait for start after the text (a long). Shares pausetimeout
+awayhotidx equ $FFFFBB5A	;94 $FFFFBF54. Hot / cold list index, away (BuildHotColdLists)
+homehotidx equ $FFFFBB5C	;94 $FFFFBF56. Hot / cold list index, home
+awayhotplayer equ $FFFFBB62	;94 $FFFFBF5C. The away team's hottest starter (BuildHotColdLists)
+homehotplayer equ $FFFFBB64	;94 $FFFFBF5E. The home team's hottest starter
+awaycoldplayer equ $FFFFBB66	;94 $FFFFBF60. The away team's coldest starter
+homecoldplayer equ $FFFFBB68	;94 $FFFFBF62. The home team's coldest starter
+TempBuffer equ $FFFFBB1E	;94 $FFFFBF20. 40 byte scratch buffer (hot / cold sum byte pairs, Strings). Shares linemarkbuf
