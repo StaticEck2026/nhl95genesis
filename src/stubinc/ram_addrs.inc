@@ -501,3 +501,12 @@ AwardCycle equ $FFFFD1D0	;95 only. SeasonAwards: frames between highlight moves
 AwardWait equ $FFFFD1D2	;95 only. AwardsLoop: frames left before it returns
 awardpicchars equ $FFFFBADC	;95 only. SeasonAwards: first vram char of the award pictures. Shares passspeed
 awardpanelchars equ $FFFFBADE	;95 only. SeasonAwards: first vram char of the finalists / winner panels. Shares passplayer
+playoffround equ $FFFFD184	;94 $FFFFD578. Shootout round (ShootoutInit sets 1)
+homeshooters equ $FFFFD186	;94 $FFFFD57A. The home shootout shooter list (6 words below homeshootnum, InitShooters)
+homeshootnum equ $FFFFD192	;94 $FFFFD586. The shooter index of the shootout
+awayshooters equ $FFFFD194	;94 $FFFFD588. The away shootout shooter list (6 words below shootoutteam)
+sopath equ $FFFFD6DC	;94 $FFFFDA12. Shootout skate path (StartShootoutPath)
+sopathpoint equ $FFFFD6DE	;94 $FFFFDA14. Point of the skate path (NextPathPoint)
+sopathy equ $FFFFD6E2	;94 $FFFFDA18
+sopathdir equ $FFFFD6E4	;94 $FFFFDA1A. passdir at the end of the path (PSandSOpassdir)
+sopathend equ $FFFFD6E6	;94 $FFFFDA1C. Shoot distance at the end of the path (ShootoutShootCheck)

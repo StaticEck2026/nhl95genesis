@@ -58,7 +58,7 @@
 	include	records95.asm		; $09B6F4  Adapted from records94.asm: name entry and record holders
 	include	cards95_02.asm		; $09C01A  Adapted from cards94.asm: player cards and matchup palettes
 	include	awards95.asm		; $09C6F0  New in 95: end of season awards
-	include	title95_01.asm		; $09D9C0  Adapted from title94.asm: song select, title, credits
+	include	title95_01.asm		; $09DA50  Adapted from title94.asm: song select, title, credits
 	include	shootout95.asm		; $09DD3E  Adapted from shootout94.asm: shootout
 	include	checks95_07.asm		; $09E5F0  Adapted from checks94.asm: checks before the display code
 	include	scout95.asm		; $09F590  Adapted from scout94.asm: matchups and scouting report
