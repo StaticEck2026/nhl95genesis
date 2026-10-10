@@ -428,3 +428,14 @@ PlayoffSchedule equ $FFFFD6E8	;95 only. Playoff schedule (ReadPlayoffSchedule); 
 optbgchars equ $FFFFDC38	;95 only. SeasonOptionsGfx: the wait box chars
 AutoplayDay equ $FFFFDC79	;95 only. Play Until A Day: the last day to autoplay, 0 none
 matchupvis equ $FFFFD268	;94 $FFFFD59E. The visitors player of the matchup; also the scroll limit of GameStatisticsScreen
+StatWork equ $FFFFBB1E	;95 only. Scratch of the season stat screens (League Leaders: +0 mode, +2 category, +4 top row, +6 bottom row, +8 rows, +$A last row, +$C count; SaveGameHighlights, PrintStatHighlight). Shares linemarkbuf
+StatBuf equ $FFFFCAF8	;95 only. Season stat buffer read from / written to save RAM (team records, player stat blocks, highlights). Shares ThreeStars
+LeaderValues equ $FFFFA1AA	;95 only. League Leaders: player values (GatherAndSort)
+LeaderPlayers equ $FFFF9C60	;95 only. League Leaders: player ids, sorted with LeaderValues
+TeamLeaderValues equ $FFFFDB04	;95 only. League Leaders: team values (word a team), sorted
+matchup equ $FFFFD262	;94 $FFFFD598. PeriodStatsScreen: 0 goals, else shots
+matchuptimer equ $FFFFD272	;94 $FFFFD5A8. PeriodStatsScreen: the running total
+screentimer equ $FFFFD280	;94 $FFFFD5B6. Line editor: the selected list row
+redrawicons equ $FFFFBC18	;94 $FFFFC012. Line editor: the line drawn last (-1 = redraw)
+LeaderTeamTbls equ $FFFFD6E8	;95 only. League Leaders: 7 team value tables of $1A bytes (shares PlayoffSchedule)
+StandingsRecs equ $FFFFDAA0	;95 only. ReadStandings buffer (3 bytes a team) used by League Leaders
