@@ -34,3 +34,4 @@ VDP____CNTR equ $C0000E
 
 
 
+Z80_RAM equ $A00000	;Z80 RAM as the 68000 sees it (8 KB)

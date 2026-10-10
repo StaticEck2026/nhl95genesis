@@ -12,12 +12,15 @@
 	include	main95.asm		; $000000  Adapted from main94.asm: header, startup, vectors
 	include	teamdata95.asm		; $000772  Adapted from teamdata94.asm: teams, palettes, credits text
 	include	frames95.asm		; $005A34  Adapted from frames94.asm: sprite animation tables
+	include	schedule95.asm		; $008DD8  New in 95: season schedule data
 	include	ram95.asm		;          Adapted from ram94.asm: equates only
-	include	sram95.asm		; $009400  Adapted from sram94.asm: save data
+	include	sram95.asm		; $009722  Adapted from sram94.asm: save data
 	include	hockey95.asm		; $009AC8  Adapted from hockey94.asm: game flow: StartGame, StartPer
 	include	display95_01.asm		; $00A204  Adapted from display94.asm: vblank, clock, crowd, rink scroll
+	include	replay95_01.asm		; $00A536  Adapted from replay94.asm: replay
 	include	setup95_01.asm		; $00A656  Adapted from setup94.asm: ice setup, intermission, playoff screen
-	include	sound95_01.asm		; $00AF44  Adapted from sound94.asm: sound driver, then the sound data
+	include	sounddrv95.asm		; $00AF44  New in 95: sound driver, Z80 program, sound bank
+	include	sound95_01.asm		; $0676D8  Adapted from sound94.asm: sound calls, the 94 driver remnant, then the 94 samples and patches
 	include	video95_01.asm		; $079902  Adapted from video94.asm: display helpers
 	include	display95_02.asm		; $079D80  Adapted from display94.asm: vblank, clock, crowd, rink scroll
 	include	video95_02.asm		; $07A02A  Adapted from video94.asm: display helpers
@@ -25,6 +28,7 @@
 	include	video95_03.asm		; $07C512  Adapted from video94.asm: display helpers
 	include	fourway95.asm		; $07DEA0  Adapted from fourway94.asm: four-player adaptor
 	include	sound95_02.asm		; $07E0E0  Adapted from sound94.asm: sound driver, then the sound data
+	include	hockey95_02.asm		; $07E36C  Adapted from hockey94.asm: pause mode
 	include	menu95.asm		; $07E4D6  Adapted from menu94.asm: menu core
 	include	checks95_01.asm		; $07F97E  Adapted from checks94.asm: checks before the display code
 	include	assign95_01.asm		; $0807EC  Adapted from assign94.asm: player assignments
