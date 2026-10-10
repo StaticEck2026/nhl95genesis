@@ -50,6 +50,8 @@ SPA equ $58		;animation (frames95 SPA offset)
 SPAnum equ $5A		;index into animation
 SPAcnt equ $5C		;count down to next frame of animation
 nopuck equ $5E		;no puck coll until zero
+newpos equ $60		;requested next position of this player
+newpnum equ $61		;requested next player (from roster) for this player
 pflags equ $62
 pfdoff equ 0		;bit0-deceleration off
 pfnc equ 2		;bit2-no collision mode
@@ -60,10 +62,13 @@ pfgoal equ 7		;0=bottom, 1=top (to shoot at)
 pfalock equ 5		;lock out until anim is done
 pflags2 equ $63
 pf2aip equ 1		;animation in progress wait
+pf2fight equ 0		;player is fighting (93; 94 has no fights)
 glitch equ $65		;counter to eliminate quick frame changes (de-glitch graphics)
 rostnum equ $6F
 pnum equ $66		;player's team location number
+aioff equ $6A		;offense rating
 aidef equ $6B		;defense rating
+spodds equ $70
 weight equ $67
 shotspd equ $6C
 stickhand equ $71
@@ -89,9 +94,13 @@ sfhor equ 7		;screen is in horizontal mode
 sf2faceoff equ 0		;face off in progress
 sf2drec equ 2		;disable replay record
 sf2shot equ 4		;shot was taken
+sf2pwrplay equ 5		;power play in progress
+sf2pwrtm equ 6		;0 for team 1 in power play
+sf2offsig equ 7		;offsides little ref on
 
 ;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
 tmscore equ $C		;score
+tmap equ $24		;active players on ice 4-6
 tmdata equ $1E		;team data address
 tmsort equ $22		;address of first sort obj (word)
 tmgoalie equ $26		;goalie 1/2/none

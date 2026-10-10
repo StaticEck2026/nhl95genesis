@@ -38,6 +38,7 @@ lldisp equ $FFFFAC5E	;94 $FFFFB046. Count down to the once a second updates
 SortCords equ $FFFFAC62	;94 $FFFFB04A. 16 sort objects of SCstruct bytes
 puckx equ $FFFFB362	;94 $FFFFB74A. SortCords+(puckscnum*SCstruct)
 puckc equ $FFFFB3C2	;94 $FFFFB7AA. Puck carrier SCnum, -1 = none
+puck_pflags2 equ $FFFFB3C5	;94 $FFFFB7AD. puckx+pflags2 (the puck struct)
 CwdExciteLvl equ $FFFFB4BA	;94 $FFFFB8A2
 Hscroll equ $FFFFB938	;94 $FFFFBD1E
 Vscroll equ $FFFFB93A	;94 $FFFFBD20
@@ -114,6 +115,7 @@ palfadenew equ $FFFFB942	;94 $FFFFBD28
 Ylist equ $FFFFB462	;94 $FFFFB84A
 OOlistpos equ $FFFFB482	;94 $FFFFB86A
 sflags5 equ $FFFFBEFC	;94 $FFFFC2F6
+msgtimer equ $FFFFBF3E	;94 $FFFFC31A
 cont1team equ $FFFFBF4C	;94 $FFFFC328
 cont2team equ $FFFFBF4E	;94 $FFFFC32A
 VisTeam equ $FFFFBF56	;94 $FFFFC332
@@ -179,9 +181,14 @@ TempWord1 equ $FFFFBB10	;94 $FFFFBF12. A scratch word
 ChkBodyG equ $FFFFBB6A	;94 $FFFFBF64. Goalie body reach (checkpuckcoll)
 ChkBodySqG equ $FFFFBB6C	;94 $FFFFBF66. Long: reach squared
 NegChkBodyG equ $FFFFBB70	;94 $FFFFBF6A
+onetimerplayer equ $FFFFBB72	;94 $FFFFBF6C
 ltplayer equ $FFFFBB80	;94 $FFFFBF7A
+ltx equ $FFFFBB82	;94 $FFFFBF7C. Last touch x (a2touchpuck)
+lty equ $FFFFBB84	;94 $FFFFBF7E. Last touch y
 xc1 equ $FFFFBB94	;94 $FFFFBF8E. Scroll lock x (sfslock)
 yc1 equ $FFFFBB96	;94 $FFFFBF90. Scroll lock y
+deltax equ $FFFFBBA2	;94 $FFFFBF9C. avdgoal x correction
+deltay equ $FFFFBBA4	;94 $FFFFBF9E. avdgoal y correction
 collflag equ $FFFFBBA6	;94 $FFFFBFA0. Set by a player collision (checkcx)
 lastplayer equ $FFFFBAD8	;94 $FFFFBEDA
 passplayer equ $FFFFBADE	;94 $FFFFBEE0
@@ -256,7 +263,13 @@ demoflag equ $FFFFCC68	;94 $FFFFD064
 penaltymsgs equ $FFFFDC82	;95 only. Queue of penalty messages, a word each (penalty, player), 0 ends (ShowPenaltyMessages)
 OptNOP equ $FFFFCC4E	;94 $FFFFD04A. Options menu: number of players
 TmpPuckX equ $FFFFDB80	;94 $FFFFDEB6. Goalie AI: the puck x it plays (assgoaliecpu)
+inputjoy equ $FFFFDBA2	;94 $FFFFDED8
+sopathx equ $FFFFD6E0	;94 $FFFFDA16
 puckvz equ $FFFFB38E	;94 $FFFFB776
+passdir equ $FFFFBADA	;94 $FFFFBEDC. Direction of the pass (chk4pass)
 threat equ $FFFFBAE2	;94 $FFFFBEE4. Direction of the threat on the puck handler (chk4pass)
 puckcross equ $FFFFBAE4	;94 $FFFFBEE6. Puck crossing x and frames at each goal line, for the goalies
 iflags equ $FFFFBB86	;94 $FFFFBF80
+icingPlayer equ $FFFFBB87	;94 $FFFFBF81. The low byte of iflags: SCnum of the player who iced it
+TempLegSpd equ $FFFFBB1C	;94 $FFFFBF1E. A scratch word: leg speed (doplayeracc); assdefo keeps the furthest y of the other forwards here
+recwins equ $FFFFBB4C	;94 $FFFFBF4E. A scratch word (record page wins; assdefo clears it)
