@@ -427,3 +427,4 @@ SeasonFlags equ $FFFFD1A7	;95 only. The byte after SeasonDay: bit 1 best of seve
 PlayoffSchedule equ $FFFFD6E8	;95 only. Playoff schedule (ReadPlayoffSchedule); a day list starts at +1
 optbgchars equ $FFFFDC38	;95 only. SeasonOptionsGfx: the wait box chars
 AutoplayDay equ $FFFFDC79	;95 only. Play Until A Day: the last day to autoplay, 0 none
+matchupvis equ $FFFFD268	;94 $FFFFD59E. The visitors player of the matchup; also the scroll limit of GameStatisticsScreen

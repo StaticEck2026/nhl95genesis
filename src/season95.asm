@@ -1,9 +1,9 @@
-;	NHL 95 season95. Retail $08DF5A-$0920BD (16740 bytes).
+;	NHL 95 season95. Retail $08DF5A-$0920DD (16772 bytes).
 ;	New in 95: season mode. SeasonMain runs the season from the main flow: SEASON SETUP, the SEASON OPTIONS menu (play games,
 ;	play until a day, standings, team schedule calendar, games today, stats and playoff screens), the simulation of the computer
 ;	games (SimDayGames, SimScore, SimGameStats and the goal weight tables at the end) and the save RAM records. Moved in at the
 ;	head: hockey94 demoread / HandleJoy1, and RandomSetupTeams (95 only; optsetup94 SetupDemo picks random teams). Each routine
-;	comment names its 94 file or says 95 only. period95 follows at $0920BE.
+;	comment names its 94 file or says 95 only. period95 follows at $0920DE.
 ;	IDA left DayToDate / DateToDay, the season menu actions and the calendar screen as dc.b; they and the tables are read from the
 ;	retail bytes. IDA hid printz / printz2 / printbigz Strings and DecompressGraphicsWithCallback remap bytes as instructions; they
 ;	are String / dc.b here. The four goal weight tables at the end IDA read as code.
@@ -2580,22 +2580,22 @@ MenuLeagueLeaders	;no IDA label. 95 only. League Leaders
 
 MenuPlayoffTeamStats	;no IDA label. 95 only. Playoff Team Stats (sflags11 bit 3)
 	bset	#3,(sflags11).w
-	jsr	(TeamStatsScreen).l
+	jsr	(SeasonTeamStats).l
 	bclr	#3,(sflags11).w
 	bra.w	MenuStay
 
 MenuTeamStats	;no IDA label. 95 only. Team Stats
-	jsr	(TeamStatsScreen).l
+	jsr	(SeasonTeamStats).l
 	bra.w	MenuStay
 
 MenuPlayoffPlayerStats	;no IDA label. 95 only. Playoff Player Stats (sflags11 bit 3)
 	bset	#3,(sflags11).w
-	jsr	(PlayerStatsScreen).l
+	jsr	(SeasonPlayerStats).l
 	bclr	#3,(sflags11).w
 	bra.w	MenuStay
 
 MenuPlayerStats	;no IDA label. 95 only. Player Stats
-	jsr	(PlayerStatsScreen).l
+	jsr	(SeasonPlayerStats).l
 	bra.w	MenuStay
 
 MenuHighlights	;no IDA label. 95 only. Highlights
@@ -3953,7 +3953,7 @@ SimGoalsHomeDef	;IDA: loc_91F8C. 95 only. 26 x 10: home defense
 	dc.b	0,2,4,7,7,8,9,4,0,1
 	dc.b	3,7,9,7,4,3,6,2,1,0
 
-SimTieTbl	;IDA: loc_92090. 95 only. Tie break weights, 3 a team
+SimTieTbl	;IDA: loc_92090. 95 only. Tie break weights, 3 a team (26 teams)
 	dc.b	6,4,0
 	dc.b	3,7,5
 	dc.b	4,$A,4
@@ -3969,4 +3969,14 @@ SimTieTbl	;IDA: loc_92090. 95 only. Tie break weights, 3 a team
 	dc.b	0,7,4
 	dc.b	3,7,3
 	dc.b	4,$B,2
-	dc.b	6
+	dc.b	6,4,0
+	dc.b	2,$B,4
+	dc.b	0,7,3
+	dc.b	1,$A,4
+	dc.b	5,2,3
+	dc.b	4,$B,2
+	dc.b	4,7,3
+	dc.b	1,$B,1
+	dc.b	0,9,1
+	dc.b	2,7,2
+	dc.b	2,7,2

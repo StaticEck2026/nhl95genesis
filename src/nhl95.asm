@@ -50,7 +50,7 @@
 	include	checks95_06.asm		; $08B9A8  Adapted from checks94.asm: checks before the display code
 	include	replay95.asm		; $08D39A  Adapted from replay94.asm: replay
 	include	season95.asm		; $08DF5A  New in 95: season mode
-	include	period95.asm		; $0920BE  Adapted from period94.asm: period stats and game statistics
+	include	period95.asm		; $0920DE  Adapted from period94.asm: period stats and game statistics
 	include	stats95_01.asm		; $0925AE  Adapted from stats94.asm: scores, line editor, roster, scoring and penalty summaries, player stats, crowd meter, goalie select
 	include	trade95.asm		; $0962EE  New in 95: schedule and trades
 	include	create95.asm		; $097C54  New in 95: create player

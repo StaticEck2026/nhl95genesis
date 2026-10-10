@@ -1,6 +1,6 @@
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;
-;	season95 segment stub. Retail $08DF5A-$0920BD.
+;	season95 segment stub. Retail $08DF5A-$0920DD.
 ;
 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -12,7 +12,7 @@
 	include	stubinc\equals.inc	;VDP status bits
 	include	stubinc\ram_addrs.inc	;RAM names
 
-; External addresses outside $08DF5A-$0920BD, read from lst/nhl95.bin.
+; External addresses outside $08DF5A-$0920DD, read from lst/nhl95.bin.
 SeasonSchedule = $8DD8		;IDA: byte_8DD8. used at $8E286, $8E2F2, $8E38C, $8E474, $8F31E (frames95)
 SeasonScheduleEnd = $9721	;no IDA label. used at $8F314 (sram95)
 WriteSRAM = $98E6		;IDA: sub_98E6. used at $8E258, $8E3D8, $8EFFC, $8F036, $8F05C, $8F082, $8F0AE, $8F15A (sram95)
@@ -54,8 +54,8 @@ GameSetUp = $85A9E		;IDA: sub_85A9E. used at $8E194 (data95_01)
 ExitToOpening = $8CD02		;IDA: loc_8CD02. used at $8DFF0 (checks95_06)
 InitSeasonStats = $92BEC	;IDA: sub_92BEC. used at $8F696 (stats95_01)
 SaveSimGame = $92CAE		;IDA: sub_92CAE. used at $8E76E, $8EFA8 (stats95_01)
-PlayerStatsScreen = $9348A	;no IDA label. used at $906C4, $906D4 (stats95_01)
-TeamStatsScreen = $93BD2	;no IDA label. used at $906A4, $906B4 (stats95_01)
+SeasonPlayerStats = $9348A	;no IDA label. used at $906C4, $906D4 (stats95_01)
+SeasonTeamStats = $93BD2	;no IDA label. used at $906A4, $906B4 (stats95_01)
 LeagueLeadersScreen = $94110	;no IDA label. used at $90694 (stats95_01)
 HighlightsScreen = $95D28	;no IDA label. used at $906DE (stats95_01)
 SeasonAwards = $9C766		;IDA: sub_9C766. used at $8E21A (awards95)
