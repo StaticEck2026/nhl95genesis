@@ -58,8 +58,8 @@ gmode2 equ $FFFFBF00	;94 $FFFFC2FA. Bit 0 shootout (main menu Shootout)
 sflags7 equ $FFFFBF02	;94 $FFFFC2FC. Bit 1 overtime
 sflags9 equ $FFFFBF06	;95 only. Bit 7 Practice Mode (main menu item 2)
 sflags10 equ $FFFFBF0A	;95 only. Main menu: bit 2 Trade Players, bit 4 Create Player, bit 5 Sign Free Agents, bit 6 Release Players
-sflags11 equ $FFFFBF0C	;95 only. Bit 7 user records count (UserNameEntry: at most one pad per team), bit 6 Regular Game (main menu item 1; kept over the Opening2 RAM clear), bit 5 set around IntermissionMenu
-sflags12 equ $FFFFBF0E	;95 only. Bit 7 Opening2 skips the sound restart (set by Opening), bit 0 set while IntermissionMenu runs Pausemode
+sflags11 equ $FFFFBF0C	;95 only. Bit 7 user records count (UserNameEntry: at most one pad per team), bit 6 Regular Game (main menu item 1; kept over the Opening2 RAM clear), bit 5 set around IntermissionMenu, bit 4 a team award (SeasonAwards), bit 3 the playoff stats (GetAwardGoals), bit 2 set around PlayoffScreen (PlayoffTreeScreen)
+sflags12 equ $FFFFBF0E	;95 only. Bit 7 Opening2 skips the sound restart (set by Opening), bit 6 SortAwardScores lowest first, bit 0 set while IntermissionMenu runs Pausemode
 lastpuckc equ $FFFFBF1C	;95 only. The puck carrier CheckNewCarrier saw last
 CurCrowdMeter equ $FFFFBF34	;94 $FFFFC30E. StartPer clears it as 94 does
 joypuckcarrier equ $FFFFBF3C	;94 $FFFFC318
@@ -486,3 +486,18 @@ recuser2 equ $FFFFBB20	;95 only. UpdatePlayerRecords: the other team's user word
 homeplayers equ $FFFFD054	;94 $FFFFD44C. Players of the home team (CountPlayers)
 awayplayers equ $FFFFD056	;94 $FFFFD44E. Players of the away team (CountPlayers)
 CrowdPeak equ $FFFFBF3A	;94 $FFFFC314. The crowd peak of the game (UpdateCrowdRecord)
+AwardIds equ $FFFF0000	;95 only. SeasonAwards: the candidate ids (players, or teams), sorted with AwardScores. Shares M68K_RAM
+AwardScores equ $FFFF0548	;95 only. SeasonAwards: the candidate scores (ScanAllPlayers, SortAwardScores)
+SeedCount equ $FFFFCAF8	;95 only. SortSeeds: the teams in the list. Shares ThreeStars
+SeedPoints equ $FFFFCAFA	;95 only. InitPlayoffs: 2 * wins + ties of each team (CalcSeedPoints)
+SeedGames equ $FFFFCB16	;95 only. InitPlayoffs: the games of each team (CalcSeedPoints)
+AwardIndex equ $FFFFD1C2	;95 only. SeasonAwards: the award shown (0 Hart ... 8 Conn Smythe). Shares SimWeights
+AwardTimer equ $FFFFD1C4	;95 only. SeasonAwards: frames of the award shown (a long)
+AwardFlashTimer equ $FFFFD1C8	;95 only. SeasonAwards: frame count of the highlight and the winner flash
+AwardCount equ $FFFFD1CA	;95 only. SeasonAwards: the candidates in AwardIds
+AwardWinner equ $FFFFD1CC	;95 only. SeasonAwards: the winner id (the best score)
+AwardHilite equ $FFFFD1CE	;95 only. SeasonAwards: the highlighted finalist * 2
+AwardCycle equ $FFFFD1D0	;95 only. SeasonAwards: frames between highlight moves
+AwardWait equ $FFFFD1D2	;95 only. AwardsLoop: frames left before it returns
+awardpicchars equ $FFFFBADC	;95 only. SeasonAwards: first vram char of the award pictures. Shares passspeed
+awardpanelchars equ $FFFFBADE	;95 only. SeasonAwards: first vram char of the finalists / winner panels. Shares passplayer
