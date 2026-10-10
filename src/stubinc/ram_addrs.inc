@@ -510,3 +510,5 @@ sopathpoint equ $FFFFD6DE	;94 $FFFFDA14. Point of the skate path (NextPathPoint)
 sopathy equ $FFFFD6E2	;94 $FFFFDA18
 sopathdir equ $FFFFD6E4	;94 $FFFFDA1A. passdir at the end of the path (PSandSOpassdir)
 sopathend equ $FFFFD6E6	;94 $FFFFDA1C. Shoot distance at the end of the path (ShootoutShootCheck)
+BA_Team equ $FFFFD008	;94 $FFFFD404. Penalty shot / shootout: the shooting team (0 home, 1 away)
+TestList equ $FFFFD282	;94 $FFFFD5B8. Shootout shooters: the selected slot (0-4 shooters, 5 goalie). Shares setupvalues
