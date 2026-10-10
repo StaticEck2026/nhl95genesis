@@ -34,6 +34,7 @@ const opcodeReplacements = [
     { instruction: 'cmp', existingOpcode: '0C87', newOpcode: 'BEBC' },
     { instruction: 'exg', existingOpcode: 'C34A', newOpcode: 'C549', operandCondition: (operands) => /^\s*a2\s*,\s*a1\s*$/.test(operands) },
     { instruction: 'exg', existingOpcode: 'C141', newOpcode: 'C340', operandCondition: (operands) => /^\s*d1\s*,\s*d0\s*$/.test(operands) },
+    { instruction: 'exg', existingOpcode: 'C149', newOpcode: 'C348', operandCondition: (operands) => /^\s*a1\s*,\s*a0\s*$/.test(operands) },
     // do not change: exg	d0,d1
     // do change: exg	d1,d0
 ];
