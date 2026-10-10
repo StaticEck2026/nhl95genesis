@@ -15,6 +15,7 @@ FIFO_EMPTY equ 9
 
 ;the sort object structure (SCstruct = $80 bytes each, from SortCords). 93 / 94 names; hockey95 updateplayers confirms these 95 values
 SCstruct equ $80
+puckscnum equ $E	;the puck sort object (SortCords + puckscnum * SCstruct = puckx); the shadow is puckscnum+1
 Xpos equ $0
 attribute equ $4		;frame attribute switch bits
 frame equ $6		;alice frame number
@@ -103,6 +104,7 @@ sf2offsig equ 7		;offsides little ref on
 
 ;team variables (HmShots / AwShots = the home / away team struct). 94 names; setup95_01 confirms these 95 values
 tmscore equ $C		;score
+tmline equ $16		;current line
 tmap equ $24		;active players on ice 4-6
 tmdata equ $1E		;team data address
 tmsort equ $22		;address of first sort obj (word)

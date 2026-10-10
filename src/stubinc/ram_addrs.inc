@@ -351,3 +351,14 @@ databuffer equ $FFFFCC7A	;94 $FFFFD076. Line data buffer (ReadLineData / WriteLi
 playoffspritex equ $FFFFB4C8	;94 $FFFFB8AE. Playoff sprite x offset while the tree is scrolled (UpdatePlayoffScroll)
 playoffspritey equ $FFFFB4CA	;94 $FFFFB8B0
 clampcounter equ $FFFFB4CC	;94 $FFFFB8B2
+fodropx equ $FFFFAC4A	;94 $FFFFB032. Faceoff window x (DrawFaceoffWindow)
+fodropy equ $FFFFAC4C	;94 $FFFFB034
+fofdata2 equ $FFFFB9C2	;94 $FFFFBDA8. Faceoff sprite entries: word frame, word flags (checkfo)
+fofdata equ $FFFFB9CA	;94 $FFFFBDB0
+puckcross2 equ $FFFFBAE6	;94 $FFFFBEE8
+puckcross6 equ $FFFFBAEA	;94 $FFFFBEEC
+yleader equ $FFFFBB98	;94 $FFFFBF92
+RefCnt equ $FFFFC01A	;94 $FFFFC3F0
+TickerNum equ $FFFFCAEE	;94 $FFFFCF2C
+arenaanim equ $FFFFD37E	;94 $FFFFD6B4
+faceoffanim equ $FFFFD388	;94 $FFFFD6BE
