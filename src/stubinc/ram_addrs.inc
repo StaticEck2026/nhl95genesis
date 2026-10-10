@@ -449,3 +449,21 @@ TradeRoster1 equ $FFFF3A98	;95 only. Trade screen: HomeTeam roster rows
 RosterRatings equ $FFFF5700	;95 only. Default roster ratings ($20 bytes a team, DefaultRosters)
 TradeRoster2 equ $FFFF88B8	;95 only. Trade screen: VisTeam roster rows
 CreatedPlayerBuf equ $FFFFDC3C	;95 only. Created player record read from save RAM (GetCreatedName reads it at +2)
+CreatedIds equ $FFFF4E20	;95 only. Created player ids (ReadCreatedPlayers)
+CreateListTop equ $FFFF55F4	;95 only. Create player list: first row shown
+CreateListSel equ $FFFF55F8	;95 only. Create player list: selected row
+CreateWork equ $FFFF55FC	;95 only. Create player: name work count
+CreateIndex equ $FFFF55FE	;95 only. Create player: the record being edited
+CreatedList equ $FFFF5D22	;95 only. Created player list ($36 bytes, save RAM $5D22)
+CreateCursorX equ $FFFF7530	;95 only. Modify Ratings cursor column
+CreateCursorY equ $FFFF7532	;95 only. Modify Ratings cursor row
+CreateType equ $FFFF7534	;95 only. Created player type: 0 goalie, else skater
+CreateRecord equ $FFFF7538	;95 only. Created player record (32 bytes; the name from +2)
+AttribDeltas equ $FFFFC42C	;95 only. Modify Ratings: the attribute changes (16 bytes)
+FieldTextBuf equ $FFFFC43C	;95 only. Modify Ratings: field value text
+NameEntryBuf equ $FFFFD0E0	;95 only. Name entry: the name (18 characters)
+NameEntryLen equ $FFFFD0F4	;95 only. Name entry: name length
+CreateListRow equ $FFFFD0F6	;95 only. Create player list: the current row
+CreateListOldRow equ $FFFFD0F8	;95 only. Create player list: the row with the markers
+nameframechars equ $FFFFD13C	;95 only. Name entry frame chars (NameEntryFramer)
+NameEntryMode equ $FFFFD38E	;95 only. Create player: 0 list mode, else name edit mode
