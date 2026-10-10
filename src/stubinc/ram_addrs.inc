@@ -536,3 +536,10 @@ homehotplayer equ $FFFFBB64	;94 $FFFFBF5E. The home team's hottest starter
 awaycoldplayer equ $FFFFBB66	;94 $FFFFBF60. The away team's coldest starter
 homecoldplayer equ $FFFFBB68	;94 $FFFFBF62. The home team's coldest starter
 TempBuffer equ $FFFFBB1E	;94 $FFFFBF20. 40 byte scratch buffer (hot / cold sum byte pairs, Strings). Shares linemarkbuf
+typedelay equ $FFFFD27E	;94 $FFFFD5B4. ScoutTextPlayer: frames to the next word
+iconplayer equ $FFFFDBB0	;94 $FFFFDEE8. HotColdIcon: the player
+awayhotter equ $FFFFBB56	;94 $FFFFBF50. CompareHotColdTotals: the away team is hotter
+awaycoldidx equ $FFFFBB5E	;94 $FFFFBF58. Hot / cold list index, away cold (NextAwayColdPlayer)
+homecoldidx equ $FFFFBB60	;94 $FFFFBF5A. Hot / cold list index, home cold (NextHomeColdPlayer)
+HomeTeamRosterPtr equ $FFFFC2A6	;94 $FFFFC6EC. HmShots+$1E: the team data address (TeamList entry)
+AwayTeamRosterPtr equ $FFFFC60C	;94 $FFFFCA50. AwShots+$1E: the team data address
